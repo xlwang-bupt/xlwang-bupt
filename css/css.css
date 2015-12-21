@@ -161,6 +161,16 @@ a:hover{text-decoration:none;color:#333;}
 .footer .foot ul li{float:left;height:60px;padding-right:50px;}
 .footer .foot ul li a{color:#999;line-height:60px;}
 
+.marketing{text-align:left;margin-bottom:20px;}
+.marketing .large-3{display:none;}
+.marketing #main-content{width:940px;margin:0 auto;background:#fff;padding:10px 40px 0 40px;margin-top:20px;font-size:14px;}
+.marketing #main-content h1{border-bottom:0;margin-bottom:20px;font-size:28px;}
+.marketing #main-content h2{border-top:solid 1px #ccc;border-bottom:0;padding-top:20px;font-size:24px;}
+.marketing #main-content h3{font-size:20px;}
+.marketing #main-content h4{font-size:16px;}
+.marketing #main-content p,li{font-size:14px;}
+.marketing #main-content img{display:block;}
+
 
 /*Retina background images display patch*/
 
