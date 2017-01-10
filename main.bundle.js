@@ -48,15 +48,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ec = __webpack_require__(404);
 var chinaMap = __webpack_require__(440);
 var $ = __webpack_require__(983);
-//const dt = require('datatables.net')();
-//const buttons = require('datatables.net-buttons-bs')();
 var sql = __webpack_require__(952);
 var _ = __webpack_require__(951);
 var AppComponent = (function () {
     function AppComponent() {
+        this.isMainPage = false;
+        this.isTable = true;
         this.picName = '图像展示区域';
         this.title = 'AngularJS is using!';
-        this.testData = 'testData';
         this.tableHead = [];
         this.tableData = [];
         this.tableDataShowing = [];
@@ -83,10 +82,17 @@ var AppComponent = (function () {
     AppComponent.prototype.changeDataName = function (name) {
         this.dataName = name;
     };
-    AppComponent.prototype.paintChinaMap = function (name) {
+    AppComponent.prototype.showTable = function () {
+        this.isTable = true;
+        this.isMainPage = false;
+    };
+    ;
+    AppComponent.prototype.paintChinaMap = function (name, docName) {
+        this.isMainPage = false;
+        this.isTable = false;
         this.picName = name;
         ec.registerMap('china', chinaMap);
-        var myChart = ec.init(document.getElementById('main'));
+        var myChart = ec.init(document.getElementById(docName));
         var geoCoordMap = {
             "海门": [121.15, 31.89],
             "鄂尔多斯": [109.781327, 39.608266],
@@ -722,9 +728,11 @@ var AppComponent = (function () {
         }
     };
     ;
-    AppComponent.prototype.paintBar = function (name) {
+    AppComponent.prototype.paintBar = function (name, docName) {
+        this.isMainPage = false;
+        this.isTable = false;
         this.picName = name;
-        var myChart = ec.init(document.getElementById('main'));
+        var myChart = ec.init(document.getElementById(docName));
         var option = {
             tooltip: {
                 trigger: 'axis',
@@ -820,9 +828,12 @@ var AppComponent = (function () {
         };
         myChart.setOption(option);
     };
-    AppComponent.prototype.paintPie = function (name) {
+    ;
+    AppComponent.prototype.paintPie = function (name, docName) {
+        this.isMainPage = false;
+        this.isTable = false;
         this.picName = name;
-        var myChart = ec.init(document.getElementById('main'));
+        var myChart = ec.init(document.getElementById(docName));
         var option = {
             title: {
                 text: '某站点用户访问来源',
@@ -863,6 +874,15 @@ var AppComponent = (function () {
         };
         myChart.setOption(option);
     };
+    ;
+    AppComponent.prototype.getMainPage = function () {
+        this.isTable = false;
+        this.isMainPage = true;
+        this.paintChinaMap('主页', 'main-left-map');
+    };
+    ;
+    AppComponent.prototype.getPicData = function () {
+    };
     AppComponent.prototype.getData = function () {
         var result;
         var request;
@@ -881,7 +901,7 @@ var AppComponent = (function () {
                 order: '*'
             };
         }
-        $.post('http://59.110.25.2:3434/', request, function (data, status) {
+        $.post('http://192.168.0.100:3434/', request, function (data, status) {
             result = data;
             self.tableHead = _.keys(result[0]);
             var temp = [];
@@ -900,10 +920,10 @@ var AppComponent = (function () {
         });
     };
     AppComponent.prototype.ngOnInit = function () {
-        var testDataTmp = 'tmp';
-        this.paintBar('柱状图');
-        this.testData = testDataTmp;
         this.getData();
+        $(document).ready(function () {
+            $('#main-left-map').width($('#canvas-container').width());
+        });
     };
     __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Input */])(), 
@@ -3423,7 +3443,7 @@ var environment = {
 /***/ 968:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"page-header\">\n    <h1>\n      中科助腾数据展示项目\n    </h1>\n  </div>\n  <div class=\"row\">\n    <div class=\"guide col-md-2\">\n      <h2>目录</h2>\n      <ul class=\"nav nav-pills nav-stacked\" role=\"tablist\">\n        <li role=\"presentation\" class=\"active\">\n          <a (click)=\"paintChinaMap('地图')\" role=\"tab\" data-toggle=\"tab\">\n            地图\n          </a>\n        </li>\n        <li role=\"presentation\">\n          <a (click)=\"paintBar('柱状图')\" role=\"tab\" data-toggle=\"tab\">\n            柱状图\n          </a>\n        </li>\n        <li role=\"presentation\">\n          <a (click)=\"paintPie('扇形图')\" role=\"tab\" data-toggle=\"tab\">\n            扇形图\n          </a>\n        </li>\n        <li role=\"presentation\">\n          <a  (click)=\"getData()\" role=\"tab\" data-toggle=\"tab\">\n            测试数据库\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"showpart col-md-10\">\n      <div class=\"col-md-12\">\n        <h2>数据表格</h2>\n        <div class=\"table-responsive\">\n          <table id=\"datatable\" class=\"table-hover table-bordered\">\n            <thead>\n            <tr>\n              <th *ngFor=\"let tableHeadCell of tableHead\">\n                {{tableHeadCell}}\n              </th>\n            </tr>\n            </thead>\n            <tbody>\n            <tr *ngFor=\"let rowData of tableDataShowing\">\n              <td *ngFor=\"let dataCell of rowData\">{{dataCell}}</td>\n            </tr>\n            </tbody>\n            <tfoot>\n            <tr>\n              <td><a (click)=\"prePage()\">上一页</a></td>\n              <td><a (click)=\"nextPage()\">下一页</a></td>\n              <td>当前页数：{{dataTablePageNumber}}/{{dataTablePageNumberAll}}</td>\n            </tr>\n            </tfoot>\n          </table>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-md-2\">\n          <button class=\"btn btn-default\" (click)=\"getData()\">数据刷新</button>\n        </div>\n        <div class=\"col-md-6\">\n          <div class=\"input-group\">\n      <span class=\"input-group-btn\">\n        <button class=\"btn btn-default\" type=\"button\">匹配值</button>\n      </span>\n            <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dataValue\">\n          </div><!-- /input-group -->\n        </div><!-- /.col-lg-6 -->\n        <div class=\"col-md-4\">\n          <div class=\"dropdown\">\n            <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\">\n              {{dataName}}\n              <span class=\"caret\"></span>\n            </button>\n            <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">\n              <li *ngFor=\"let name of tableHead\" role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" (click)=\"this.changeDataName(name)\">{{name}}</a></li>\n            </ul>\n          </div>\n        </div>\n      </div><!-- /.row -->\n      <h2>{{picName}}</h2>\n      <div id=\"main\" style=\"width:1000px;height:700px;\"></div>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <h2>London</h2>\n      <p>London is the capital city of England.</p>\n      <p>It is the most populous city in the United Kingdom,\n        with a metropolitan area of over 13 million inhabitants.</p>\n    </div>\n    <div class=\"col-md-4\">\n      <h2>Paris</h2>\n      <p>Paris is the capital and most populous city of France.</p>\n    </div>\n    <div class=\"col-md-4\">\n      <h2>Tokyo</h2>\n      <p>Tokyo is the capital of Japan, the center of the Greater Tokyo Area,\n        and the most populous metropolitan area in the world.</p>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"page-header\">\n    <h1>\n      中科助腾数据展示项目\n    </h1>\n  </div>\n  <div class=\"row\">\n    <div class=\"guide col-md-2\">\n      <h2>目录</h2>\n      <ul class=\"nav nav-pills nav-stacked\" role=\"tablist\">\n        <li role=\"presentation\" class=\"active\">\n          <a  (click)=\"showTable()\" role=\"tab\" data-toggle=\"tab\">\n            数据表格\n          </a>\n        </li>\n        <li role=\"presentation\">\n          <a  (click)=\"getMainPage()\" role=\"tab\" data-toggle=\"tab\">\n            主页\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"showpart col-md-10\">\n      <div class=\"row\">\n        <div class=\"col-md-12\" *ngIf=\"isTable&&!isMainPage\">\n          <h2>数据表格</h2>\n          <div class=\"table-responsive\">\n            <table id=\"datatable\" class=\"table-hover table-bordered\">\n              <thead>\n              <tr>\n                <th *ngFor=\"let tableHeadCell of tableHead\">\n                  {{tableHeadCell}}\n                </th>\n              </tr>\n              </thead>\n              <tbody>\n              <tr *ngFor=\"let rowData of tableDataShowing\">\n                <td *ngFor=\"let dataCell of rowData\">{{dataCell}}</td>\n              </tr>\n              </tbody>\n              <tfoot>\n              <tr>\n                <td><a (click)=\"prePage()\">上一页</a></td>\n                <td><a (click)=\"nextPage()\">下一页</a></td>\n                <td>当前页数：{{dataTablePageNumber}}/{{dataTablePageNumberAll}}</td>\n              </tr>\n              </tfoot>\n            </table>\n          </div>\n        </div>\n        <div *ngIf=\"isTable\" class=\"col-md-12\">\n          <div class=\"col-md-2\">\n            <button class=\"btn btn-default\" (click)=\"getData()\">数据刷新</button>\n          </div>\n          <div class=\"col-md-6\">\n            <div class=\"input-group\">\n      <span class=\"input-group-btn\">\n        <button class=\"btn btn-default\" type=\"button\">匹配值</button>\n      </span>\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dataValue\">\n            </div><!-- /input-group -->\n          </div><!-- /.col-lg-6 -->\n          <div class=\"col-md-4\">\n            <div class=\"dropdown\">\n              <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\">\n                {{dataName}}\n                <span class=\"caret\"></span>\n              </button>\n              <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">\n                <li *ngFor=\"let name of tableHead\" role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" (click)=\"this.changeDataName(name)\">{{name}}</a></li>\n              </ul>\n            </div>\n          </div>\n        </div><!-- /.row -->\n        <div class=\"col-md-12\">\n          <div class=\"row\" [hidden]=\"isTable\">\n            <div class=\"col-md-3\">\n              <label>时间筛选：</label><input type=\"date\" [(ngModel)]=\"dateFilter\" class=\"form-control\">\n            </div>\n            <div class=\"col-md-4\">\n              <label>食物筛选：</label><input type=\"text\" [(ngModel)]=\"foodNameFilter\" class=\"form-control\">\n            </div>\n            <div class=\"col-md-2\">\n              <button class=\"btn btn-default\" onclick=\"getPicData()\">搜索</button>\n            </div>\n          </div>\n          <div [hidden]=\"isTable\" class=\"row\" id=\"canvas-container\">\n            <div class=\"col-md-12\">\n              <h2>{{picName}}</h2>\n            </div>\n            <div class=\"col-md-12 col-lg-12\" id=\"main-left-map\" style=\"width:500px; height:700px;\">la</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <h2>London</h2>\n      <p>London is the capital city of England.</p>\n      <p>It is the most populous city in the United Kingdom,\n        with a metropolitan area of over 13 million inhabitants.</p>\n    </div>\n\n    <div class=\"col-md-4\">\n      <h2>Paris</h2>\n      <p>Paris is the capital and most populous city of France.</p>\n    </div>\n\n    <div class=\"col-md-4\">\n      <h2>Tokyo</h2>\n      <p>Tokyo is the capital of Japan, the center of the Greater Tokyo Area,\n        and the most populous metropolitan area in the world.</p>\n    </div>\n  </div>\n</div>\n"
 
 /***/ },
 
