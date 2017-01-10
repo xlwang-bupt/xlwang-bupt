@@ -901,7 +901,7 @@ var AppComponent = (function () {
                 order: '*'
             };
         }
-        $.post('http://192.168.0.100:3434/', request, function (data, status) {
+        $.post('http://59.110.25.2:3434/', request, function (data, status) {
             result = data;
             self.tableHead = _.keys(result[0]);
             var temp = [];
