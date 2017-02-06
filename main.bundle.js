@@ -1,6 +1,6 @@
 webpackJsonp([0,3],{
 
-/***/ 1025:
+/***/ 1026:
 /***/ function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -9,12 +9,12 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 1025;
+webpackEmptyContext.id = 1026;
 
 
 /***/ },
 
-/***/ 1026:
+/***/ 1027:
 /***/ function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(466);
@@ -47,9 +47,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ec = __webpack_require__(404);
 var chinaMap = __webpack_require__(440);
-var $ = __webpack_require__(983);
-var sql = __webpack_require__(952);
-var _ = __webpack_require__(951);
+var $ = __webpack_require__(984);
+var sql = __webpack_require__(953);
+var _ = __webpack_require__(952);
+var geoCoordMap = __webpack_require__(951);
 var AppComponent = (function () {
     function AppComponent() {
         this.isMainPage = false;
@@ -63,6 +64,7 @@ var AppComponent = (function () {
         this.dataValue = '';
         this.dataTablePageNumber = 1;
         this.dataTablePageNumberAll = 1;
+        this.dateFilter = '2016-01-01';
     }
     AppComponent.prototype.tableDataShowingChange = function () {
         this.tableDataShowing = this.tableData[this.dataTablePageNumber - 1];
@@ -88,644 +90,691 @@ var AppComponent = (function () {
     };
     ;
     AppComponent.prototype.paintChinaMap = function (name, docName) {
-        this.isMainPage = false;
-        this.isTable = false;
-        this.picName = name;
-        ec.registerMap('china', chinaMap);
-        var myChart = ec.init(document.getElementById(docName));
-        var geoCoordMap = {
-            "海门": [121.15, 31.89],
-            "鄂尔多斯": [109.781327, 39.608266],
-            "招远": [120.38, 37.35],
-            "舟山": [122.207216, 29.985295],
-            "齐齐哈尔": [123.97, 47.33],
-            "盐城": [120.13, 33.38],
-            "赤峰": [118.87, 42.28],
-            "青岛": [120.33, 36.07],
-            "乳山": [121.52, 36.89],
-            "金昌": [102.188043, 38.520089],
-            "泉州": [118.58, 24.93],
-            "莱西": [120.53, 36.86],
-            "日照": [119.46, 35.42],
-            "胶南": [119.97, 35.88],
-            "南通": [121.05, 32.08],
-            "拉萨": [91.11, 29.97],
-            "云浮": [112.02, 22.93],
-            "梅州": [116.1, 24.55],
-            "文登": [122.05, 37.2],
-            "上海": [121.48, 31.22],
-            "攀枝花": [101.718637, 26.582347],
-            "威海": [122.1, 37.5],
-            "承德": [117.93, 40.97],
-            "厦门": [118.1, 24.46],
-            "汕尾": [115.375279, 22.786211],
-            "潮州": [116.63, 23.68],
-            "丹东": [124.37, 40.13],
-            "太仓": [121.1, 31.45],
-            "曲靖": [103.79, 25.51],
-            "烟台": [121.39, 37.52],
-            "福州": [119.3, 26.08],
-            "瓦房店": [121.979603, 39.627114],
-            "即墨": [120.45, 36.38],
-            "抚顺": [123.97, 41.97],
-            "玉溪": [102.52, 24.35],
-            "张家口": [114.87, 40.82],
-            "阳泉": [113.57, 37.85],
-            "莱州": [119.942327, 37.177017],
-            "湖州": [120.1, 30.86],
-            "汕头": [116.69, 23.39],
-            "昆山": [120.95, 31.39],
-            "宁波": [121.56, 29.86],
-            "湛江": [110.359377, 21.270708],
-            "揭阳": [116.35, 23.55],
-            "荣成": [122.41, 37.16],
-            "连云港": [119.16, 34.59],
-            "葫芦岛": [120.836932, 40.711052],
-            "常熟": [120.74, 31.64],
-            "东莞": [113.75, 23.04],
-            "河源": [114.68, 23.73],
-            "淮安": [119.15, 33.5],
-            "泰州": [119.9, 32.49],
-            "南宁": [108.33, 22.84],
-            "营口": [122.18, 40.65],
-            "惠州": [114.4, 23.09],
-            "江阴": [120.26, 31.91],
-            "蓬莱": [120.75, 37.8],
-            "韶关": [113.62, 24.84],
-            "嘉峪关": [98.289152, 39.77313],
-            "广州": [113.23, 23.16],
-            "延安": [109.47, 36.6],
-            "太原": [112.53, 37.87],
-            "清远": [113.01, 23.7],
-            "中山": [113.38, 22.52],
-            "昆明": [102.73, 25.04],
-            "寿光": [118.73, 36.86],
-            "盘锦": [122.070714, 41.119997],
-            "长治": [113.08, 36.18],
-            "深圳": [114.07, 22.62],
-            "珠海": [113.52, 22.3],
-            "宿迁": [118.3, 33.96],
-            "咸阳": [108.72, 34.36],
-            "铜川": [109.11, 35.09],
-            "平度": [119.97, 36.77],
-            "佛山": [113.11, 23.05],
-            "海口": [110.35, 20.02],
-            "江门": [113.06, 22.61],
-            "章丘": [117.53, 36.72],
-            "肇庆": [112.44, 23.05],
-            "大连": [121.62, 38.92],
-            "临汾": [111.5, 36.08],
-            "吴江": [120.63, 31.16],
-            "石嘴山": [106.39, 39.04],
-            "沈阳": [123.38, 41.8],
-            "苏州": [120.62, 31.32],
-            "茂名": [110.88, 21.68],
-            "嘉兴": [120.76, 30.77],
-            "长春": [125.35, 43.88],
-            "胶州": [120.03336, 36.264622],
-            "银川": [106.27, 38.47],
-            "张家港": [120.555821, 31.875428],
-            "三门峡": [111.19, 34.76],
-            "锦州": [121.15, 41.13],
-            "南昌": [115.89, 28.68],
-            "柳州": [109.4, 24.33],
-            "三亚": [109.511909, 18.252847],
-            "自贡": [104.778442, 29.33903],
-            "吉林": [126.57, 43.87],
-            "阳江": [111.95, 21.85],
-            "泸州": [105.39, 28.91],
-            "西宁": [101.74, 36.56],
-            "宜宾": [104.56, 29.77],
-            "呼和浩特": [111.65, 40.82],
-            "成都": [104.06, 30.67],
-            "大同": [113.3, 40.12],
-            "镇江": [119.44, 32.2],
-            "桂林": [110.28, 25.29],
-            "张家界": [110.479191, 29.117096],
-            "宜兴": [119.82, 31.36],
-            "北海": [109.12, 21.49],
-            "西安": [108.95, 34.27],
-            "金坛": [119.56, 31.74],
-            "东营": [118.49, 37.46],
-            "牡丹江": [129.58, 44.6],
-            "遵义": [106.9, 27.7],
-            "绍兴": [120.58, 30.01],
-            "扬州": [119.42, 32.39],
-            "常州": [119.95, 31.79],
-            "潍坊": [119.1, 36.62],
-            "重庆": [106.54, 29.59],
-            "台州": [121.420757, 28.656386],
-            "南京": [118.78, 32.04],
-            "滨州": [118.03, 37.36],
-            "贵阳": [106.71, 26.57],
-            "无锡": [120.29, 31.59],
-            "本溪": [123.73, 41.3],
-            "克拉玛依": [84.77, 45.59],
-            "渭南": [109.5, 34.52],
-            "马鞍山": [118.48, 31.56],
-            "宝鸡": [107.15, 34.38],
-            "焦作": [113.21, 35.24],
-            "句容": [119.16, 31.95],
-            "北京": [116.46, 39.92],
-            "徐州": [117.2, 34.26],
-            "衡水": [115.72, 37.72],
-            "包头": [110, 40.58],
-            "绵阳": [104.73, 31.48],
-            "乌鲁木齐": [87.68, 43.77],
-            "枣庄": [117.57, 34.86],
-            "杭州": [120.19, 30.26],
-            "淄博": [118.05, 36.78],
-            "鞍山": [122.85, 41.12],
-            "溧阳": [119.48, 31.43],
-            "库尔勒": [86.06, 41.68],
-            "安阳": [114.35, 36.1],
-            "开封": [114.35, 34.79],
-            "济南": [117, 36.65],
-            "德阳": [104.37, 31.13],
-            "温州": [120.65, 28.01],
-            "九江": [115.97, 29.71],
-            "邯郸": [114.47, 36.6],
-            "临安": [119.72, 30.23],
-            "兰州": [103.73, 36.03],
-            "沧州": [116.83, 38.33],
-            "临沂": [118.35, 35.05],
-            "南充": [106.110698, 30.837793],
-            "天津": [117.2, 39.13],
-            "富阳": [119.95, 30.07],
-            "泰安": [117.13, 36.18],
-            "诸暨": [120.23, 29.71],
-            "郑州": [113.65, 34.76],
-            "哈尔滨": [126.63, 45.75],
-            "聊城": [115.97, 36.45],
-            "芜湖": [118.38, 31.33],
-            "唐山": [118.02, 39.63],
-            "平顶山": [113.29, 33.75],
-            "邢台": [114.48, 37.05],
-            "德州": [116.29, 37.45],
-            "济宁": [116.59, 35.38],
-            "荆州": [112.239741, 30.335165],
-            "宜昌": [111.3, 30.7],
-            "义乌": [120.06, 29.32],
-            "丽水": [119.92, 28.45],
-            "洛阳": [112.44, 34.7],
-            "秦皇岛": [119.57, 39.95],
-            "株洲": [113.16, 27.83],
-            "石家庄": [114.48, 38.03],
-            "莱芜": [117.67, 36.19],
-            "常德": [111.69, 29.05],
-            "保定": [115.48, 38.85],
-            "湘潭": [112.91, 27.87],
-            "金华": [119.64, 29.12],
-            "岳阳": [113.09, 29.37],
-            "长沙": [113, 28.21],
-            "衢州": [118.88, 28.97],
-            "廊坊": [116.7, 39.53],
-            "菏泽": [115.480656, 35.23375],
-            "合肥": [117.27, 31.86],
-            "武汉": [114.31, 30.52],
-            "大庆": [125.03, 46.58]
-        };
-        var data = [
-            { name: "海门", value: 9 },
-            { name: "鄂尔多斯", value: 12 },
-            { name: "招远", value: 12 },
-            { name: "舟山", value: 12 },
-            { name: "齐齐哈尔", value: 14 },
-            { name: "盐城", value: 15 },
-            { name: "赤峰", value: 16 },
-            { name: "青岛", value: 18 },
-            { name: "乳山", value: 18 },
-            { name: "金昌", value: 19 },
-            { name: "泉州", value: 21 },
-            { name: "莱西", value: 21 },
-            { name: "日照", value: 21 },
-            { name: "胶南", value: 22 },
-            { name: "南通", value: 23 },
-            { name: "拉萨", value: 24 },
-            { name: "云浮", value: 24 },
-            { name: "梅州", value: 25 },
-            { name: "文登", value: 25 },
-            { name: "上海", value: 25 },
-            { name: "攀枝花", value: 25 },
-            { name: "威海", value: 25 },
-            { name: "承德", value: 25 },
-            { name: "厦门", value: 26 },
-            { name: "汕尾", value: 26 },
-            { name: "潮州", value: 26 },
-            { name: "丹东", value: 27 },
-            { name: "太仓", value: 27 },
-            { name: "曲靖", value: 27 },
-            { name: "烟台", value: 28 },
-            { name: "福州", value: 29 },
-            { name: "瓦房店", value: 30 },
-            { name: "即墨", value: 30 },
-            { name: "抚顺", value: 31 },
-            { name: "玉溪", value: 31 },
-            { name: "张家口", value: 31 },
-            { name: "阳泉", value: 31 },
-            { name: "莱州", value: 32 },
-            { name: "湖州", value: 32 },
-            { name: "汕头", value: 32 },
-            { name: "昆山", value: 33 },
-            { name: "宁波", value: 33 },
-            { name: "湛江", value: 33 },
-            { name: "揭阳", value: 34 },
-            { name: "荣成", value: 34 },
-            { name: "连云港", value: 35 },
-            { name: "葫芦岛", value: 35 },
-            { name: "常熟", value: 36 },
-            { name: "东莞", value: 36 },
-            { name: "河源", value: 36 },
-            { name: "淮安", value: 36 },
-            { name: "泰州", value: 36 },
-            { name: "南宁", value: 37 },
-            { name: "营口", value: 37 },
-            { name: "惠州", value: 37 },
-            { name: "江阴", value: 37 },
-            { name: "蓬莱", value: 37 },
-            { name: "韶关", value: 38 },
-            { name: "嘉峪关", value: 38 },
-            { name: "广州", value: 38 },
-            { name: "延安", value: 38 },
-            { name: "太原", value: 39 },
-            { name: "清远", value: 39 },
-            { name: "中山", value: 39 },
-            { name: "昆明", value: 39 },
-            { name: "寿光", value: 40 },
-            { name: "盘锦", value: 40 },
-            { name: "长治", value: 41 },
-            { name: "深圳", value: 41 },
-            { name: "珠海", value: 42 },
-            { name: "宿迁", value: 43 },
-            { name: "咸阳", value: 43 },
-            { name: "铜川", value: 44 },
-            { name: "平度", value: 44 },
-            { name: "佛山", value: 44 },
-            { name: "海口", value: 44 },
-            { name: "江门", value: 45 },
-            { name: "章丘", value: 45 },
-            { name: "肇庆", value: 46 },
-            { name: "大连", value: 47 },
-            { name: "临汾", value: 47 },
-            { name: "吴江", value: 47 },
-            { name: "石嘴山", value: 49 },
-            { name: "沈阳", value: 50 },
-            { name: "苏州", value: 50 },
-            { name: "茂名", value: 50 },
-            { name: "嘉兴", value: 51 },
-            { name: "长春", value: 51 },
-            { name: "胶州", value: 52 },
-            { name: "银川", value: 52 },
-            { name: "张家港", value: 52 },
-            { name: "三门峡", value: 53 },
-            { name: "锦州", value: 54 },
-            { name: "南昌", value: 54 },
-            { name: "柳州", value: 54 },
-            { name: "三亚", value: 54 },
-            { name: "自贡", value: 56 },
-            { name: "吉林", value: 56 },
-            { name: "阳江", value: 57 },
-            { name: "泸州", value: 57 },
-            { name: "西宁", value: 57 },
-            { name: "宜宾", value: 58 },
-            { name: "呼和浩特", value: 58 },
-            { name: "成都", value: 58 },
-            { name: "大同", value: 58 },
-            { name: "镇江", value: 59 },
-            { name: "桂林", value: 59 },
-            { name: "张家界", value: 59 },
-            { name: "宜兴", value: 59 },
-            { name: "北海", value: 60 },
-            { name: "西安", value: 61 },
-            { name: "金坛", value: 62 },
-            { name: "东营", value: 62 },
-            { name: "牡丹江", value: 63 },
-            { name: "遵义", value: 63 },
-            { name: "绍兴", value: 63 },
-            { name: "扬州", value: 64 },
-            { name: "常州", value: 64 },
-            { name: "潍坊", value: 65 },
-            { name: "重庆", value: 66 },
-            { name: "台州", value: 67 },
-            { name: "南京", value: 67 },
-            { name: "滨州", value: 70 },
-            { name: "贵阳", value: 71 },
-            { name: "无锡", value: 71 },
-            { name: "本溪", value: 71 },
-            { name: "克拉玛依", value: 72 },
-            { name: "渭南", value: 72 },
-            { name: "马鞍山", value: 72 },
-            { name: "宝鸡", value: 72 },
-            { name: "焦作", value: 75 },
-            { name: "句容", value: 75 },
-            { name: "北京", value: 79 },
-            { name: "徐州", value: 79 },
-            { name: "衡水", value: 80 },
-            { name: "包头", value: 80 },
-            { name: "绵阳", value: 80 },
-            { name: "乌鲁木齐", value: 84 },
-            { name: "枣庄", value: 84 },
-            { name: "杭州", value: 84 },
-            { name: "淄博", value: 85 },
-            { name: "鞍山", value: 86 },
-            { name: "溧阳", value: 86 },
-            { name: "库尔勒", value: 86 },
-            { name: "安阳", value: 90 },
-            { name: "开封", value: 90 },
-            { name: "济南", value: 92 },
-            { name: "德阳", value: 93 },
-            { name: "温州", value: 95 },
-            { name: "九江", value: 96 },
-            { name: "邯郸", value: 98 },
-            { name: "临安", value: 99 },
-            { name: "兰州", value: 99 },
-            { name: "沧州", value: 100 },
-            { name: "临沂", value: 103 },
-            { name: "南充", value: 104 },
-            { name: "天津", value: 105 },
-            { name: "富阳", value: 106 },
-            { name: "泰安", value: 112 },
-            { name: "诸暨", value: 112 },
-            { name: "郑州", value: 113 },
-            { name: "哈尔滨", value: 114 },
-            { name: "聊城", value: 116 },
-            { name: "芜湖", value: 117 },
-            { name: "唐山", value: 119 },
-            { name: "平顶山", value: 119 },
-            { name: "邢台", value: 119 },
-            { name: "德州", value: 120 },
-            { name: "济宁", value: 120 },
-            { name: "荆州", value: 127 },
-            { name: "宜昌", value: 130 },
-            { name: "义乌", value: 132 },
-            { name: "丽水", value: 133 },
-            { name: "洛阳", value: 134 },
-            { name: "秦皇岛", value: 136 },
-            { name: "株洲", value: 143 },
-            { name: "石家庄", value: 147 },
-            { name: "莱芜", value: 148 },
-            { name: "常德", value: 152 },
-            { name: "保定", value: 153 },
-            { name: "湘潭", value: 154 },
-            { name: "金华", value: 157 },
-            { name: "岳阳", value: 169 },
-            { name: "长沙", value: 175 },
-            { name: "衢州", value: 177 },
-            { name: "廊坊", value: 193 },
-            { name: "菏泽", value: 194 },
-            { name: "合肥", value: 229 },
-            { name: "武汉", value: 273 },
-            { name: "大庆", value: 279 }
-        ];
-        var convertData = function (data) {
-            var res = [];
-            for (var i = 0; i < data.length; i++) {
-                var geoCoord = geoCoordMap[data[i].name];
-                if (geoCoord) {
-                    res.push({
-                        name: data[i].name,
-                        value: geoCoord.concat(data[i].value)
-                    });
-                }
-            }
-            return res;
-        };
-        var convertedData = [
-            convertData(data),
-            convertData(data.sort(function (a, b) {
-                return b.value - a.value;
-            }).slice(0, 6))
-        ];
-        var option = {
-            backgroundColor: '#404a59',
-            animation: true,
-            animationDuration: 1000,
-            animationEasing: 'cubicInOut',
-            animationDurationUpdate: 1000,
-            animationEasingUpdate: 'cubicInOut',
-            title: [
-                {
-                    text: '全国病例爆发分析',
-                    subtext: '数据来源',
-                    left: 'center',
-                    textStyle: {
-                        color: '#fff'
+        var result;
+        var request;
+        var self = this;
+        if (self.dateFilter) {
+            request = {
+                type: 'dataGet',
+                key: 'date',
+                value: self.dateFilter,
+                order: '*'
+            };
+        }
+        else {
+            request = {
+                type: 'dataGet',
+                order: '*'
+            };
+        }
+        if (self.foodNameFilter) {
+            _.set(request, 'food_name', self.foodNameFilter);
+        }
+        $.post('http://59.110.25.2:3434/', request, function (docs, status) {
+            var sourceData = docs;
+            var data = [];
+            _(docs).forEach(function (doc) {
+                var result = {};
+                var cityName = doc.g_city;
+                _.set(result, 'name', cityName);
+                _.set(result, 'value', parseInt(doc.count) || 0);
+                _.set(result, 'date', doc.date);
+                _.set(result, 'foodName', doc.food_name);
+                data.push(result);
+            });
+            this.isMainPage = false;
+            this.isTable = false;
+            this.picName = name;
+            ec.registerMap('china', chinaMap);
+            var myChart = ec.init(document.getElementById(docName));
+            var geoCoordMapTmp = {
+                "海门": [121.15, 31.89],
+                "鄂尔多斯": [109.781327, 39.608266],
+                "招远": [120.38, 37.35],
+                "舟山": [122.207216, 29.985295],
+                "齐齐哈尔": [123.97, 47.33],
+                "盐城": [120.13, 33.38],
+                "赤峰": [118.87, 42.28],
+                "青岛": [120.33, 36.07],
+                "乳山": [121.52, 36.89],
+                "金昌": [102.188043, 38.520089],
+                "泉州": [118.58, 24.93],
+                "莱西": [120.53, 36.86],
+                "日照": [119.46, 35.42],
+                "胶南": [119.97, 35.88],
+                "南通": [121.05, 32.08],
+                "拉萨": [91.11, 29.97],
+                "云浮": [112.02, 22.93],
+                "梅州": [116.1, 24.55],
+                "文登": [122.05, 37.2],
+                "上海": [121.48, 31.22],
+                "攀枝花": [101.718637, 26.582347],
+                "威海": [122.1, 37.5],
+                "承德": [117.93, 40.97],
+                "厦门": [118.1, 24.46],
+                "汕尾": [115.375279, 22.786211],
+                "潮州": [116.63, 23.68],
+                "丹东": [124.37, 40.13],
+                "太仓": [121.1, 31.45],
+                "曲靖": [103.79, 25.51],
+                "烟台": [121.39, 37.52],
+                "福州": [119.3, 26.08],
+                "瓦房店": [121.979603, 39.627114],
+                "即墨": [120.45, 36.38],
+                "抚顺": [123.97, 41.97],
+                "玉溪": [102.52, 24.35],
+                "张家口": [114.87, 40.82],
+                "阳泉": [113.57, 37.85],
+                "莱州": [119.942327, 37.177017],
+                "湖州": [120.1, 30.86],
+                "汕头": [116.69, 23.39],
+                "昆山": [120.95, 31.39],
+                "宁波": [121.56, 29.86],
+                "湛江": [110.359377, 21.270708],
+                "揭阳": [116.35, 23.55],
+                "荣成": [122.41, 37.16],
+                "连云港": [119.16, 34.59],
+                "葫芦岛": [120.836932, 40.711052],
+                "常熟": [120.74, 31.64],
+                "东莞": [113.75, 23.04],
+                "河源": [114.68, 23.73],
+                "淮安": [119.15, 33.5],
+                "泰州": [119.9, 32.49],
+                "南宁": [108.33, 22.84],
+                "营口": [122.18, 40.65],
+                "惠州": [114.4, 23.09],
+                "江阴": [120.26, 31.91],
+                "蓬莱": [120.75, 37.8],
+                "韶关": [113.62, 24.84],
+                "嘉峪关": [98.289152, 39.77313],
+                "广州": [113.23, 23.16],
+                "延安": [109.47, 36.6],
+                "太原": [112.53, 37.87],
+                "清远": [113.01, 23.7],
+                "中山": [113.38, 22.52],
+                "昆明": [102.73, 25.04],
+                "寿光": [118.73, 36.86],
+                "盘锦": [122.070714, 41.119997],
+                "长治": [113.08, 36.18],
+                "深圳": [114.07, 22.62],
+                "珠海": [113.52, 22.3],
+                "宿迁": [118.3, 33.96],
+                "咸阳": [108.72, 34.36],
+                "铜川": [109.11, 35.09],
+                "平度": [119.97, 36.77],
+                "佛山": [113.11, 23.05],
+                "海口": [110.35, 20.02],
+                "江门": [113.06, 22.61],
+                "章丘": [117.53, 36.72],
+                "肇庆": [112.44, 23.05],
+                "大连": [121.62, 38.92],
+                "临汾": [111.5, 36.08],
+                "吴江": [120.63, 31.16],
+                "石嘴山": [106.39, 39.04],
+                "沈阳": [123.38, 41.8],
+                "苏州": [120.62, 31.32],
+                "茂名": [110.88, 21.68],
+                "嘉兴": [120.76, 30.77],
+                "长春": [125.35, 43.88],
+                "胶州": [120.03336, 36.264622],
+                "银川": [106.27, 38.47],
+                "张家港": [120.555821, 31.875428],
+                "三门峡": [111.19, 34.76],
+                "锦州": [121.15, 41.13],
+                "南昌": [115.89, 28.68],
+                "柳州": [109.4, 24.33],
+                "三亚": [109.511909, 18.252847],
+                "自贡": [104.778442, 29.33903],
+                "吉林": [126.57, 43.87],
+                "阳江": [111.95, 21.85],
+                "泸州": [105.39, 28.91],
+                "西宁": [101.74, 36.56],
+                "宜宾": [104.56, 29.77],
+                "呼和浩特": [111.65, 40.82],
+                "成都": [104.06, 30.67],
+                "大同": [113.3, 40.12],
+                "镇江": [119.44, 32.2],
+                "桂林": [110.28, 25.29],
+                "张家界": [110.479191, 29.117096],
+                "宜兴": [119.82, 31.36],
+                "北海": [109.12, 21.49],
+                "西安": [108.95, 34.27],
+                "金坛": [119.56, 31.74],
+                "东营": [118.49, 37.46],
+                "牡丹江": [129.58, 44.6],
+                "遵义": [106.9, 27.7],
+                "绍兴": [120.58, 30.01],
+                "扬州": [119.42, 32.39],
+                "常州": [119.95, 31.79],
+                "潍坊": [119.1, 36.62],
+                "重庆": [106.54, 29.59],
+                "台州": [121.420757, 28.656386],
+                "南京": [118.78, 32.04],
+                "滨州": [118.03, 37.36],
+                "贵阳": [106.71, 26.57],
+                "无锡": [120.29, 31.59],
+                "本溪": [123.73, 41.3],
+                "克拉玛依": [84.77, 45.59],
+                "渭南": [109.5, 34.52],
+                "马鞍山": [118.48, 31.56],
+                "宝鸡": [107.15, 34.38],
+                "焦作": [113.21, 35.24],
+                "句容": [119.16, 31.95],
+                "北京": [116.46, 39.92],
+                "徐州": [117.2, 34.26],
+                "衡水": [115.72, 37.72],
+                "包头": [110, 40.58],
+                "绵阳": [104.73, 31.48],
+                "乌鲁木齐": [87.68, 43.77],
+                "枣庄": [117.57, 34.86],
+                "杭州": [120.19, 30.26],
+                "淄博": [118.05, 36.78],
+                "鞍山": [122.85, 41.12],
+                "溧阳": [119.48, 31.43],
+                "库尔勒": [86.06, 41.68],
+                "安阳": [114.35, 36.1],
+                "开封": [114.35, 34.79],
+                "济南": [117, 36.65],
+                "德阳": [104.37, 31.13],
+                "温州": [120.65, 28.01],
+                "九江": [115.97, 29.71],
+                "邯郸": [114.47, 36.6],
+                "临安": [119.72, 30.23],
+                "兰州": [103.73, 36.03],
+                "沧州": [116.83, 38.33],
+                "临沂": [118.35, 35.05],
+                "南充": [106.110698, 30.837793],
+                "天津": [117.2, 39.13],
+                "富阳": [119.95, 30.07],
+                "泰安": [117.13, 36.18],
+                "诸暨": [120.23, 29.71],
+                "郑州": [113.65, 34.76],
+                "哈尔滨": [126.63, 45.75],
+                "聊城": [115.97, 36.45],
+                "芜湖": [118.38, 31.33],
+                "唐山": [118.02, 39.63],
+                "平顶山": [113.29, 33.75],
+                "邢台": [114.48, 37.05],
+                "德州": [116.29, 37.45],
+                "济宁": [116.59, 35.38],
+                "荆州": [112.239741, 30.335165],
+                "宜昌": [111.3, 30.7],
+                "义乌": [120.06, 29.32],
+                "丽水": [119.92, 28.45],
+                "洛阳": [112.44, 34.7],
+                "秦皇岛": [119.57, 39.95],
+                "株洲": [113.16, 27.83],
+                "石家庄": [114.48, 38.03],
+                "莱芜": [117.67, 36.19],
+                "常德": [111.69, 29.05],
+                "保定": [115.48, 38.85],
+                "湘潭": [112.91, 27.87],
+                "金华": [119.64, 29.12],
+                "岳阳": [113.09, 29.37],
+                "长沙": [113, 28.21],
+                "衢州": [118.88, 28.97],
+                "廊坊": [116.7, 39.53],
+                "菏泽": [115.480656, 35.23375],
+                "合肥": [117.27, 31.86],
+                "武汉": [114.31, 30.52],
+                "大庆": [125.03, 46.58]
+            };
+            var dataTmp = [
+                { name: "海门", value: 9 },
+                { name: "鄂尔多斯", value: 12 },
+                { name: "招远", value: 12 },
+                { name: "舟山", value: 12 },
+                { name: "齐齐哈尔", value: 14 },
+                { name: "盐城", value: 15 },
+                { name: "赤峰", value: 16 },
+                { name: "青岛", value: 18 },
+                { name: "乳山", value: 18 },
+                { name: "金昌", value: 19 },
+                { name: "泉州", value: 21 },
+                { name: "莱西", value: 21 },
+                { name: "日照", value: 21 },
+                { name: "胶南", value: 22 },
+                { name: "南通", value: 23 },
+                { name: "拉萨", value: 24 },
+                { name: "云浮", value: 24 },
+                { name: "梅州", value: 25 },
+                { name: "文登", value: 25 },
+                { name: "上海", value: 25 },
+                { name: "攀枝花", value: 25 },
+                { name: "威海", value: 25 },
+                { name: "承德", value: 25 },
+                { name: "厦门", value: 26 },
+                { name: "汕尾", value: 26 },
+                { name: "潮州", value: 26 },
+                { name: "丹东", value: 27 },
+                { name: "太仓", value: 27 },
+                { name: "曲靖", value: 27 },
+                { name: "烟台", value: 28 },
+                { name: "福州", value: 29 },
+                { name: "瓦房店", value: 30 },
+                { name: "即墨", value: 30 },
+                { name: "抚顺", value: 31 },
+                { name: "玉溪", value: 31 },
+                { name: "张家口", value: 31 },
+                { name: "阳泉", value: 31 },
+                { name: "莱州", value: 32 },
+                { name: "湖州", value: 32 },
+                { name: "汕头", value: 32 },
+                { name: "昆山", value: 33 },
+                { name: "宁波", value: 33 },
+                { name: "湛江", value: 33 },
+                { name: "揭阳", value: 34 },
+                { name: "荣成", value: 34 },
+                { name: "连云港", value: 35 },
+                { name: "葫芦岛", value: 35 },
+                { name: "常熟", value: 36 },
+                { name: "东莞", value: 36 },
+                { name: "河源", value: 36 },
+                { name: "淮安", value: 36 },
+                { name: "泰州", value: 36 },
+                { name: "南宁", value: 37 },
+                { name: "营口", value: 37 },
+                { name: "惠州", value: 37 },
+                { name: "江阴", value: 37 },
+                { name: "蓬莱", value: 37 },
+                { name: "韶关", value: 38 },
+                { name: "嘉峪关", value: 38 },
+                { name: "广州", value: 38 },
+                { name: "延安", value: 38 },
+                { name: "太原", value: 39 },
+                { name: "清远", value: 39 },
+                { name: "中山", value: 39 },
+                { name: "昆明", value: 39 },
+                { name: "寿光", value: 40 },
+                { name: "盘锦", value: 40 },
+                { name: "长治", value: 41 },
+                { name: "深圳", value: 41 },
+                { name: "珠海", value: 42 },
+                { name: "宿迁", value: 43 },
+                { name: "咸阳", value: 43 },
+                { name: "铜川", value: 44 },
+                { name: "平度", value: 44 },
+                { name: "佛山", value: 44 },
+                { name: "海口", value: 44 },
+                { name: "江门", value: 45 },
+                { name: "章丘", value: 45 },
+                { name: "肇庆", value: 46 },
+                { name: "大连", value: 47 },
+                { name: "临汾", value: 47 },
+                { name: "吴江", value: 47 },
+                { name: "石嘴山", value: 49 },
+                { name: "沈阳", value: 50 },
+                { name: "苏州", value: 50 },
+                { name: "茂名", value: 50 },
+                { name: "嘉兴", value: 51 },
+                { name: "长春", value: 51 },
+                { name: "胶州", value: 52 },
+                { name: "银川", value: 52 },
+                { name: "张家港", value: 52 },
+                { name: "三门峡", value: 53 },
+                { name: "锦州", value: 54 },
+                { name: "南昌", value: 54 },
+                { name: "柳州", value: 54 },
+                { name: "三亚", value: 54 },
+                { name: "自贡", value: 56 },
+                { name: "吉林", value: 56 },
+                { name: "阳江", value: 57 },
+                { name: "泸州", value: 57 },
+                { name: "西宁", value: 57 },
+                { name: "宜宾", value: 58 },
+                { name: "呼和浩特", value: 58 },
+                { name: "成都", value: 58 },
+                { name: "大同", value: 58 },
+                { name: "镇江", value: 59 },
+                { name: "桂林", value: 59 },
+                { name: "张家界", value: 59 },
+                { name: "宜兴", value: 59 },
+                { name: "北海", value: 60 },
+                { name: "西安", value: 61 },
+                { name: "金坛", value: 62 },
+                { name: "东营", value: 62 },
+                { name: "牡丹江", value: 63 },
+                { name: "遵义", value: 63 },
+                { name: "绍兴", value: 63 },
+                { name: "扬州", value: 64 },
+                { name: "常州", value: 64 },
+                { name: "潍坊", value: 65 },
+                { name: "重庆", value: 66 },
+                { name: "台州", value: 67 },
+                { name: "南京", value: 67 },
+                { name: "滨州", value: 70 },
+                { name: "贵阳", value: 71 },
+                { name: "无锡", value: 71 },
+                { name: "本溪", value: 71 },
+                { name: "克拉玛依", value: 72 },
+                { name: "渭南", value: 72 },
+                { name: "马鞍山", value: 72 },
+                { name: "宝鸡", value: 72 },
+                { name: "焦作", value: 75 },
+                { name: "句容", value: 75 },
+                { name: "北京", value: 79 },
+                { name: "徐州", value: 79 },
+                { name: "衡水", value: 80 },
+                { name: "包头", value: 80 },
+                { name: "绵阳", value: 80 },
+                { name: "乌鲁木齐", value: 84 },
+                { name: "枣庄", value: 84 },
+                { name: "杭州", value: 84 },
+                { name: "淄博", value: 85 },
+                { name: "鞍山", value: 86 },
+                { name: "溧阳", value: 86 },
+                { name: "库尔勒", value: 86 },
+                { name: "安阳", value: 90 },
+                { name: "开封", value: 90 },
+                { name: "济南", value: 92 },
+                { name: "德阳", value: 93 },
+                { name: "温州", value: 95 },
+                { name: "九江", value: 96 },
+                { name: "邯郸", value: 98 },
+                { name: "临安", value: 99 },
+                { name: "兰州", value: 99 },
+                { name: "沧州", value: 100 },
+                { name: "临沂", value: 103 },
+                { name: "南充", value: 104 },
+                { name: "天津", value: 105 },
+                { name: "富阳", value: 106 },
+                { name: "泰安", value: 112 },
+                { name: "诸暨", value: 112 },
+                { name: "郑州", value: 113 },
+                { name: "哈尔滨", value: 114 },
+                { name: "聊城", value: 116 },
+                { name: "芜湖", value: 117 },
+                { name: "唐山", value: 119 },
+                { name: "平顶山", value: 119 },
+                { name: "邢台", value: 119 },
+                { name: "德州", value: 120 },
+                { name: "济宁", value: 120 },
+                { name: "荆州", value: 127 },
+                { name: "宜昌", value: 130 },
+                { name: "义乌", value: 132 },
+                { name: "丽水", value: 133 },
+                { name: "洛阳", value: 134 },
+                { name: "秦皇岛", value: 136 },
+                { name: "株洲", value: 143 },
+                { name: "石家庄", value: 147 },
+                { name: "莱芜", value: 148 },
+                { name: "常德", value: 152 },
+                { name: "保定", value: 153 },
+                { name: "湘潭", value: 154 },
+                { name: "金华", value: 157 },
+                { name: "岳阳", value: 169 },
+                { name: "长沙", value: 175 },
+                { name: "衢州", value: 177 },
+                { name: "廊坊", value: 193 },
+                { name: "菏泽", value: 194 },
+                { name: "合肥", value: 229 },
+                { name: "武汉", value: 273 },
+                { name: "大庆", value: 279 }
+            ];
+            var convertData = function (data) {
+                var res = [];
+                for (var i = 0; i < data.length; i++) {
+                    var geoCoord = geoCoordMap[data[i].name];
+                    if (geoCoord) {
+                        res.push({
+                            name: data[i].name,
+                            value: geoCoord.concat(data[i].value),
+                            date: data[i].date,
+                            foodName: data[i].foodName
+                        });
                     }
-                },
-                {
-                    id: 'statistic',
-                    right: 120,
-                    top: 40,
-                    width: 100,
-                    textStyle: {
-                        color: '#fff',
-                        fontSize: 16
-                    }
-                }
-            ],
-            toolbox: {
-                iconStyle: {
-                    normal: {
-                        borderColor: '#fff'
-                    },
-                    emphasis: {
-                        borderColor: '#b1e4ff'
-                    }
-                },
-                feature: {
-                    dataZoom: {},
-                    brush: {
-                        type: ['rect', 'polygon', 'clear']
-                    },
-                    saveAsImage: { show: true }
-                }
-            },
-            brush: {
-                outOfBrush: {
-                    color: '#abc'
-                },
-                brushStyle: {
-                    borderWidth: 2,
-                    color: 'rgba(0,0,0,0.2)',
-                    borderColor: 'rgba(0,0,0,0.5)',
-                },
-                seriesIndex: [0, 1],
-                throttleType: 'debounce',
-                throttleDelay: 300,
-                geoIndex: 0
-            },
-            geo: {
-                map: 'china',
-                left: '10',
-                right: '35%',
-                center: [117.98561551896913, 31.205000490896193],
-                zoom: 2.5,
-                label: {
-                    emphasis: {
-                        show: false
-                    }
-                },
-                roam: true,
-                itemStyle: {
-                    normal: {
-                        areaColor: '#323c48',
-                        borderColor: '#111'
-                    },
-                    emphasis: {
-                        areaColor: '#2a333d'
+                    else {
+                        console.log(data[i].name + '坐标不存在，请添加');
                     }
                 }
-            },
-            tooltip: {
-                trigger: 'item'
-            },
-            grid: {
-                right: 40,
-                top: 100,
-                bottom: 40,
-                width: '30%'
-            },
-            xAxis: {
-                type: 'value',
-                scale: true,
-                position: 'top',
-                boundaryGap: false,
-                splitLine: { show: false },
-                axisLine: { show: false },
-                axisTick: { show: false },
-                axisLabel: { margin: 2, textStyle: { color: '#aaa' } },
-            },
-            yAxis: {
-                type: 'category',
-                name: 'TOP 20',
-                nameGap: 16,
-                axisLine: { show: false, lineStyle: { color: '#ddd' } },
-                axisTick: { show: false, lineStyle: { color: '#ddd' } },
-                axisLabel: { interval: 0, textStyle: { color: '#ddd' } },
-                data: []
-            },
-            series: [
-                {
-                    name: '病例数量',
-                    type: 'scatter',
-                    coordinateSystem: 'geo',
-                    data: convertedData[0],
-                    symbolSize: function (val) {
-                        return Math.max(val[2] / 10, 8);
+                return res;
+            };
+            var convertedData = [
+                convertData(data),
+                convertData(data.sort(function (a, b) {
+                    return b.value - a.value;
+                }).slice(0, 6))
+            ];
+            var option = {
+                backgroundColor: '#404a59',
+                animation: true,
+                animationDuration: 1000,
+                animationEasing: 'cubicInOut',
+                animationDurationUpdate: 1000,
+                animationEasingUpdate: 'cubicInOut',
+                title: [
+                    {
+                        text: '全国病例爆发分析',
+                        subtext: '数据来源',
+                        left: 'center',
+                        textStyle: {
+                            color: '#fff'
+                        }
                     },
-                    label: {
+                    {
+                        id: 'statistic',
+                        right: 120,
+                        top: 40,
+                        width: 100,
+                        textStyle: {
+                            color: '#fff',
+                            fontSize: 16
+                        }
+                    }
+                ],
+                toolbox: {
+                    iconStyle: {
                         normal: {
-                            formatter: '{b}',
-                            position: 'right',
-                            show: false
+                            borderColor: '#fff'
                         },
                         emphasis: {
-                            show: true
+                            borderColor: '#b1e4ff'
                         }
                     },
-                    itemStyle: {
-                        normal: {
-                            color: '#ddb926'
-                        }
+                    feature: {
+                        dataZoom: {},
+                        brush: {
+                            type: ['rect', 'polygon', 'clear']
+                        },
+                        saveAsImage: { show: true }
                     }
                 },
-                {
-                    name: 'Top 5',
-                    type: 'effectScatter',
-                    coordinateSystem: 'geo',
-                    data: convertedData[1],
-                    symbolSize: function (val) {
-                        return Math.max(val[2] / 10, 8);
+                brush: {
+                    outOfBrush: {
+                        color: '#abc'
                     },
-                    showEffectOn: 'emphasis',
-                    rippleEffect: {
-                        brushType: 'stroke'
+                    brushStyle: {
+                        borderWidth: 2,
+                        color: 'rgba(0,0,0,0.2)',
+                        borderColor: 'rgba(0,0,0,0.5)',
                     },
-                    hoverAnimation: true,
+                    seriesIndex: [0, 1],
+                    throttleType: 'debounce',
+                    throttleDelay: 300,
+                    geoIndex: 0
+                },
+                geo: {
+                    map: 'china',
+                    left: '10',
+                    right: '35%',
+                    center: [117.98561551896913, 31.205000490896193],
+                    zoom: 2.5,
                     label: {
-                        normal: {
-                            formatter: '{b}',
-                            position: 'right',
-                            show: true
+                        emphasis: {
+                            show: false
                         }
                     },
+                    roam: true,
                     itemStyle: {
                         normal: {
-                            color: '#f4e925',
-                            shadowBlur: 10,
-                            shadowColor: '#333'
+                            areaColor: '#323c48',
+                            borderColor: '#111'
+                        },
+                        emphasis: {
+                            areaColor: '#2a333d'
                         }
-                    },
-                    zlevel: 1
-                },
-                {
-                    id: 'bar',
-                    zlevel: 2,
-                    type: 'bar',
-                    symbol: 'none',
-                    itemStyle: {
-                        normal: {
-                            color: '#ddb926'
-                        }
-                    },
-                    data: []
-                }
-            ]
-        };
-        myChart.on('brushselected', renderBrushed);
-        myChart.setOption(option);
-        setTimeout(function () {
-            myChart.dispatchAction({
-                type: 'brush',
-                areas: [
-                    {
-                        geoIndex: 0,
-                        brushType: 'polygon',
-                        coordRange: [[119.72, 34.85], [119.68, 34.85], [119.5, 34.84], [119.19, 34.77], [118.76, 34.63], [118.6, 34.6], [118.46, 34.6], [118.33, 34.57], [118.05, 34.56], [117.6, 34.56], [117.41, 34.56], [117.25, 34.56], [117.11, 34.56], [117.02, 34.56], [117, 34.56], [116.94, 34.56], [116.94, 34.55], [116.9, 34.5], [116.88, 34.44], [116.88, 34.37], [116.88, 34.33], [116.88, 34.24], [116.92, 34.15], [116.98, 34.09], [117.05, 34.06], [117.19, 33.96], [117.29, 33.9], [117.43, 33.8], [117.49, 33.75], [117.54, 33.68], [117.6, 33.65], [117.62, 33.61], [117.64, 33.59], [117.68, 33.58], [117.7, 33.52], [117.74, 33.5], [117.74, 33.46], [117.8, 33.44], [117.82, 33.41], [117.86, 33.37], [117.9, 33.3], [117.9, 33.28], [117.9, 33.27], [118.09, 32.97], [118.21, 32.7], [118.29, 32.56], [118.31, 32.5], [118.35, 32.46], [118.35, 32.42], [118.35, 32.36], [118.35, 32.34], [118.37, 32.24], [118.37, 32.14], [118.37, 32.09], [118.44, 32.05], [118.46, 32.01], [118.54, 31.98], [118.6, 31.93], [118.68, 31.86], [118.72, 31.8], [118.74, 31.78], [118.76, 31.74], [118.78, 31.7], [118.82, 31.64], [118.82, 31.62], [118.86, 31.58], [118.86, 31.55], [118.88, 31.54], [118.88, 31.52], [118.9, 31.51], [118.91, 31.48], [118.93, 31.43], [118.95, 31.4], [118.97, 31.39], [118.97, 31.37], [118.97, 31.34], [118.97, 31.27], [118.97, 31.21], [118.97, 31.17], [118.97, 31.12], [118.97, 31.02], [118.97, 30.93], [118.97, 30.87], [118.97, 30.85], [118.95, 30.8], [118.95, 30.77], [118.95, 30.76], [118.93, 30.7], [118.91, 30.63], [118.91, 30.61], [118.91, 30.6], [118.9, 30.6], [118.88, 30.54], [118.88, 30.51], [118.86, 30.51], [118.86, 30.46], [118.72, 30.18], [118.68, 30.1], [118.66, 30.07], [118.62, 29.91], [118.56, 29.73], [118.52, 29.63], [118.48, 29.51], [118.44, 29.42], [118.44, 29.32], [118.43, 29.19], [118.43, 29.14], [118.43, 29.08], [118.44, 29.05], [118.46, 29.05], [118.6, 28.95], [118.64, 28.94], [119.07, 28.51], [119.25, 28.41], [119.36, 28.28], [119.46, 28.19], [119.54, 28.13], [119.66, 28.03], [119.78, 28], [119.87, 27.94], [120.03, 27.86], [120.17, 27.79], [120.23, 27.76], [120.3, 27.72], [120.42, 27.66], [120.52, 27.64], [120.58, 27.63], [120.64, 27.63], [120.77, 27.63], [120.89, 27.61], [120.97, 27.6], [121.07, 27.59], [121.15, 27.59], [121.28, 27.59], [121.38, 27.61], [121.56, 27.73], [121.73, 27.89], [122.03, 28.2], [122.3, 28.5], [122.46, 28.72], [122.5, 28.77], [122.54, 28.82], [122.56, 28.82], [122.58, 28.85], [122.6, 28.86], [122.61, 28.91], [122.71, 29.02], [122.73, 29.08], [122.93, 29.44], [122.99, 29.54], [123.03, 29.66], [123.05, 29.73], [123.16, 29.92], [123.24, 30.02], [123.28, 30.13], [123.32, 30.29], [123.36, 30.36], [123.36, 30.55], [123.36, 30.74], [123.36, 31.05], [123.36, 31.14], [123.36, 31.26], [123.38, 31.42], [123.46, 31.74], [123.48, 31.83], [123.48, 31.95], [123.46, 32.09], [123.34, 32.25], [123.22, 32.39], [123.12, 32.46], [123.07, 32.48], [123.05, 32.49], [122.97, 32.53], [122.91, 32.59], [122.83, 32.81], [122.77, 32.87], [122.71, 32.9], [122.56, 32.97], [122.38, 33.05], [122.3, 33.12], [122.26, 33.15], [122.22, 33.21], [122.22, 33.3], [122.22, 33.39], [122.18, 33.44], [122.07, 33.56], [121.99, 33.69], [121.89, 33.78], [121.69, 34.02], [121.66, 34.05], [121.64, 34.08]]
                     }
-                ]
-            });
-        }, 0);
-        function renderBrushed(params) {
-            var mainSeries = params.batch[0].selected[0];
-            var selectedItems = [];
-            var categoryData = [];
-            var barData = [];
-            var maxBar = 30;
-            var sum = 0;
-            var count = 0;
-            for (var i = 0; i < mainSeries.dataIndex.length; i++) {
-                var rawIndex = mainSeries.dataIndex[i];
-                var dataItem = convertedData[0][rawIndex];
-                var pmValue = dataItem.value[2];
-                sum += pmValue;
-                count++;
-                selectedItems.push(dataItem);
-            }
-            selectedItems.sort(function (a, b) {
-                return a.value[2] - b.value[2];
-            });
-            for (var i = 0; i < Math.min(selectedItems.length, maxBar); i++) {
-                categoryData.push(selectedItems[i].name);
-                barData.push(selectedItems[i].value[2]);
-            }
-            this.setOption({
-                yAxis: {
-                    data: categoryData
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function (params) {
+                        return (params.name + ' : ' + params.data.date + ' <br /> ' + params.data.foodName);
+                    }
+                },
+                grid: {
+                    right: 40,
+                    top: 100,
+                    bottom: 40,
+                    width: '30%'
                 },
                 xAxis: {
-                    axisLabel: { show: !!count }
+                    type: 'value',
+                    scale: true,
+                    position: 'top',
+                    boundaryGap: false,
+                    splitLine: { show: false },
+                    axisLine: { show: false },
+                    axisTick: { show: false },
+                    axisLabel: { margin: 2, textStyle: { color: '#aaa' } },
                 },
-                title: {
-                    id: 'statistic',
-                    text: count ? '平均: ' + (sum / count).toFixed(4) : ''
+                yAxis: {
+                    type: 'category',
+                    name: 'TOP 20',
+                    nameGap: 16,
+                    axisLine: { show: false, lineStyle: { color: '#ddd' } },
+                    axisTick: { show: false, lineStyle: { color: '#ddd' } },
+                    axisLabel: { interval: 0, textStyle: { color: '#ddd' } },
+                    data: []
                 },
-                series: {
-                    id: 'bar',
-                    data: barData
+                series: [
+                    {
+                        name: '病例数量',
+                        type: 'scatter',
+                        coordinateSystem: 'geo',
+                        data: convertedData[0],
+                        symbolSize: function (val) {
+                            return Math.max(val[2] / 10, 8);
+                        },
+                        label: {
+                            normal: {
+                                formatter: '{b}',
+                                position: 'right',
+                                show: false
+                            },
+                            emphasis: {
+                                show: true
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#ddb926'
+                            }
+                        }
+                    },
+                    {
+                        name: 'Top 5',
+                        type: 'effectScatter',
+                        coordinateSystem: 'geo',
+                        data: convertedData[1],
+                        symbolSize: function (val) {
+                            return Math.max(val[2] / 10, 8);
+                        },
+                        showEffectOn: 'emphasis',
+                        rippleEffect: {
+                            brushType: 'stroke'
+                        },
+                        hoverAnimation: true,
+                        label: {
+                            normal: {
+                                formatter: '{b}',
+                                position: 'right',
+                                show: true
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#f4e925',
+                                shadowBlur: 10,
+                                shadowColor: '#333'
+                            }
+                        },
+                        zlevel: 1
+                    },
+                    {
+                        id: 'bar',
+                        zlevel: 2,
+                        type: 'bar',
+                        symbol: 'none',
+                        itemStyle: {
+                            normal: {
+                                color: '#ddb926'
+                            }
+                        },
+                        data: []
+                    }
+                ]
+            };
+            myChart.on('brushselected', renderBrushed);
+            myChart.setOption(option);
+            setTimeout(function () {
+                myChart.dispatchAction({
+                    type: 'brush',
+                    areas: [
+                        {
+                            geoIndex: 0,
+                            brushType: 'polygon',
+                            coordRange: [[119.72, 34.85], [119.68, 34.85], [119.5, 34.84], [119.19, 34.77], [118.76, 34.63], [118.6, 34.6], [118.46, 34.6], [118.33, 34.57], [118.05, 34.56], [117.6, 34.56], [117.41, 34.56], [117.25, 34.56], [117.11, 34.56], [117.02, 34.56], [117, 34.56], [116.94, 34.56], [116.94, 34.55], [116.9, 34.5], [116.88, 34.44], [116.88, 34.37], [116.88, 34.33], [116.88, 34.24], [116.92, 34.15], [116.98, 34.09], [117.05, 34.06], [117.19, 33.96], [117.29, 33.9], [117.43, 33.8], [117.49, 33.75], [117.54, 33.68], [117.6, 33.65], [117.62, 33.61], [117.64, 33.59], [117.68, 33.58], [117.7, 33.52], [117.74, 33.5], [117.74, 33.46], [117.8, 33.44], [117.82, 33.41], [117.86, 33.37], [117.9, 33.3], [117.9, 33.28], [117.9, 33.27], [118.09, 32.97], [118.21, 32.7], [118.29, 32.56], [118.31, 32.5], [118.35, 32.46], [118.35, 32.42], [118.35, 32.36], [118.35, 32.34], [118.37, 32.24], [118.37, 32.14], [118.37, 32.09], [118.44, 32.05], [118.46, 32.01], [118.54, 31.98], [118.6, 31.93], [118.68, 31.86], [118.72, 31.8], [118.74, 31.78], [118.76, 31.74], [118.78, 31.7], [118.82, 31.64], [118.82, 31.62], [118.86, 31.58], [118.86, 31.55], [118.88, 31.54], [118.88, 31.52], [118.9, 31.51], [118.91, 31.48], [118.93, 31.43], [118.95, 31.4], [118.97, 31.39], [118.97, 31.37], [118.97, 31.34], [118.97, 31.27], [118.97, 31.21], [118.97, 31.17], [118.97, 31.12], [118.97, 31.02], [118.97, 30.93], [118.97, 30.87], [118.97, 30.85], [118.95, 30.8], [118.95, 30.77], [118.95, 30.76], [118.93, 30.7], [118.91, 30.63], [118.91, 30.61], [118.91, 30.6], [118.9, 30.6], [118.88, 30.54], [118.88, 30.51], [118.86, 30.51], [118.86, 30.46], [118.72, 30.18], [118.68, 30.1], [118.66, 30.07], [118.62, 29.91], [118.56, 29.73], [118.52, 29.63], [118.48, 29.51], [118.44, 29.42], [118.44, 29.32], [118.43, 29.19], [118.43, 29.14], [118.43, 29.08], [118.44, 29.05], [118.46, 29.05], [118.6, 28.95], [118.64, 28.94], [119.07, 28.51], [119.25, 28.41], [119.36, 28.28], [119.46, 28.19], [119.54, 28.13], [119.66, 28.03], [119.78, 28], [119.87, 27.94], [120.03, 27.86], [120.17, 27.79], [120.23, 27.76], [120.3, 27.72], [120.42, 27.66], [120.52, 27.64], [120.58, 27.63], [120.64, 27.63], [120.77, 27.63], [120.89, 27.61], [120.97, 27.6], [121.07, 27.59], [121.15, 27.59], [121.28, 27.59], [121.38, 27.61], [121.56, 27.73], [121.73, 27.89], [122.03, 28.2], [122.3, 28.5], [122.46, 28.72], [122.5, 28.77], [122.54, 28.82], [122.56, 28.82], [122.58, 28.85], [122.6, 28.86], [122.61, 28.91], [122.71, 29.02], [122.73, 29.08], [122.93, 29.44], [122.99, 29.54], [123.03, 29.66], [123.05, 29.73], [123.16, 29.92], [123.24, 30.02], [123.28, 30.13], [123.32, 30.29], [123.36, 30.36], [123.36, 30.55], [123.36, 30.74], [123.36, 31.05], [123.36, 31.14], [123.36, 31.26], [123.38, 31.42], [123.46, 31.74], [123.48, 31.83], [123.48, 31.95], [123.46, 32.09], [123.34, 32.25], [123.22, 32.39], [123.12, 32.46], [123.07, 32.48], [123.05, 32.49], [122.97, 32.53], [122.91, 32.59], [122.83, 32.81], [122.77, 32.87], [122.71, 32.9], [122.56, 32.97], [122.38, 33.05], [122.3, 33.12], [122.26, 33.15], [122.22, 33.21], [122.22, 33.3], [122.22, 33.39], [122.18, 33.44], [122.07, 33.56], [121.99, 33.69], [121.89, 33.78], [121.69, 34.02], [121.66, 34.05], [121.64, 34.08]]
+                        }
+                    ]
+                });
+            }, 0);
+            function renderBrushed(params) {
+                var mainSeries = params.batch[0].selected[0];
+                var selectedItems = [];
+                var categoryData = [];
+                var barData = [];
+                var maxBar = 30;
+                var sum = 0;
+                var count = 0;
+                for (var i = 0; i < mainSeries.dataIndex.length; i++) {
+                    var rawIndex = mainSeries.dataIndex[i];
+                    var dataItem = convertedData[0][rawIndex];
+                    var pmValue = dataItem.value[2];
+                    sum += pmValue;
+                    count++;
+                    selectedItems.push(dataItem);
                 }
-            });
-        }
+                selectedItems.sort(function (a, b) {
+                    return a.value[2] - b.value[2];
+                });
+                for (var i = 0; i < Math.min(selectedItems.length, maxBar); i++) {
+                    var choosedData = {};
+                    _.set(choosedData, 'value', parseInt(selectedItems[i].value[2]));
+                    _.set(choosedData, 'foodName', selectedItems[i].foodName);
+                    _.set(choosedData, 'date', selectedItems[i].date);
+                    categoryData.push(selectedItems[i].name);
+                    //barData.push(selectedItems[i].value[2]);
+                    barData.push(choosedData);
+                }
+                this.setOption({
+                    yAxis: {
+                        data: categoryData
+                    },
+                    xAxis: {
+                        axisLabel: { show: !!count },
+                        min: 0,
+                    },
+                    title: {
+                        id: 'statistic',
+                        text: count ? '平均: ' + (sum / count).toFixed(4) : ''
+                    },
+                    series: {
+                        id: 'bar',
+                        data: barData
+                    }
+                });
+            }
+        });
     };
     ;
     AppComponent.prototype.paintBar = function (name, docName) {
@@ -932,7 +981,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* Component */])({
             selector: 'app-root',
-            template: __webpack_require__(968),
+            template: __webpack_require__(969),
             styles: [__webpack_require__(277)]
         }), 
         __metadata('design:paramtypes', [])
@@ -2658,7 +2707,7 @@ var GuideComponent = (function () {
     GuideComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* Component */])({
             selector: 'left-guide',
-            template: __webpack_require__(969),
+            template: __webpack_require__(970),
             styles: [__webpack_require__(277)]
         }), 
         __metadata('design:paramtypes', [])
@@ -3357,7 +3406,7 @@ var ShowPartComponent = (function () {
     ShowPartComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["G" /* Component */])({
             selector: 'right-showpart',
-            template: __webpack_require__(970),
+            template: __webpack_require__(971),
             styles: [__webpack_require__(277)]
         }), 
         __metadata('design:paramtypes', [])
@@ -3418,7 +3467,7 @@ var environment = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13_core_js_es6_reflect__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__ = __webpack_require__(587);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14_core_js_es7_reflect__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(990);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__ = __webpack_require__(991);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15_zone_js_dist_zone__);
 
 
@@ -3440,37 +3489,1985 @@ var environment = {
 
 /***/ },
 
-/***/ 968:
+/***/ 951:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"page-header\">\n    <h1>\n      中科助腾数据展示项目\n    </h1>\n  </div>\n  <div class=\"row\">\n    <div class=\"guide col-md-2\">\n      <h2>目录</h2>\n      <ul class=\"nav nav-pills nav-stacked\" role=\"tablist\">\n        <li role=\"presentation\" class=\"active\">\n          <a  (click)=\"showTable()\" role=\"tab\" data-toggle=\"tab\">\n            数据表格\n          </a>\n        </li>\n        <li role=\"presentation\">\n          <a  (click)=\"getMainPage()\" role=\"tab\" data-toggle=\"tab\">\n            主页\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"showpart col-md-10\">\n      <div class=\"row\">\n        <div class=\"col-md-12\" *ngIf=\"isTable&&!isMainPage\">\n          <h2>数据表格</h2>\n          <div class=\"table-responsive\">\n            <table id=\"datatable\" class=\"table-hover table-bordered\">\n              <thead>\n              <tr>\n                <th *ngFor=\"let tableHeadCell of tableHead\">\n                  {{tableHeadCell}}\n                </th>\n              </tr>\n              </thead>\n              <tbody>\n              <tr *ngFor=\"let rowData of tableDataShowing\">\n                <td *ngFor=\"let dataCell of rowData\">{{dataCell}}</td>\n              </tr>\n              </tbody>\n              <tfoot>\n              <tr>\n                <td><a (click)=\"prePage()\">上一页</a></td>\n                <td><a (click)=\"nextPage()\">下一页</a></td>\n                <td>当前页数：{{dataTablePageNumber}}/{{dataTablePageNumberAll}}</td>\n              </tr>\n              </tfoot>\n            </table>\n          </div>\n        </div>\n        <div *ngIf=\"isTable\" class=\"col-md-12\">\n          <div class=\"col-md-2\">\n            <button class=\"btn btn-default\" (click)=\"getData()\">数据刷新</button>\n          </div>\n          <div class=\"col-md-6\">\n            <div class=\"input-group\">\n      <span class=\"input-group-btn\">\n        <button class=\"btn btn-default\" type=\"button\">匹配值</button>\n      </span>\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dataValue\">\n            </div><!-- /input-group -->\n          </div><!-- /.col-lg-6 -->\n          <div class=\"col-md-4\">\n            <div class=\"dropdown\">\n              <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\">\n                {{dataName}}\n                <span class=\"caret\"></span>\n              </button>\n              <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">\n                <li *ngFor=\"let name of tableHead\" role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" (click)=\"this.changeDataName(name)\">{{name}}</a></li>\n              </ul>\n            </div>\n          </div>\n        </div><!-- /.row -->\n        <div class=\"col-md-12\">\n          <div class=\"row\" [hidden]=\"isTable\">\n            <div class=\"col-md-3\">\n              <label>时间筛选：</label><input type=\"date\" [(ngModel)]=\"dateFilter\" class=\"form-control\">\n            </div>\n            <div class=\"col-md-4\">\n              <label>食物筛选：</label><input type=\"text\" [(ngModel)]=\"foodNameFilter\" class=\"form-control\">\n            </div>\n            <div class=\"col-md-2\">\n              <button class=\"btn btn-default\" onclick=\"getPicData()\">搜索</button>\n            </div>\n          </div>\n          <div [hidden]=\"isTable\" class=\"row\" id=\"canvas-container\">\n            <div class=\"col-md-12\">\n              <h2>{{picName}}</h2>\n            </div>\n            <div class=\"col-md-12 col-lg-12\" id=\"main-left-map\" style=\"width:500px; height:700px;\">la</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"row\">\n    <div class=\"col-md-4\">\n      <h2>London</h2>\n      <p>London is the capital city of England.</p>\n      <p>It is the most populous city in the United Kingdom,\n        with a metropolitan area of over 13 million inhabitants.</p>\n    </div>\n\n    <div class=\"col-md-4\">\n      <h2>Paris</h2>\n      <p>Paris is the capital and most populous city of France.</p>\n    </div>\n\n    <div class=\"col-md-4\">\n      <h2>Tokyo</h2>\n      <p>Tokyo is the capital of Japan, the center of the Greater Tokyo Area,\n        and the most populous metropolitan area in the world.</p>\n    </div>\n  </div>\n</div>\n"
+module.exports = {
+	"六安市": [
+		116.3123,
+		31.8329
+	],
+	"安庆市": [
+		116.7517,
+		30.5255
+	],
+	"滁州市": [
+		118.1909,
+		32.536
+	],
+	"宣城市": [
+		118.8062,
+		30.6244
+	],
+	"阜阳市": [
+		115.7629,
+		32.9919
+	],
+	"宿州市": [
+		117.5208,
+		33.6841
+	],
+	"黄山市": [
+		118.0481,
+		29.9542
+	],
+	"巢湖市": [
+		117.7734,
+		31.4978
+	],
+	"亳州市": [
+		116.1914,
+		33.4698
+	],
+	"池州市": [
+		117.3889,
+		30.2014
+	],
+	"合肥市": [
+		117.29,
+		32.0581
+	],
+	"蚌埠市": [
+		117.4109,
+		33.1073
+	],
+	"芜湖市": [
+		118.3557,
+		31.0858
+	],
+	"淮北市": [
+		116.6968,
+		33.6896
+	],
+	"淮南市": [
+		116.7847,
+		32.7722
+	],
+	"马鞍山市": [
+		118.6304,
+		31.5363
+	],
+	"铜陵市": [
+		117.9382,
+		30.9375
+	],
+	"密云县": [
+		117.0923,
+		40.5121
+	],
+	"怀柔区": [
+		116.6377,
+		40.6219
+	],
+	"房山区": [
+		115.8453,
+		39.7163
+	],
+	"延庆县": [
+		116.1543,
+		40.5286
+	],
+	"门头沟区": [
+		115.8,
+		39.9957
+	],
+	"昌平区": [
+		116.1777,
+		40.2134
+	],
+	"大兴区": [
+		116.4716,
+		39.6352
+	],
+	"顺义区": [
+		116.7242,
+		40.1619
+	],
+	"平谷区": [
+		117.1706,
+		40.2052
+	],
+	"通州区": [
+		116.7297,
+		39.8131
+	],
+	"朝阳区": [
+		116.4977,
+		39.949
+	],
+	"海淀区": [
+		116.2202,
+		40.0239
+	],
+	"丰台区": [
+		116.2683,
+		39.8309
+	],
+	"石景山区": [
+		116.1887,
+		39.9346
+	],
+	"西城区": [
+		116.3631,
+		39.9353
+	],
+	"东城区": [
+		116.418,
+		39.9367
+	],
+	"宣武区": [
+		116.3603,
+		39.8852
+	],
+	"崇文区": [
+		116.4166,
+		39.8811
+	],
+	"新疆": [
+		84.9023,
+		41.748
+	],
+	"西藏": [
+		88.7695,
+		31.6846
+	],
+	"内蒙古": [
+		117.5977,
+		44.3408
+	],
+	"青海": [
+		96.2402,
+		35.4199
+	],
+	"四川": [
+		102.9199,
+		30.1904
+	],
+	"黑龙江": [
+		128.1445,
+		48.5156
+	],
+	"甘肃": [
+		95.7129,
+		40.166
+	],
+	"云南": [
+		101.8652,
+		25.1807
+	],
+	"广西": [
+		108.2813,
+		23.6426
+	],
+	"湖南": [
+		111.5332,
+		27.3779
+	],
+	"陕西": [
+		109.5996,
+		35.6396
+	],
+	"广东": [
+		113.4668,
+		22.8076
+	],
+	"吉林": [
+		126.4746,
+		43.5938
+	],
+	"河北": [
+		115.4004,
+		37.9688
+	],
+	"湖北": [
+		112.2363,
+		31.1572
+	],
+	"贵州": [
+		106.6113,
+		26.9385
+	],
+	"山东": [
+		118.7402,
+		36.4307
+	],
+	"江西": [
+		116.0156,
+		27.29
+	],
+	"河南": [
+		113.4668,
+		33.8818
+	],
+	"辽宁": [
+		122.3438,
+		41.0889
+	],
+	"山西": [
+		112.4121,
+		37.6611
+	],
+	"安徽": [
+		117.2461,
+		32.0361
+	],
+	"福建": [
+		118.3008,
+		25.9277
+	],
+	"浙江": [
+		120.498,
+		29.0918
+	],
+	"江苏": [
+		120.0586,
+		32.915
+	],
+	"重庆": [
+		107.7539,
+		30.1904
+	],
+	"宁夏": [
+		105.9961,
+		37.3096
+	],
+	"海南": [
+		109.9512,
+		19.2041
+	],
+	"台湾": [
+		121.0254,
+		23.5986
+	],
+	"北京": [
+		116.4551,
+		40.2539
+	],
+	"天津": [
+		117.4219,
+		39.4189
+	],
+	"上海": [
+		121.4648,
+		31.2891
+	],
+	"香港": [
+		114.2578,
+		22.3242
+	],
+	"酉阳土家族苗族自治县": [
+		108.8196,
+		28.8666
+	],
+	"奉节县": [
+		109.3909,
+		30.9265
+	],
+	"巫溪县": [
+		109.3359,
+		31.4813
+	],
+	"开县": [
+		108.4131,
+		31.2561
+	],
+	"彭水苗族土家族自治县": [
+		108.2043,
+		29.3994
+	],
+	"云阳县": [
+		108.8306,
+		31.0089
+	],
+	"万州区": [
+		108.3911,
+		30.6958
+	],
+	"城口县": [
+		108.7756,
+		31.9098
+	],
+	"江津区": [
+		106.2158,
+		28.9874
+	],
+	"石柱土家族自治县": [
+		108.2813,
+		30.1025
+	],
+	"巫山县": [
+		109.8853,
+		31.1188
+	],
+	"涪陵区": [
+		107.3364,
+		29.6796
+	],
+	"丰都县": [
+		107.8418,
+		29.9048
+	],
+	"武隆县": [
+		107.655,
+		29.35
+	],
+	"南川区": [
+		107.1716,
+		29.1302
+	],
+	"秀山土家族苗族自治县": [
+		109.0173,
+		28.5205
+	],
+	"黔江区": [
+		108.7207,
+		29.4708
+	],
+	"合川区": [
+		106.3257,
+		30.108
+	],
+	"綦江县": [
+		106.6553,
+		28.8171
+	],
+	"忠县": [
+		107.8967,
+		30.3223
+	],
+	"梁平县": [
+		107.7429,
+		30.6519
+	],
+	"巴南区": [
+		106.7322,
+		29.4214
+	],
+	"潼南县": [
+		105.7764,
+		30.1135
+	],
+	"永川区": [
+		105.8643,
+		29.2566
+	],
+	"垫江县": [
+		107.4573,
+		30.2454
+	],
+	"渝北区": [
+		106.7212,
+		29.8499
+	],
+	"长寿区": [
+		107.1606,
+		29.9762
+	],
+	"大足县": [
+		105.7544,
+		29.6136
+	],
+	"铜梁县": [
+		106.0291,
+		29.8059
+	],
+	"荣昌县": [
+		105.5127,
+		29.4708
+	],
+	"璧山县": [
+		106.2048,
+		29.5807
+	],
+	"北碚区": [
+		106.5674,
+		29.8883
+	],
+	"万盛区": [
+		106.908,
+		28.9325
+	],
+	"九龙坡区": [
+		106.3586,
+		29.4049
+	],
+	"沙坪坝区": [
+		106.3696,
+		29.6191
+	],
+	"南岸区": [
+		106.6663,
+		29.5367
+	],
+	"江北区": [
+		106.8311,
+		29.6191
+	],
+	"大渡口区": [
+		106.4905,
+		29.4214
+	],
+	"双桥区": [
+		105.7874,
+		29.4928
+	],
+	"渝中区": [
+		106.5344,
+		29.5477
+	],
+	"南平市": [
+		118.136,
+		27.2845
+	],
+	"三明市": [
+		117.5317,
+		26.3013
+	],
+	"龙岩市": [
+		116.8066,
+		25.2026
+	],
+	"宁德市": [
+		119.6521,
+		26.9824
+	],
+	"福州市": [
+		119.4543,
+		25.9222
+	],
+	"漳州市": [
+		117.5757,
+		24.3732
+	],
+	"泉州市": [
+		118.3228,
+		25.1147
+	],
+	"莆田市": [
+		119.0918,
+		25.3455
+	],
+	"厦门市": [
+		118.1689,
+		24.6478
+	],
+	"酒泉市": [
+		96.2622,
+		40.4517
+	],
+	"张掖市": [
+		99.7998,
+		38.7433
+	],
+	"甘南藏族自治州": [
+		102.9199,
+		34.6893
+	],
+	"武威市": [
+		103.0188,
+		38.1061
+	],
+	"陇南市": [
+		105.304,
+		33.5632
+	],
+	"庆阳市": [
+		107.5342,
+		36.2
+	],
+	"白银市": [
+		104.8645,
+		36.5076
+	],
+	"定西市": [
+		104.5569,
+		35.0848
+	],
+	"天水市": [
+		105.6445,
+		34.6289
+	],
+	"兰州市": [
+		103.5901,
+		36.3043
+	],
+	"平凉市": [
+		107.0728,
+		35.321
+	],
+	"临夏回族自治州": [
+		103.2715,
+		35.5737
+	],
+	"金昌市": [
+		102.074,
+		38.5126
+	],
+	"嘉峪关市": [
+		98.1738,
+		39.8035
+	],
+	"清远市": [
+		112.9175,
+		24.3292
+	],
+	"韶关市": [
+		113.7964,
+		24.7028
+	],
+	"湛江市": [
+		110.3577,
+		20.9894
+	],
+	"梅州市": [
+		116.1255,
+		24.1534
+	],
+	"河源市": [
+		114.917,
+		23.9722
+	],
+	"肇庆市": [
+		112.1265,
+		23.5822
+	],
+	"惠州市": [
+		114.6204,
+		23.1647
+	],
+	"茂名市": [
+		111.0059,
+		22.0221
+	],
+	"江门市": [
+		112.6318,
+		22.1484
+	],
+	"阳江市": [
+		111.8298,
+		22.0715
+	],
+	"云浮市": [
+		111.7859,
+		22.8516
+	],
+	"广州市": [
+		113.5107,
+		23.2196
+	],
+	"汕尾市": [
+		115.5762,
+		23.0438
+	],
+	"揭阳市": [
+		116.1255,
+		23.313
+	],
+	"珠海市": [
+		113.7305,
+		22.1155
+	],
+	"佛山市": [
+		112.8955,
+		23.1097
+	],
+	"潮州市": [
+		116.7847,
+		23.8293
+	],
+	"汕头市": [
+		117.1692,
+		23.3405
+	],
+	"深圳市": [
+		114.5435,
+		22.5439
+	],
+	"东莞市": [
+		113.8953,
+		22.901
+	],
+	"中山市": [
+		113.4229,
+		22.478
+	],
+	"百色市": [
+		106.6003,
+		23.9227
+	],
+	"河池市": [
+		107.8638,
+		24.5819
+	],
+	"桂林市": [
+		110.5554,
+		25.318
+	],
+	"南宁市": [
+		108.479,
+		23.1152
+	],
+	"柳州市": [
+		109.3799,
+		24.9774
+	],
+	"崇左市": [
+		107.3364,
+		22.4725
+	],
+	"来宾市": [
+		109.7095,
+		23.8403
+	],
+	"玉林市": [
+		110.2148,
+		22.3792
+	],
+	"梧州市": [
+		110.9949,
+		23.5052
+	],
+	"贺州市": [
+		111.3135,
+		24.4006
+	],
+	"钦州市": [
+		109.0283,
+		22.0935
+	],
+	"贵港市": [
+		109.9402,
+		23.3459
+	],
+	"防城港市": [
+		108.0505,
+		21.9287
+	],
+	"北海市": [
+		109.314,
+		21.6211
+	],
+	"遵义市": [
+		106.908,
+		28.1744
+	],
+	"黔东南苗族侗族自治州": [
+		108.4241,
+		26.4166
+	],
+	"毕节市": [
+		105.1611,
+		27.0648
+	],
+	"黔南布依族苗族自治州": [
+		107.2485,
+		25.8398
+	],
+	"铜仁市": [
+		108.6218,
+		28.0096
+	],
+	"黔西南布依族苗族自治州": [
+		105.5347,
+		25.3949
+	],
+	"六盘水市": [
+		104.7546,
+		26.0925
+	],
+	"安顺市": [
+		105.9082,
+		25.9882
+	],
+	"贵阳市": [
+		106.6992,
+		26.7682
+	],
+	"儋州市": [
+		109.3291,
+		19.5653
+	],
+	"文昌市": [
+		110.8905,
+		19.7823
+	],
+	"乐东黎族自治县": [
+		109.0283,
+		18.6301
+	],
+	"三亚市": [
+		109.3716,
+		18.3698
+	],
+	"琼中黎族苗族自治县": [
+		109.8413,
+		19.0736
+	],
+	"东方市": [
+		108.8498,
+		19.0414
+	],
+	"海口市": [
+		110.3893,
+		19.8516
+	],
+	"万宁市": [
+		110.3137,
+		18.8388
+	],
+	"澄迈县": [
+		109.9937,
+		19.7314
+	],
+	"白沙黎族自治县": [
+		109.3703,
+		19.211
+	],
+	"琼海市": [
+		110.4208,
+		19.224
+	],
+	"昌江黎族自治县": [
+		109.0407,
+		19.2137
+	],
+	"临高县": [
+		109.6957,
+		19.8063
+	],
+	"陵水黎族自治县": [
+		109.9924,
+		18.5415
+	],
+	"屯昌县": [
+		110.0377,
+		19.362
+	],
+	"定安县": [
+		110.3384,
+		19.4698
+	],
+	"保亭黎族苗族自治县": [
+		109.6284,
+		18.6108
+	],
+	"五指山市": [
+		109.5282,
+		18.8299
+	],
+	"承德市": [
+		117.5757,
+		41.4075
+	],
+	"张家口市": [
+		115.1477,
+		40.8527
+	],
+	"保定市": [
+		115.0488,
+		39.0948
+	],
+	"唐山市": [
+		118.4766,
+		39.6826
+	],
+	"沧州市": [
+		116.8286,
+		38.2104
+	],
+	"石家庄市": [
+		114.4995,
+		38.1006
+	],
+	"邢台市": [
+		114.8071,
+		37.2821
+	],
+	"邯郸市": [
+		114.4775,
+		36.535
+	],
+	"秦皇岛市": [
+		119.2126,
+		40.0232
+	],
+	"衡水市": [
+		115.8838,
+		37.7161
+	],
+	"廊坊市": [
+		116.521,
+		39.0509
+	],
+	"黑河市": [
+		127.1448,
+		49.2957
+	],
+	"大兴安岭地区": [
+		124.1016,
+		52.2345
+	],
+	"哈尔滨市": [
+		127.9688,
+		45.368
+	],
+	"齐齐哈尔市": [
+		124.541,
+		47.5818
+	],
+	"牡丹江市": [
+		129.7815,
+		44.7089
+	],
+	"绥化市": [
+		126.7163,
+		46.8018
+	],
+	"伊春市": [
+		129.1992,
+		47.9608
+	],
+	"佳木斯市": [
+		133.0005,
+		47.5763
+	],
+	"鸡西市": [
+		132.7917,
+		45.7361
+	],
+	"双鸭山市": [
+		133.5938,
+		46.7523
+	],
+	"大庆市": [
+		124.7717,
+		46.4282
+	],
+	"鹤岗市": [
+		130.4407,
+		47.7081
+	],
+	"七台河市": [
+		131.2756,
+		45.9558
+	],
+	"南阳市": [
+		112.4011,
+		33.0359
+	],
+	"信阳市": [
+		114.8291,
+		32.0197
+	],
+	"洛阳市": [
+		112.0605,
+		34.3158
+	],
+	"驻马店市": [
+		114.1589,
+		32.9041
+	],
+	"周口市": [
+		114.873,
+		33.6951
+	],
+	"商丘市": [
+		115.741,
+		34.2828
+	],
+	"三门峡市": [
+		110.8301,
+		34.3158
+	],
+	"新乡市": [
+		114.2029,
+		35.3595
+	],
+	"平顶山市": [
+		112.9724,
+		33.739
+	],
+	"郑州市": [
+		113.4668,
+		34.6234
+	],
+	"安阳市": [
+		114.5325,
+		36.0022
+	],
+	"开封市": [
+		114.5764,
+		34.6124
+	],
+	"焦作市": [
+		112.8406,
+		35.1508
+	],
+	"许昌市": [
+		113.6975,
+		34.0466
+	],
+	"濮阳市": [
+		115.1917,
+		35.799
+	],
+	"漯河市": [
+		113.8733,
+		33.6951
+	],
+	"鹤壁市": [
+		114.3787,
+		35.744
+	],
+	"恩施土家族苗族自治州": [
+		109.5007,
+		30.2563
+	],
+	"十堰市": [
+		110.5115,
+		32.3877
+	],
+	"宜昌市": [
+		111.1707,
+		30.7617
+	],
+	"襄樊市": [
+		111.9397,
+		31.9263
+	],
+	"黄冈市": [
+		115.2686,
+		30.6628
+	],
+	"荆州市": [
+		113.291,
+		30.0092
+	],
+	"荆门市": [
+		112.6758,
+		30.9979
+	],
+	"咸宁市": [
+		114.2578,
+		29.6631
+	],
+	"随州市": [
+		113.4338,
+		31.8768
+	],
+	"孝感市": [
+		113.9502,
+		31.1188
+	],
+	"武汉市": [
+		114.3896,
+		30.6628
+	],
+	"黄石市": [
+		115.0159,
+		29.9213
+	],
+	"神农架林区": [
+		110.4565,
+		31.5802
+	],
+	"天门市": [
+		113.0273,
+		30.6409
+	],
+	"仙桃市": [
+		113.3789,
+		30.3003
+	],
+	"潜江市": [
+		112.7637,
+		30.3607
+	],
+	"鄂州市": [
+		114.7302,
+		30.4102
+	],
+	"怀化市": [
+		109.9512,
+		27.4438
+	],
+	"永州市": [
+		111.709,
+		25.752
+	],
+	"邵阳市": [
+		110.9619,
+		26.8121
+	],
+	"郴州市": [
+		113.2361,
+		25.8673
+	],
+	"常德市": [
+		111.4014,
+		29.2676
+	],
+	"湘西土家族苗族自治州": [
+		109.7864,
+		28.6743
+	],
+	"衡阳市": [
+		112.4121,
+		26.7902
+	],
+	"岳阳市": [
+		113.2361,
+		29.1357
+	],
+	"益阳市": [
+		111.731,
+		28.3832
+	],
+	"长沙市": [
+		113.0823,
+		28.2568
+	],
+	"株洲市": [
+		113.5327,
+		27.0319
+	],
+	"张家界市": [
+		110.5115,
+		29.328
+	],
+	"娄底市": [
+		111.6431,
+		27.7185
+	],
+	"湘潭市": [
+		112.5439,
+		27.7075
+	],
+	"盐城市": [
+		120.2234,
+		33.5577
+	],
+	"徐州市": [
+		117.5208,
+		34.3268
+	],
+	"南通市": [
+		121.1023,
+		32.1625
+	],
+	"淮安市": [
+		118.927,
+		33.4039
+	],
+	"苏州市": [
+		120.6519,
+		31.3989
+	],
+	"宿迁市": [
+		118.5535,
+		33.7775
+	],
+	"连云港市": [
+		119.1248,
+		34.552
+	],
+	"扬州市": [
+		119.4653,
+		32.8162
+	],
+	"南京市": [
+		118.8062,
+		31.9208
+	],
+	"泰州市": [
+		120.0586,
+		32.5525
+	],
+	"无锡市": [
+		120.3442,
+		31.5527
+	],
+	"常州市": [
+		119.4543,
+		31.5582
+	],
+	"镇江市": [
+		119.4763,
+		31.9702
+	],
+	"赣州市": [
+		115.2795,
+		25.8124
+	],
+	"吉安市": [
+		114.884,
+		26.9659
+	],
+	"上饶市": [
+		117.8613,
+		28.7292
+	],
+	"九江市": [
+		115.4224,
+		29.3774
+	],
+	"抚州市": [
+		116.4441,
+		27.4933
+	],
+	"宜春市": [
+		115.0159,
+		28.3228
+	],
+	"南昌市": [
+		116.0046,
+		28.6633
+	],
+	"景德镇市": [
+		117.334,
+		29.3225
+	],
+	"萍乡市": [
+		113.9282,
+		27.4823
+	],
+	"鹰潭市": [
+		117.0813,
+		28.2349
+	],
+	"新余市": [
+		114.95,
+		27.8174
+	],
+	"延边朝鲜族自治州": [
+		129.397,
+		43.2587
+	],
+	"吉林市": [
+		126.8372,
+		43.6047
+	],
+	"白城市": [
+		123.0029,
+		45.2637
+	],
+	"松原市": [
+		124.0906,
+		44.7198
+	],
+	"长春市": [
+		125.8154,
+		44.2584
+	],
+	"白山市": [
+		127.2217,
+		42.0941
+	],
+	"通化市": [
+		125.9583,
+		41.8579
+	],
+	"四平市": [
+		124.541,
+		43.4894
+	],
+	"辽源市": [
+		125.343,
+		42.7643
+	],
+	"大连市": [
+		122.2229,
+		39.4409
+	],
+	"朝阳市": [
+		120.0696,
+		41.4899
+	],
+	"丹东市": [
+		124.541,
+		40.4242
+	],
+	"铁岭市": [
+		124.2773,
+		42.7423
+	],
+	"沈阳市": [
+		123.1238,
+		42.1216
+	],
+	"抚顺市": [
+		124.585,
+		41.8579
+	],
+	"葫芦岛市": [
+		120.1575,
+		40.578
+	],
+	"阜新市": [
+		122.0032,
+		42.2699
+	],
+	"锦州市": [
+		121.6626,
+		41.4294
+	],
+	"鞍山市": [
+		123.0798,
+		40.6055
+	],
+	"本溪市": [
+		124.1455,
+		41.1987
+	],
+	"营口市": [
+		122.4316,
+		40.4297
+	],
+	"辽阳市": [
+		123.4094,
+		41.1383
+	],
+	"盘锦市": [
+		121.9482,
+		41.0449
+	],
+	"呼伦贝尔市": [
+		120.8057,
+		50.2185
+	],
+	"阿拉善盟": [
+		102.019,
+		40.1001
+	],
+	"锡林郭勒盟": [
+		115.6421,
+		44.176
+	],
+	"鄂尔多斯市": [
+		108.9734,
+		39.2487
+	],
+	"赤峰市": [
+		118.6743,
+		43.2642
+	],
+	"巴彦淖尔市": [
+		107.5562,
+		41.3196
+	],
+	"通辽市": [
+		121.4758,
+		43.9673
+	],
+	"乌兰察布市": [
+		112.5769,
+		41.77
+	],
+	"兴安盟": [
+		121.3879,
+		46.1426
+	],
+	"包头市": [
+		110.3467,
+		41.4899
+	],
+	"呼和浩特市": [
+		111.4124,
+		40.4901
+	],
+	"乌海市": [
+		106.886,
+		39.4739
+	],
+	"吴忠市": [
+		106.853,
+		37.3755
+	],
+	"中卫市": [
+		105.4028,
+		36.9525
+	],
+	"固原市": [
+		106.1389,
+		35.9363
+	],
+	"银川市": [
+		106.3586,
+		38.1775
+	],
+	"石嘴山市": [
+		106.4795,
+		39.0015
+	],
+	"海西蒙古族藏族自治州": [
+		94.9768,
+		37.1118
+	],
+	"玉树藏族自治州": [
+		93.5925,
+		33.9368
+	],
+	"果洛藏族自治州": [
+		99.3823,
+		34.0466
+	],
+	"海南藏族自治州": [
+		100.3711,
+		35.9418
+	],
+	"海北藏族自治州": [
+		100.3711,
+		37.9138
+	],
+	"黄南藏族自治州": [
+		101.5686,
+		35.1178
+	],
+	"海东市": [
+		102.3706,
+		36.2988
+	],
+	"西宁市": [
+		101.4038,
+		36.8207
+	],
+	"忻州市": [
+		112.4561,
+		38.8971
+	],
+	"吕梁市": [
+		111.3574,
+		37.7325
+	],
+	"临汾市": [
+		111.4783,
+		36.1615
+	],
+	"晋中市": [
+		112.7747,
+		37.37
+	],
+	"运城市": [
+		111.1487,
+		35.2002
+	],
+	"大同市": [
+		113.7854,
+		39.8035
+	],
+	"长治市": [
+		112.8625,
+		36.4746
+	],
+	"朔州市": [
+		113.0713,
+		39.6991
+	],
+	"晋城市": [
+		112.7856,
+		35.6342
+	],
+	"太原市": [
+		112.3352,
+		37.9413
+	],
+	"阳泉市": [
+		113.4778,
+		38.0951
+	],
+	"榆林市": [
+		109.8743,
+		38.205
+	],
+	"延安市": [
+		109.1052,
+		36.4252
+	],
+	"汉中市": [
+		106.886,
+		33.0139
+	],
+	"安康市": [
+		109.1162,
+		32.7722
+	],
+	"商洛市": [
+		109.8083,
+		33.761
+	],
+	"宝鸡市": [
+		107.1826,
+		34.3433
+	],
+	"渭南市": [
+		109.7864,
+		35.0299
+	],
+	"咸阳市": [
+		108.4131,
+		34.8706
+	],
+	"西安市": [
+		109.1162,
+		34.2004
+	],
+	"铜川市": [
+		109.0393,
+		35.1947
+	],
+	"烟台市": [
+		120.7397,
+		37.5128
+	],
+	"临沂市": [
+		118.3118,
+		35.2936
+	],
+	"潍坊市": [
+		119.0918,
+		36.524
+	],
+	"青岛市": [
+		120.4651,
+		36.3373
+	],
+	"菏泽市": [
+		115.6201,
+		35.2057
+	],
+	"济宁市": [
+		116.8286,
+		35.3375
+	],
+	"德州市": [
+		116.6858,
+		37.2107
+	],
+	"滨州市": [
+		117.8174,
+		37.4963
+	],
+	"聊城市": [
+		115.9167,
+		36.4032
+	],
+	"东营市": [
+		118.7073,
+		37.5513
+	],
+	"济南市": [
+		117.1582,
+		36.8701
+	],
+	"泰安市": [
+		117.0264,
+		36.0516
+	],
+	"威海市": [
+		121.9482,
+		37.1393
+	],
+	"日照市": [
+		119.2786,
+		35.5023
+	],
+	"淄博市": [
+		118.0371,
+		36.6064
+	],
+	"枣庄市": [
+		117.323,
+		34.8926
+	],
+	"莱芜市": [
+		117.6526,
+		36.2714
+	],
+	"崇明县": [
+		121.5637,
+		31.5383
+	],
+	"南汇区": [
+		121.8755,
+		30.954
+	],
+	"奉贤区": [
+		121.5747,
+		30.8475
+	],
+	"浦东新区": [
+		121.6928,
+		31.2561
+	],
+	"金山区": [
+		121.2657,
+		30.8112
+	],
+	"青浦区": [
+		121.1751,
+		31.1909
+	],
+	"松江区": [
+		121.1984,
+		31.0268
+	],
+	"嘉定区": [
+		121.2437,
+		31.3625
+	],
+	"宝山区": [
+		121.4346,
+		31.4051
+	],
+	"闵行区": [
+		121.4992,
+		31.0838
+	],
+	"杨浦区": [
+		121.528,
+		31.2966
+	],
+	"普陀区": [
+		121.3879,
+		31.2602
+	],
+	"徐汇区": [
+		121.4333,
+		31.1607
+	],
+	"长宁区": [
+		121.3852,
+		31.2115
+	],
+	"闸北区": [
+		121.4511,
+		31.2794
+	],
+	"虹口区": [
+		121.4882,
+		31.2788
+	],
+	"黄浦区": [
+		121.4868,
+		31.219
+	],
+	"卢湾区": [
+		121.4758,
+		31.2074
+	],
+	"静安区": [
+		121.4484,
+		31.2286
+	],
+	"甘孜藏族自治州": [
+		99.9207,
+		31.0803
+	],
+	"阿坝藏族羌族自治州": [
+		102.4805,
+		32.4536
+	],
+	"凉山彝族自治州": [
+		101.9641,
+		27.6746
+	],
+	"绵阳市": [
+		104.7327,
+		31.8713
+	],
+	"达州市": [
+		107.6111,
+		31.333
+	],
+	"广元市": [
+		105.6885,
+		32.2284
+	],
+	"雅安市": [
+		102.6672,
+		29.8938
+	],
+	"宜宾市": [
+		104.6558,
+		28.548
+	],
+	"乐山市": [
+		103.5791,
+		29.1742
+	],
+	"南充市": [
+		106.2048,
+		31.1517
+	],
+	"巴中市": [
+		107.0618,
+		31.9977
+	],
+	"泸州市": [
+		105.4578,
+		28.493
+	],
+	"成都市": [
+		103.9526,
+		30.7617
+	],
+	"资阳市": [
+		104.9744,
+		30.1575
+	],
+	"攀枝花市": [
+		101.6895,
+		26.7133
+	],
+	"眉山市": [
+		103.8098,
+		30.0146
+	],
+	"广安市": [
+		106.6333,
+		30.4376
+	],
+	"德阳市": [
+		104.48,
+		31.1133
+	],
+	"内江市": [
+		104.8535,
+		29.6136
+	],
+	"遂宁市": [
+		105.5347,
+		30.6683
+	],
+	"自贡市": [
+		104.6667,
+		29.2786
+	],
+	"蓟县": [
+		117.4672,
+		40.004
+	],
+	"武清区": [
+		117.0621,
+		39.4121
+	],
+	"宝坻区": [
+		117.4274,
+		39.5913
+	],
+	"静海县": [
+		116.9824,
+		38.8312
+	],
+	"宁河县": [
+		117.6801,
+		39.3853
+	],
+	"大港区": [
+		117.3875,
+		38.757
+	],
+	"塘沽区": [
+		117.6801,
+		38.9987
+	],
+	"西青区": [
+		117.1829,
+		39.0022
+	],
+	"北辰区": [
+		117.1761,
+		39.2548
+	],
+	"东丽区": [
+		117.4013,
+		39.1223
+	],
+	"汉沽区": [
+		117.8888,
+		39.2191
+	],
+	"津南区": [
+		117.3958,
+		38.9603
+	],
+	"河西区": [
+		117.2365,
+		39.0804
+	],
+	"河东区": [
+		117.2571,
+		39.1209
+	],
+	"南开区": [
+		117.1527,
+		39.1065
+	],
+	"河北区": [
+		117.2145,
+		39.1615
+	],
+	"红桥区": [
+		117.1596,
+		39.1663
+	],
+	"和平区": [
+		117.2008,
+		39.1189
+	],
+	"巴音郭楞蒙古自治州": [
+		88.1653,
+		39.6002
+	],
+	"和田地区": [
+		81.167,
+		36.9855
+	],
+	"哈密地区": [
+		93.7793,
+		42.9236
+	],
+	"阿克苏地区": [
+		82.9797,
+		41.0229
+	],
+	"阿勒泰地区": [
+		88.2971,
+		47.0929
+	],
+	"喀什地区": [
+		77.168,
+		37.8534
+	],
+	"塔城地区": [
+		86.6272,
+		45.8514
+	],
+	"昌吉回族自治州": [
+		89.6814,
+		44.4507
+	],
+	"克孜勒苏柯尔克孜自治州": [
+		74.6301,
+		39.5233
+	],
+	"吐鲁番地区": [
+		89.6375,
+		42.4127
+	],
+	"伊犁哈萨克自治州": [
+		82.5513,
+		43.5498
+	],
+	"博尔塔拉蒙古自治州": [
+		81.8481,
+		44.6979
+	],
+	"乌鲁木齐市": [
+		87.9236,
+		43.5883
+	],
+	"克拉玛依市": [
+		85.2869,
+		45.5054
+	],
+	"阿拉尔市": [
+		81.2769,
+		40.6549
+	],
+	"图木舒克市": [
+		79.1345,
+		39.8749
+	],
+	"五家渠市": [
+		87.5391,
+		44.3024
+	],
+	"石河子市": [
+		86.0229,
+		44.2914
+	],
+	"那曲地区": [
+		88.1982,
+		33.3215
+	],
+	"阿里地区": [
+		82.3645,
+		32.7667
+	],
+	"日喀则地区": [
+		86.2427,
+		29.5093
+	],
+	"林芝地区": [
+		95.4602,
+		29.1138
+	],
+	"昌都地区": [
+		97.0203,
+		30.7068
+	],
+	"山南地区": [
+		92.2083,
+		28.3392
+	],
+	"拉萨市": [
+		91.1865,
+		30.1465
+	],
+	"普洱市": [
+		100.7446,
+		23.4229
+	],
+	"红河哈尼族彝族自治州": [
+		103.0408,
+		23.6041
+	],
+	"文山壮族苗族自治州": [
+		104.8865,
+		23.5712
+	],
+	"曲靖市": [
+		103.9417,
+		25.7025
+	],
+	"楚雄彝族自治州": [
+		101.6016,
+		25.3619
+	],
+	"大理白族自治州": [
+		99.9536,
+		25.6805
+	],
+	"临沧市": [
+		99.613,
+		24.0546
+	],
+	"迪庆藏族自治州": [
+		99.4592,
+		27.9327
+	],
+	"昭通市": [
+		104.0955,
+		27.6031
+	],
+	"昆明市": [
+		102.9199,
+		25.4663
+	],
+	"丽江市": [
+		100.448,
+		26.955
+	],
+	"西双版纳傣族自治州": [
+		100.8984,
+		21.8628
+	],
+	"保山市": [
+		99.0637,
+		24.9884
+	],
+	"玉溪市": [
+		101.9312,
+		23.8898
+	],
+	"怒江傈僳族自治州": [
+		99.1516,
+		26.5594
+	],
+	"德宏傣族景颇族自治州": [
+		98.1299,
+		24.5874
+	],
+	"丽水市": [
+		119.5642,
+		28.1854
+	],
+	"杭州市": [
+		119.5313,
+		29.8773
+	],
+	"温州市": [
+		120.498,
+		27.8119
+	],
+	"宁波市": [
+		121.5967,
+		29.6466
+	],
+	"舟山市": [
+		122.2559,
+		30.2234
+	],
+	"台州市": [
+		121.1353,
+		28.6688
+	],
+	"金华市": [
+		120.0037,
+		29.1028
+	],
+	"衢州市": [
+		118.6853,
+		28.8666
+	],
+	"绍兴市": [
+		120.564,
+		29.7565
+	],
+	"嘉兴市": [
+		120.9155,
+		30.6354
+	],
+	"湖州市": [
+		119.8608,
+		30.7782
+	]
+};
 
 /***/ },
 
 /***/ 969:
 /***/ function(module, exports) {
 
-module.exports = "<h2 xmlns=\"http://www.w3.org/1999/html\">{{title}}</h2>\n<ul>\n  <li class=\"guide-first\" *ngFor=\"let guide of guideList; let i = index\">\n    <span>\n      {{guide.name}}\n    <li *ngFor=\"let child of guide.children; let i = index;\">\n      <span (click)=\"testFunc(child)\">{{child}}</span>\n    </li>\n    </span>\n  </li>\n</ul>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"page-header\">\n    <h1>\n      中科助腾数据展示项目\n    </h1>\n  </div>\n  <div class=\"row\">\n    <div class=\"guide col-md-2\">\n      <h2>目录</h2>\n      <ul class=\"nav nav-pills nav-stacked\" role=\"tablist\">\n        <li role=\"presentation\" class=\"active\">\n          <a  (click)=\"showTable()\" role=\"tab\" data-toggle=\"tab\">\n            数据表格\n          </a>\n        </li>\n        <li role=\"presentation\">\n          <a  (click)=\"getMainPage()\" role=\"tab\" data-toggle=\"tab\">\n            主页\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"showpart col-md-10\">\n      <div class=\"row\">\n        <div class=\"col-md-12\" *ngIf=\"isTable&&!isMainPage\">\n          <h2>数据表格</h2>\n          <div class=\"table-responsive\">\n            <table id=\"datatable\" class=\"table-hover table-bordered\">\n              <thead>\n              <tr>\n                <th *ngFor=\"let tableHeadCell of tableHead\">\n                  {{tableHeadCell}}\n                </th>\n              </tr>\n              </thead>\n              <tbody>\n              <tr *ngFor=\"let rowData of tableDataShowing\">\n                <td *ngFor=\"let dataCell of rowData\">{{dataCell}}</td>\n              </tr>\n              </tbody>\n              <tfoot>\n              <tr>\n                <td><a (click)=\"prePage()\">上一页</a></td>\n                <td><a (click)=\"nextPage()\">下一页</a></td>\n                <td>当前页数：{{dataTablePageNumber}}/{{dataTablePageNumberAll}}</td>\n              </tr>\n              </tfoot>\n            </table>\n          </div>\n        </div>\n        <div *ngIf=\"isTable\" class=\"col-md-12\">\n          <div class=\"col-md-2\">\n            <button class=\"btn btn-default\" (click)=\"getData()\">数据刷新</button>\n          </div>\n          <div class=\"col-md-6\">\n            <div class=\"input-group\">\n      <span class=\"input-group-btn\">\n        <button class=\"btn btn-default\" type=\"button\">匹配值</button>\n      </span>\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dataValue\">\n            </div><!-- /input-group -->\n          </div><!-- /.col-lg-6 -->\n          <div class=\"col-md-4\">\n            <div class=\"dropdown\">\n              <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\">\n                {{dataName}}\n                <span class=\"caret\"></span>\n              </button>\n              <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">\n                <li *ngFor=\"let name of tableHead\" role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" (click)=\"this.changeDataName(name)\">{{name}}</a></li>\n              </ul>\n            </div>\n          </div>\n        </div><!-- /.row -->\n        <div class=\"col-md-12\">\n          <div class=\"row\" [hidden]=\"isTable\">\n            <div class=\"col-md-3\">\n              <label>时间筛选：</label><input type=\"date\" [(ngModel)]=\"dateFilter\" class=\"form-control\">\n            </div>\n            <div class=\"col-md-4\">\n              <label>食物筛选：</label><input type=\"text\" [(ngModel)]=\"foodNameFilter\" class=\"form-control\">\n            </div>\n            <div class=\"col-md-2\">\n              <button class=\"btn btn-default\" (click)=\"paintChinaMap('主页', 'main-left-map')\">搜索</button>\n            </div>\n          </div>\n          <div [hidden]=\"isTable\" class=\"row\" id=\"canvas-container\">\n            <div class=\"col-md-12\">\n              <h2>{{picName}}</h2>\n            </div>\n            <div class=\"col-md-12 col-lg-12\" id=\"main-left-map\" style=\"width:500px; height:700px;\">la</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ },
 
 /***/ 970:
 /***/ function(module, exports) {
 
+module.exports = "<h2 xmlns=\"http://www.w3.org/1999/html\">{{title}}</h2>\n<ul>\n  <li class=\"guide-first\" *ngFor=\"let guide of guideList; let i = index\">\n    <span>\n      {{guide.name}}\n    <li *ngFor=\"let child of guide.children; let i = index;\">\n      <span (click)=\"testFunc(child)\">{{child}}</span>\n    </li>\n    </span>\n  </li>\n</ul>\n"
+
+/***/ },
+
+/***/ 971:
+/***/ function(module, exports) {
+
 module.exports = "<h2>{{title}}{{test}}{{page}}</h2>\n<div id=\"main\" style=\"width:1000px;height:700px;\"></div>\n"
 
 /***/ },
 
-/***/ 983:
+/***/ 984:
 /***/ function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! jQuery v3.1.1 | (c) jQuery Foundation | jquery.org/license */
 !function(a,b){"use strict";"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error("jQuery requires a window with a document");return b(a)}:b(a)}("undefined"!=typeof window?window:this,function(a,b){"use strict";var c=[],d=a.document,e=Object.getPrototypeOf,f=c.slice,g=c.concat,h=c.push,i=c.indexOf,j={},k=j.toString,l=j.hasOwnProperty,m=l.toString,n=m.call(Object),o={};function p(a,b){b=b||d;var c=b.createElement("script");c.text=a,b.head.appendChild(c).parentNode.removeChild(c)}var q="3.1.1",r=function(a,b){return new r.fn.init(a,b)},s=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,t=/^-ms-/,u=/-([a-z])/g,v=function(a,b){return b.toUpperCase()};r.fn=r.prototype={jquery:q,constructor:r,length:0,toArray:function(){return f.call(this)},get:function(a){return null==a?f.call(this):a<0?this[a+this.length]:this[a]},pushStack:function(a){var b=r.merge(this.constructor(),a);return b.prevObject=this,b},each:function(a){return r.each(this,a)},map:function(a){return this.pushStack(r.map(this,function(b,c){return a.call(b,c,b)}))},slice:function(){return this.pushStack(f.apply(this,arguments))},first:function(){return this.eq(0)},last:function(){return this.eq(-1)},eq:function(a){var b=this.length,c=+a+(a<0?b:0);return this.pushStack(c>=0&&c<b?[this[c]]:[])},end:function(){return this.prevObject||this.constructor()},push:h,sort:c.sort,splice:c.splice},r.extend=r.fn.extend=function(){var a,b,c,d,e,f,g=arguments[0]||{},h=1,i=arguments.length,j=!1;for("boolean"==typeof g&&(j=g,g=arguments[h]||{},h++),"object"==typeof g||r.isFunction(g)||(g={}),h===i&&(g=this,h--);h<i;h++)if(null!=(a=arguments[h]))for(b in a)c=g[b],d=a[b],g!==d&&(j&&d&&(r.isPlainObject(d)||(e=r.isArray(d)))?(e?(e=!1,f=c&&r.isArray(c)?c:[]):f=c&&r.isPlainObject(c)?c:{},g[b]=r.extend(j,f,d)):void 0!==d&&(g[b]=d));return g},r.extend({expando:"jQuery"+(q+Math.random()).replace(/\D/g,""),isReady:!0,error:function(a){throw new Error(a)},noop:function(){},isFunction:function(a){return"function"===r.type(a)},isArray:Array.isArray,isWindow:function(a){return null!=a&&a===a.window},isNumeric:function(a){var b=r.type(a);return("number"===b||"string"===b)&&!isNaN(a-parseFloat(a))},isPlainObject:function(a){var b,c;return!(!a||"[object Object]"!==k.call(a))&&(!(b=e(a))||(c=l.call(b,"constructor")&&b.constructor,"function"==typeof c&&m.call(c)===n))},isEmptyObject:function(a){var b;for(b in a)return!1;return!0},type:function(a){return null==a?a+"":"object"==typeof a||"function"==typeof a?j[k.call(a)]||"object":typeof a},globalEval:function(a){p(a)},camelCase:function(a){return a.replace(t,"ms-").replace(u,v)},nodeName:function(a,b){return a.nodeName&&a.nodeName.toLowerCase()===b.toLowerCase()},each:function(a,b){var c,d=0;if(w(a)){for(c=a.length;d<c;d++)if(b.call(a[d],d,a[d])===!1)break}else for(d in a)if(b.call(a[d],d,a[d])===!1)break;return a},trim:function(a){return null==a?"":(a+"").replace(s,"")},makeArray:function(a,b){var c=b||[];return null!=a&&(w(Object(a))?r.merge(c,"string"==typeof a?[a]:a):h.call(c,a)),c},inArray:function(a,b,c){return null==b?-1:i.call(b,a,c)},merge:function(a,b){for(var c=+b.length,d=0,e=a.length;d<c;d++)a[e++]=b[d];return a.length=e,a},grep:function(a,b,c){for(var d,e=[],f=0,g=a.length,h=!c;f<g;f++)d=!b(a[f],f),d!==h&&e.push(a[f]);return e},map:function(a,b,c){var d,e,f=0,h=[];if(w(a))for(d=a.length;f<d;f++)e=b(a[f],f,c),null!=e&&h.push(e);else for(f in a)e=b(a[f],f,c),null!=e&&h.push(e);return g.apply([],h)},guid:1,proxy:function(a,b){var c,d,e;if("string"==typeof b&&(c=a[b],b=a,a=c),r.isFunction(a))return d=f.call(arguments,2),e=function(){return a.apply(b||this,d.concat(f.call(arguments)))},e.guid=a.guid=a.guid||r.guid++,e},now:Date.now,support:o}),"function"==typeof Symbol&&(r.fn[Symbol.iterator]=c[Symbol.iterator]),r.each("Boolean Number String Function Array Date RegExp Object Error Symbol".split(" "),function(a,b){j["[object "+b+"]"]=b.toLowerCase()});function w(a){var b=!!a&&"length"in a&&a.length,c=r.type(a);return"function"!==c&&!r.isWindow(a)&&("array"===c||0===b||"number"==typeof b&&b>0&&b-1 in a)}var x=function(a){var b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u="sizzle"+1*new Date,v=a.document,w=0,x=0,y=ha(),z=ha(),A=ha(),B=function(a,b){return a===b&&(l=!0),0},C={}.hasOwnProperty,D=[],E=D.pop,F=D.push,G=D.push,H=D.slice,I=function(a,b){for(var c=0,d=a.length;c<d;c++)if(a[c]===b)return c;return-1},J="checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",K="[\\x20\\t\\r\\n\\f]",L="(?:\\\\.|[\\w-]|[^\0-\\xa0])+",M="\\["+K+"*("+L+")(?:"+K+"*([*^$|!~]?=)"+K+"*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|("+L+"))|)"+K+"*\\]",N=":("+L+")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|"+M+")*)|.*)\\)|)",O=new RegExp(K+"+","g"),P=new RegExp("^"+K+"+|((?:^|[^\\\\])(?:\\\\.)*)"+K+"+$","g"),Q=new RegExp("^"+K+"*,"+K+"*"),R=new RegExp("^"+K+"*([>+~]|"+K+")"+K+"*"),S=new RegExp("="+K+"*([^\\]'\"]*?)"+K+"*\\]","g"),T=new RegExp(N),U=new RegExp("^"+L+"$"),V={ID:new RegExp("^#("+L+")"),CLASS:new RegExp("^\\.("+L+")"),TAG:new RegExp("^("+L+"|[*])"),ATTR:new RegExp("^"+M),PSEUDO:new RegExp("^"+N),CHILD:new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\("+K+"*(even|odd|(([+-]|)(\\d*)n|)"+K+"*(?:([+-]|)"+K+"*(\\d+)|))"+K+"*\\)|)","i"),bool:new RegExp("^(?:"+J+")$","i"),needsContext:new RegExp("^"+K+"*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\("+K+"*((?:-\\d)?\\d*)"+K+"*\\)|)(?=[^-]|$)","i")},W=/^(?:input|select|textarea|button)$/i,X=/^h\d$/i,Y=/^[^{]+\{\s*\[native \w/,Z=/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,$=/[+~]/,_=new RegExp("\\\\([\\da-f]{1,6}"+K+"?|("+K+")|.)","ig"),aa=function(a,b,c){var d="0x"+b-65536;return d!==d||c?b:d<0?String.fromCharCode(d+65536):String.fromCharCode(d>>10|55296,1023&d|56320)},ba=/([\0-\x1f\x7f]|^-?\d)|^-$|[^\0-\x1f\x7f-\uFFFF\w-]/g,ca=function(a,b){return b?"\0"===a?"\ufffd":a.slice(0,-1)+"\\"+a.charCodeAt(a.length-1).toString(16)+" ":"\\"+a},da=function(){m()},ea=ta(function(a){return a.disabled===!0&&("form"in a||"label"in a)},{dir:"parentNode",next:"legend"});try{G.apply(D=H.call(v.childNodes),v.childNodes),D[v.childNodes.length].nodeType}catch(fa){G={apply:D.length?function(a,b){F.apply(a,H.call(b))}:function(a,b){var c=a.length,d=0;while(a[c++]=b[d++]);a.length=c-1}}}function ga(a,b,d,e){var f,h,j,k,l,o,r,s=b&&b.ownerDocument,w=b?b.nodeType:9;if(d=d||[],"string"!=typeof a||!a||1!==w&&9!==w&&11!==w)return d;if(!e&&((b?b.ownerDocument||b:v)!==n&&m(b),b=b||n,p)){if(11!==w&&(l=Z.exec(a)))if(f=l[1]){if(9===w){if(!(j=b.getElementById(f)))return d;if(j.id===f)return d.push(j),d}else if(s&&(j=s.getElementById(f))&&t(b,j)&&j.id===f)return d.push(j),d}else{if(l[2])return G.apply(d,b.getElementsByTagName(a)),d;if((f=l[3])&&c.getElementsByClassName&&b.getElementsByClassName)return G.apply(d,b.getElementsByClassName(f)),d}if(c.qsa&&!A[a+" "]&&(!q||!q.test(a))){if(1!==w)s=b,r=a;else if("object"!==b.nodeName.toLowerCase()){(k=b.getAttribute("id"))?k=k.replace(ba,ca):b.setAttribute("id",k=u),o=g(a),h=o.length;while(h--)o[h]="#"+k+" "+sa(o[h]);r=o.join(","),s=$.test(a)&&qa(b.parentNode)||b}if(r)try{return G.apply(d,s.querySelectorAll(r)),d}catch(x){}finally{k===u&&b.removeAttribute("id")}}}return i(a.replace(P,"$1"),b,d,e)}function ha(){var a=[];function b(c,e){return a.push(c+" ")>d.cacheLength&&delete b[a.shift()],b[c+" "]=e}return b}function ia(a){return a[u]=!0,a}function ja(a){var b=n.createElement("fieldset");try{return!!a(b)}catch(c){return!1}finally{b.parentNode&&b.parentNode.removeChild(b),b=null}}function ka(a,b){var c=a.split("|"),e=c.length;while(e--)d.attrHandle[c[e]]=b}function la(a,b){var c=b&&a,d=c&&1===a.nodeType&&1===b.nodeType&&a.sourceIndex-b.sourceIndex;if(d)return d;if(c)while(c=c.nextSibling)if(c===b)return-1;return a?1:-1}function ma(a){return function(b){var c=b.nodeName.toLowerCase();return"input"===c&&b.type===a}}function na(a){return function(b){var c=b.nodeName.toLowerCase();return("input"===c||"button"===c)&&b.type===a}}function oa(a){return function(b){return"form"in b?b.parentNode&&b.disabled===!1?"label"in b?"label"in b.parentNode?b.parentNode.disabled===a:b.disabled===a:b.isDisabled===a||b.isDisabled!==!a&&ea(b)===a:b.disabled===a:"label"in b&&b.disabled===a}}function pa(a){return ia(function(b){return b=+b,ia(function(c,d){var e,f=a([],c.length,b),g=f.length;while(g--)c[e=f[g]]&&(c[e]=!(d[e]=c[e]))})})}function qa(a){return a&&"undefined"!=typeof a.getElementsByTagName&&a}c=ga.support={},f=ga.isXML=function(a){var b=a&&(a.ownerDocument||a).documentElement;return!!b&&"HTML"!==b.nodeName},m=ga.setDocument=function(a){var b,e,g=a?a.ownerDocument||a:v;return g!==n&&9===g.nodeType&&g.documentElement?(n=g,o=n.documentElement,p=!f(n),v!==n&&(e=n.defaultView)&&e.top!==e&&(e.addEventListener?e.addEventListener("unload",da,!1):e.attachEvent&&e.attachEvent("onunload",da)),c.attributes=ja(function(a){return a.className="i",!a.getAttribute("className")}),c.getElementsByTagName=ja(function(a){return a.appendChild(n.createComment("")),!a.getElementsByTagName("*").length}),c.getElementsByClassName=Y.test(n.getElementsByClassName),c.getById=ja(function(a){return o.appendChild(a).id=u,!n.getElementsByName||!n.getElementsByName(u).length}),c.getById?(d.filter.ID=function(a){var b=a.replace(_,aa);return function(a){return a.getAttribute("id")===b}},d.find.ID=function(a,b){if("undefined"!=typeof b.getElementById&&p){var c=b.getElementById(a);return c?[c]:[]}}):(d.filter.ID=function(a){var b=a.replace(_,aa);return function(a){var c="undefined"!=typeof a.getAttributeNode&&a.getAttributeNode("id");return c&&c.value===b}},d.find.ID=function(a,b){if("undefined"!=typeof b.getElementById&&p){var c,d,e,f=b.getElementById(a);if(f){if(c=f.getAttributeNode("id"),c&&c.value===a)return[f];e=b.getElementsByName(a),d=0;while(f=e[d++])if(c=f.getAttributeNode("id"),c&&c.value===a)return[f]}return[]}}),d.find.TAG=c.getElementsByTagName?function(a,b){return"undefined"!=typeof b.getElementsByTagName?b.getElementsByTagName(a):c.qsa?b.querySelectorAll(a):void 0}:function(a,b){var c,d=[],e=0,f=b.getElementsByTagName(a);if("*"===a){while(c=f[e++])1===c.nodeType&&d.push(c);return d}return f},d.find.CLASS=c.getElementsByClassName&&function(a,b){if("undefined"!=typeof b.getElementsByClassName&&p)return b.getElementsByClassName(a)},r=[],q=[],(c.qsa=Y.test(n.querySelectorAll))&&(ja(function(a){o.appendChild(a).innerHTML="<a id='"+u+"'></a><select id='"+u+"-\r\\' msallowcapture=''><option selected=''></option></select>",a.querySelectorAll("[msallowcapture^='']").length&&q.push("[*^$]="+K+"*(?:''|\"\")"),a.querySelectorAll("[selected]").length||q.push("\\["+K+"*(?:value|"+J+")"),a.querySelectorAll("[id~="+u+"-]").length||q.push("~="),a.querySelectorAll(":checked").length||q.push(":checked"),a.querySelectorAll("a#"+u+"+*").length||q.push(".#.+[+~]")}),ja(function(a){a.innerHTML="<a href='' disabled='disabled'></a><select disabled='disabled'><option/></select>";var b=n.createElement("input");b.setAttribute("type","hidden"),a.appendChild(b).setAttribute("name","D"),a.querySelectorAll("[name=d]").length&&q.push("name"+K+"*[*^$|!~]?="),2!==a.querySelectorAll(":enabled").length&&q.push(":enabled",":disabled"),o.appendChild(a).disabled=!0,2!==a.querySelectorAll(":disabled").length&&q.push(":enabled",":disabled"),a.querySelectorAll("*,:x"),q.push(",.*:")})),(c.matchesSelector=Y.test(s=o.matches||o.webkitMatchesSelector||o.mozMatchesSelector||o.oMatchesSelector||o.msMatchesSelector))&&ja(function(a){c.disconnectedMatch=s.call(a,"*"),s.call(a,"[s!='']:x"),r.push("!=",N)}),q=q.length&&new RegExp(q.join("|")),r=r.length&&new RegExp(r.join("|")),b=Y.test(o.compareDocumentPosition),t=b||Y.test(o.contains)?function(a,b){var c=9===a.nodeType?a.documentElement:a,d=b&&b.parentNode;return a===d||!(!d||1!==d.nodeType||!(c.contains?c.contains(d):a.compareDocumentPosition&&16&a.compareDocumentPosition(d)))}:function(a,b){if(b)while(b=b.parentNode)if(b===a)return!0;return!1},B=b?function(a,b){if(a===b)return l=!0,0;var d=!a.compareDocumentPosition-!b.compareDocumentPosition;return d?d:(d=(a.ownerDocument||a)===(b.ownerDocument||b)?a.compareDocumentPosition(b):1,1&d||!c.sortDetached&&b.compareDocumentPosition(a)===d?a===n||a.ownerDocument===v&&t(v,a)?-1:b===n||b.ownerDocument===v&&t(v,b)?1:k?I(k,a)-I(k,b):0:4&d?-1:1)}:function(a,b){if(a===b)return l=!0,0;var c,d=0,e=a.parentNode,f=b.parentNode,g=[a],h=[b];if(!e||!f)return a===n?-1:b===n?1:e?-1:f?1:k?I(k,a)-I(k,b):0;if(e===f)return la(a,b);c=a;while(c=c.parentNode)g.unshift(c);c=b;while(c=c.parentNode)h.unshift(c);while(g[d]===h[d])d++;return d?la(g[d],h[d]):g[d]===v?-1:h[d]===v?1:0},n):n},ga.matches=function(a,b){return ga(a,null,null,b)},ga.matchesSelector=function(a,b){if((a.ownerDocument||a)!==n&&m(a),b=b.replace(S,"='$1']"),c.matchesSelector&&p&&!A[b+" "]&&(!r||!r.test(b))&&(!q||!q.test(b)))try{var d=s.call(a,b);if(d||c.disconnectedMatch||a.document&&11!==a.document.nodeType)return d}catch(e){}return ga(b,n,null,[a]).length>0},ga.contains=function(a,b){return(a.ownerDocument||a)!==n&&m(a),t(a,b)},ga.attr=function(a,b){(a.ownerDocument||a)!==n&&m(a);var e=d.attrHandle[b.toLowerCase()],f=e&&C.call(d.attrHandle,b.toLowerCase())?e(a,b,!p):void 0;return void 0!==f?f:c.attributes||!p?a.getAttribute(b):(f=a.getAttributeNode(b))&&f.specified?f.value:null},ga.escape=function(a){return(a+"").replace(ba,ca)},ga.error=function(a){throw new Error("Syntax error, unrecognized expression: "+a)},ga.uniqueSort=function(a){var b,d=[],e=0,f=0;if(l=!c.detectDuplicates,k=!c.sortStable&&a.slice(0),a.sort(B),l){while(b=a[f++])b===a[f]&&(e=d.push(f));while(e--)a.splice(d[e],1)}return k=null,a},e=ga.getText=function(a){var b,c="",d=0,f=a.nodeType;if(f){if(1===f||9===f||11===f){if("string"==typeof a.textContent)return a.textContent;for(a=a.firstChild;a;a=a.nextSibling)c+=e(a)}else if(3===f||4===f)return a.nodeValue}else while(b=a[d++])c+=e(b);return c},d=ga.selectors={cacheLength:50,createPseudo:ia,match:V,attrHandle:{},find:{},relative:{">":{dir:"parentNode",first:!0}," ":{dir:"parentNode"},"+":{dir:"previousSibling",first:!0},"~":{dir:"previousSibling"}},preFilter:{ATTR:function(a){return a[1]=a[1].replace(_,aa),a[3]=(a[3]||a[4]||a[5]||"").replace(_,aa),"~="===a[2]&&(a[3]=" "+a[3]+" "),a.slice(0,4)},CHILD:function(a){return a[1]=a[1].toLowerCase(),"nth"===a[1].slice(0,3)?(a[3]||ga.error(a[0]),a[4]=+(a[4]?a[5]+(a[6]||1):2*("even"===a[3]||"odd"===a[3])),a[5]=+(a[7]+a[8]||"odd"===a[3])):a[3]&&ga.error(a[0]),a},PSEUDO:function(a){var b,c=!a[6]&&a[2];return V.CHILD.test(a[0])?null:(a[3]?a[2]=a[4]||a[5]||"":c&&T.test(c)&&(b=g(c,!0))&&(b=c.indexOf(")",c.length-b)-c.length)&&(a[0]=a[0].slice(0,b),a[2]=c.slice(0,b)),a.slice(0,3))}},filter:{TAG:function(a){var b=a.replace(_,aa).toLowerCase();return"*"===a?function(){return!0}:function(a){return a.nodeName&&a.nodeName.toLowerCase()===b}},CLASS:function(a){var b=y[a+" "];return b||(b=new RegExp("(^|"+K+")"+a+"("+K+"|$)"))&&y(a,function(a){return b.test("string"==typeof a.className&&a.className||"undefined"!=typeof a.getAttribute&&a.getAttribute("class")||"")})},ATTR:function(a,b,c){return function(d){var e=ga.attr(d,a);return null==e?"!="===b:!b||(e+="","="===b?e===c:"!="===b?e!==c:"^="===b?c&&0===e.indexOf(c):"*="===b?c&&e.indexOf(c)>-1:"$="===b?c&&e.slice(-c.length)===c:"~="===b?(" "+e.replace(O," ")+" ").indexOf(c)>-1:"|="===b&&(e===c||e.slice(0,c.length+1)===c+"-"))}},CHILD:function(a,b,c,d,e){var f="nth"!==a.slice(0,3),g="last"!==a.slice(-4),h="of-type"===b;return 1===d&&0===e?function(a){return!!a.parentNode}:function(b,c,i){var j,k,l,m,n,o,p=f!==g?"nextSibling":"previousSibling",q=b.parentNode,r=h&&b.nodeName.toLowerCase(),s=!i&&!h,t=!1;if(q){if(f){while(p){m=b;while(m=m[p])if(h?m.nodeName.toLowerCase()===r:1===m.nodeType)return!1;o=p="only"===a&&!o&&"nextSibling"}return!0}if(o=[g?q.firstChild:q.lastChild],g&&s){m=q,l=m[u]||(m[u]={}),k=l[m.uniqueID]||(l[m.uniqueID]={}),j=k[a]||[],n=j[0]===w&&j[1],t=n&&j[2],m=n&&q.childNodes[n];while(m=++n&&m&&m[p]||(t=n=0)||o.pop())if(1===m.nodeType&&++t&&m===b){k[a]=[w,n,t];break}}else if(s&&(m=b,l=m[u]||(m[u]={}),k=l[m.uniqueID]||(l[m.uniqueID]={}),j=k[a]||[],n=j[0]===w&&j[1],t=n),t===!1)while(m=++n&&m&&m[p]||(t=n=0)||o.pop())if((h?m.nodeName.toLowerCase()===r:1===m.nodeType)&&++t&&(s&&(l=m[u]||(m[u]={}),k=l[m.uniqueID]||(l[m.uniqueID]={}),k[a]=[w,t]),m===b))break;return t-=e,t===d||t%d===0&&t/d>=0}}},PSEUDO:function(a,b){var c,e=d.pseudos[a]||d.setFilters[a.toLowerCase()]||ga.error("unsupported pseudo: "+a);return e[u]?e(b):e.length>1?(c=[a,a,"",b],d.setFilters.hasOwnProperty(a.toLowerCase())?ia(function(a,c){var d,f=e(a,b),g=f.length;while(g--)d=I(a,f[g]),a[d]=!(c[d]=f[g])}):function(a){return e(a,0,c)}):e}},pseudos:{not:ia(function(a){var b=[],c=[],d=h(a.replace(P,"$1"));return d[u]?ia(function(a,b,c,e){var f,g=d(a,null,e,[]),h=a.length;while(h--)(f=g[h])&&(a[h]=!(b[h]=f))}):function(a,e,f){return b[0]=a,d(b,null,f,c),b[0]=null,!c.pop()}}),has:ia(function(a){return function(b){return ga(a,b).length>0}}),contains:ia(function(a){return a=a.replace(_,aa),function(b){return(b.textContent||b.innerText||e(b)).indexOf(a)>-1}}),lang:ia(function(a){return U.test(a||"")||ga.error("unsupported lang: "+a),a=a.replace(_,aa).toLowerCase(),function(b){var c;do if(c=p?b.lang:b.getAttribute("xml:lang")||b.getAttribute("lang"))return c=c.toLowerCase(),c===a||0===c.indexOf(a+"-");while((b=b.parentNode)&&1===b.nodeType);return!1}}),target:function(b){var c=a.location&&a.location.hash;return c&&c.slice(1)===b.id},root:function(a){return a===o},focus:function(a){return a===n.activeElement&&(!n.hasFocus||n.hasFocus())&&!!(a.type||a.href||~a.tabIndex)},enabled:oa(!1),disabled:oa(!0),checked:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&!!a.checked||"option"===b&&!!a.selected},selected:function(a){return a.parentNode&&a.parentNode.selectedIndex,a.selected===!0},empty:function(a){for(a=a.firstChild;a;a=a.nextSibling)if(a.nodeType<6)return!1;return!0},parent:function(a){return!d.pseudos.empty(a)},header:function(a){return X.test(a.nodeName)},input:function(a){return W.test(a.nodeName)},button:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&"button"===a.type||"button"===b},text:function(a){var b;return"input"===a.nodeName.toLowerCase()&&"text"===a.type&&(null==(b=a.getAttribute("type"))||"text"===b.toLowerCase())},first:pa(function(){return[0]}),last:pa(function(a,b){return[b-1]}),eq:pa(function(a,b,c){return[c<0?c+b:c]}),even:pa(function(a,b){for(var c=0;c<b;c+=2)a.push(c);return a}),odd:pa(function(a,b){for(var c=1;c<b;c+=2)a.push(c);return a}),lt:pa(function(a,b,c){for(var d=c<0?c+b:c;--d>=0;)a.push(d);return a}),gt:pa(function(a,b,c){for(var d=c<0?c+b:c;++d<b;)a.push(d);return a})}},d.pseudos.nth=d.pseudos.eq;for(b in{radio:!0,checkbox:!0,file:!0,password:!0,image:!0})d.pseudos[b]=ma(b);for(b in{submit:!0,reset:!0})d.pseudos[b]=na(b);function ra(){}ra.prototype=d.filters=d.pseudos,d.setFilters=new ra,g=ga.tokenize=function(a,b){var c,e,f,g,h,i,j,k=z[a+" "];if(k)return b?0:k.slice(0);h=a,i=[],j=d.preFilter;while(h){c&&!(e=Q.exec(h))||(e&&(h=h.slice(e[0].length)||h),i.push(f=[])),c=!1,(e=R.exec(h))&&(c=e.shift(),f.push({value:c,type:e[0].replace(P," ")}),h=h.slice(c.length));for(g in d.filter)!(e=V[g].exec(h))||j[g]&&!(e=j[g](e))||(c=e.shift(),f.push({value:c,type:g,matches:e}),h=h.slice(c.length));if(!c)break}return b?h.length:h?ga.error(a):z(a,i).slice(0)};function sa(a){for(var b=0,c=a.length,d="";b<c;b++)d+=a[b].value;return d}function ta(a,b,c){var d=b.dir,e=b.next,f=e||d,g=c&&"parentNode"===f,h=x++;return b.first?function(b,c,e){while(b=b[d])if(1===b.nodeType||g)return a(b,c,e);return!1}:function(b,c,i){var j,k,l,m=[w,h];if(i){while(b=b[d])if((1===b.nodeType||g)&&a(b,c,i))return!0}else while(b=b[d])if(1===b.nodeType||g)if(l=b[u]||(b[u]={}),k=l[b.uniqueID]||(l[b.uniqueID]={}),e&&e===b.nodeName.toLowerCase())b=b[d]||b;else{if((j=k[f])&&j[0]===w&&j[1]===h)return m[2]=j[2];if(k[f]=m,m[2]=a(b,c,i))return!0}return!1}}function ua(a){return a.length>1?function(b,c,d){var e=a.length;while(e--)if(!a[e](b,c,d))return!1;return!0}:a[0]}function va(a,b,c){for(var d=0,e=b.length;d<e;d++)ga(a,b[d],c);return c}function wa(a,b,c,d,e){for(var f,g=[],h=0,i=a.length,j=null!=b;h<i;h++)(f=a[h])&&(c&&!c(f,d,e)||(g.push(f),j&&b.push(h)));return g}function xa(a,b,c,d,e,f){return d&&!d[u]&&(d=xa(d)),e&&!e[u]&&(e=xa(e,f)),ia(function(f,g,h,i){var j,k,l,m=[],n=[],o=g.length,p=f||va(b||"*",h.nodeType?[h]:h,[]),q=!a||!f&&b?p:wa(p,m,a,h,i),r=c?e||(f?a:o||d)?[]:g:q;if(c&&c(q,r,h,i),d){j=wa(r,n),d(j,[],h,i),k=j.length;while(k--)(l=j[k])&&(r[n[k]]=!(q[n[k]]=l))}if(f){if(e||a){if(e){j=[],k=r.length;while(k--)(l=r[k])&&j.push(q[k]=l);e(null,r=[],j,i)}k=r.length;while(k--)(l=r[k])&&(j=e?I(f,l):m[k])>-1&&(f[j]=!(g[j]=l))}}else r=wa(r===g?r.splice(o,r.length):r),e?e(null,g,r,i):G.apply(g,r)})}function ya(a){for(var b,c,e,f=a.length,g=d.relative[a[0].type],h=g||d.relative[" "],i=g?1:0,k=ta(function(a){return a===b},h,!0),l=ta(function(a){return I(b,a)>-1},h,!0),m=[function(a,c,d){var e=!g&&(d||c!==j)||((b=c).nodeType?k(a,c,d):l(a,c,d));return b=null,e}];i<f;i++)if(c=d.relative[a[i].type])m=[ta(ua(m),c)];else{if(c=d.filter[a[i].type].apply(null,a[i].matches),c[u]){for(e=++i;e<f;e++)if(d.relative[a[e].type])break;return xa(i>1&&ua(m),i>1&&sa(a.slice(0,i-1).concat({value:" "===a[i-2].type?"*":""})).replace(P,"$1"),c,i<e&&ya(a.slice(i,e)),e<f&&ya(a=a.slice(e)),e<f&&sa(a))}m.push(c)}return ua(m)}function za(a,b){var c=b.length>0,e=a.length>0,f=function(f,g,h,i,k){var l,o,q,r=0,s="0",t=f&&[],u=[],v=j,x=f||e&&d.find.TAG("*",k),y=w+=null==v?1:Math.random()||.1,z=x.length;for(k&&(j=g===n||g||k);s!==z&&null!=(l=x[s]);s++){if(e&&l){o=0,g||l.ownerDocument===n||(m(l),h=!p);while(q=a[o++])if(q(l,g||n,h)){i.push(l);break}k&&(w=y)}c&&((l=!q&&l)&&r--,f&&t.push(l))}if(r+=s,c&&s!==r){o=0;while(q=b[o++])q(t,u,g,h);if(f){if(r>0)while(s--)t[s]||u[s]||(u[s]=E.call(i));u=wa(u)}G.apply(i,u),k&&!f&&u.length>0&&r+b.length>1&&ga.uniqueSort(i)}return k&&(w=y,j=v),t};return c?ia(f):f}return h=ga.compile=function(a,b){var c,d=[],e=[],f=A[a+" "];if(!f){b||(b=g(a)),c=b.length;while(c--)f=ya(b[c]),f[u]?d.push(f):e.push(f);f=A(a,za(e,d)),f.selector=a}return f},i=ga.select=function(a,b,c,e){var f,i,j,k,l,m="function"==typeof a&&a,n=!e&&g(a=m.selector||a);if(c=c||[],1===n.length){if(i=n[0]=n[0].slice(0),i.length>2&&"ID"===(j=i[0]).type&&9===b.nodeType&&p&&d.relative[i[1].type]){if(b=(d.find.ID(j.matches[0].replace(_,aa),b)||[])[0],!b)return c;m&&(b=b.parentNode),a=a.slice(i.shift().value.length)}f=V.needsContext.test(a)?0:i.length;while(f--){if(j=i[f],d.relative[k=j.type])break;if((l=d.find[k])&&(e=l(j.matches[0].replace(_,aa),$.test(i[0].type)&&qa(b.parentNode)||b))){if(i.splice(f,1),a=e.length&&sa(i),!a)return G.apply(c,e),c;break}}}return(m||h(a,n))(e,b,!p,c,!b||$.test(a)&&qa(b.parentNode)||b),c},c.sortStable=u.split("").sort(B).join("")===u,c.detectDuplicates=!!l,m(),c.sortDetached=ja(function(a){return 1&a.compareDocumentPosition(n.createElement("fieldset"))}),ja(function(a){return a.innerHTML="<a href='#'></a>","#"===a.firstChild.getAttribute("href")})||ka("type|href|height|width",function(a,b,c){if(!c)return a.getAttribute(b,"type"===b.toLowerCase()?1:2)}),c.attributes&&ja(function(a){return a.innerHTML="<input/>",a.firstChild.setAttribute("value",""),""===a.firstChild.getAttribute("value")})||ka("value",function(a,b,c){if(!c&&"input"===a.nodeName.toLowerCase())return a.defaultValue}),ja(function(a){return null==a.getAttribute("disabled")})||ka(J,function(a,b,c){var d;if(!c)return a[b]===!0?b.toLowerCase():(d=a.getAttributeNode(b))&&d.specified?d.value:null}),ga}(a);r.find=x,r.expr=x.selectors,r.expr[":"]=r.expr.pseudos,r.uniqueSort=r.unique=x.uniqueSort,r.text=x.getText,r.isXMLDoc=x.isXML,r.contains=x.contains,r.escapeSelector=x.escape;var y=function(a,b,c){var d=[],e=void 0!==c;while((a=a[b])&&9!==a.nodeType)if(1===a.nodeType){if(e&&r(a).is(c))break;d.push(a)}return d},z=function(a,b){for(var c=[];a;a=a.nextSibling)1===a.nodeType&&a!==b&&c.push(a);return c},A=r.expr.match.needsContext,B=/^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i,C=/^.[^:#\[\.,]*$/;function D(a,b,c){return r.isFunction(b)?r.grep(a,function(a,d){return!!b.call(a,d,a)!==c}):b.nodeType?r.grep(a,function(a){return a===b!==c}):"string"!=typeof b?r.grep(a,function(a){return i.call(b,a)>-1!==c}):C.test(b)?r.filter(b,a,c):(b=r.filter(b,a),r.grep(a,function(a){return i.call(b,a)>-1!==c&&1===a.nodeType}))}r.filter=function(a,b,c){var d=b[0];return c&&(a=":not("+a+")"),1===b.length&&1===d.nodeType?r.find.matchesSelector(d,a)?[d]:[]:r.find.matches(a,r.grep(b,function(a){return 1===a.nodeType}))},r.fn.extend({find:function(a){var b,c,d=this.length,e=this;if("string"!=typeof a)return this.pushStack(r(a).filter(function(){for(b=0;b<d;b++)if(r.contains(e[b],this))return!0}));for(c=this.pushStack([]),b=0;b<d;b++)r.find(a,e[b],c);return d>1?r.uniqueSort(c):c},filter:function(a){return this.pushStack(D(this,a||[],!1))},not:function(a){return this.pushStack(D(this,a||[],!0))},is:function(a){return!!D(this,"string"==typeof a&&A.test(a)?r(a):a||[],!1).length}});var E,F=/^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]+))$/,G=r.fn.init=function(a,b,c){var e,f;if(!a)return this;if(c=c||E,"string"==typeof a){if(e="<"===a[0]&&">"===a[a.length-1]&&a.length>=3?[null,a,null]:F.exec(a),!e||!e[1]&&b)return!b||b.jquery?(b||c).find(a):this.constructor(b).find(a);if(e[1]){if(b=b instanceof r?b[0]:b,r.merge(this,r.parseHTML(e[1],b&&b.nodeType?b.ownerDocument||b:d,!0)),B.test(e[1])&&r.isPlainObject(b))for(e in b)r.isFunction(this[e])?this[e](b[e]):this.attr(e,b[e]);return this}return f=d.getElementById(e[2]),f&&(this[0]=f,this.length=1),this}return a.nodeType?(this[0]=a,this.length=1,this):r.isFunction(a)?void 0!==c.ready?c.ready(a):a(r):r.makeArray(a,this)};G.prototype=r.fn,E=r(d);var H=/^(?:parents|prev(?:Until|All))/,I={children:!0,contents:!0,next:!0,prev:!0};r.fn.extend({has:function(a){var b=r(a,this),c=b.length;return this.filter(function(){for(var a=0;a<c;a++)if(r.contains(this,b[a]))return!0})},closest:function(a,b){var c,d=0,e=this.length,f=[],g="string"!=typeof a&&r(a);if(!A.test(a))for(;d<e;d++)for(c=this[d];c&&c!==b;c=c.parentNode)if(c.nodeType<11&&(g?g.index(c)>-1:1===c.nodeType&&r.find.matchesSelector(c,a))){f.push(c);break}return this.pushStack(f.length>1?r.uniqueSort(f):f)},index:function(a){return a?"string"==typeof a?i.call(r(a),this[0]):i.call(this,a.jquery?a[0]:a):this[0]&&this[0].parentNode?this.first().prevAll().length:-1},add:function(a,b){return this.pushStack(r.uniqueSort(r.merge(this.get(),r(a,b))))},addBack:function(a){return this.add(null==a?this.prevObject:this.prevObject.filter(a))}});function J(a,b){while((a=a[b])&&1!==a.nodeType);return a}r.each({parent:function(a){var b=a.parentNode;return b&&11!==b.nodeType?b:null},parents:function(a){return y(a,"parentNode")},parentsUntil:function(a,b,c){return y(a,"parentNode",c)},next:function(a){return J(a,"nextSibling")},prev:function(a){return J(a,"previousSibling")},nextAll:function(a){return y(a,"nextSibling")},prevAll:function(a){return y(a,"previousSibling")},nextUntil:function(a,b,c){return y(a,"nextSibling",c)},prevUntil:function(a,b,c){return y(a,"previousSibling",c)},siblings:function(a){return z((a.parentNode||{}).firstChild,a)},children:function(a){return z(a.firstChild)},contents:function(a){return a.contentDocument||r.merge([],a.childNodes)}},function(a,b){r.fn[a]=function(c,d){var e=r.map(this,b,c);return"Until"!==a.slice(-5)&&(d=c),d&&"string"==typeof d&&(e=r.filter(d,e)),this.length>1&&(I[a]||r.uniqueSort(e),H.test(a)&&e.reverse()),this.pushStack(e)}});var K=/[^\x20\t\r\n\f]+/g;function L(a){var b={};return r.each(a.match(K)||[],function(a,c){b[c]=!0}),b}r.Callbacks=function(a){a="string"==typeof a?L(a):r.extend({},a);var b,c,d,e,f=[],g=[],h=-1,i=function(){for(e=a.once,d=b=!0;g.length;h=-1){c=g.shift();while(++h<f.length)f[h].apply(c[0],c[1])===!1&&a.stopOnFalse&&(h=f.length,c=!1)}a.memory||(c=!1),b=!1,e&&(f=c?[]:"")},j={add:function(){return f&&(c&&!b&&(h=f.length-1,g.push(c)),function d(b){r.each(b,function(b,c){r.isFunction(c)?a.unique&&j.has(c)||f.push(c):c&&c.length&&"string"!==r.type(c)&&d(c)})}(arguments),c&&!b&&i()),this},remove:function(){return r.each(arguments,function(a,b){var c;while((c=r.inArray(b,f,c))>-1)f.splice(c,1),c<=h&&h--}),this},has:function(a){return a?r.inArray(a,f)>-1:f.length>0},empty:function(){return f&&(f=[]),this},disable:function(){return e=g=[],f=c="",this},disabled:function(){return!f},lock:function(){return e=g=[],c||b||(f=c=""),this},locked:function(){return!!e},fireWith:function(a,c){return e||(c=c||[],c=[a,c.slice?c.slice():c],g.push(c),b||i()),this},fire:function(){return j.fireWith(this,arguments),this},fired:function(){return!!d}};return j};function M(a){return a}function N(a){throw a}function O(a,b,c){var d;try{a&&r.isFunction(d=a.promise)?d.call(a).done(b).fail(c):a&&r.isFunction(d=a.then)?d.call(a,b,c):b.call(void 0,a)}catch(a){c.call(void 0,a)}}r.extend({Deferred:function(b){var c=[["notify","progress",r.Callbacks("memory"),r.Callbacks("memory"),2],["resolve","done",r.Callbacks("once memory"),r.Callbacks("once memory"),0,"resolved"],["reject","fail",r.Callbacks("once memory"),r.Callbacks("once memory"),1,"rejected"]],d="pending",e={state:function(){return d},always:function(){return f.done(arguments).fail(arguments),this},"catch":function(a){return e.then(null,a)},pipe:function(){var a=arguments;return r.Deferred(function(b){r.each(c,function(c,d){var e=r.isFunction(a[d[4]])&&a[d[4]];f[d[1]](function(){var a=e&&e.apply(this,arguments);a&&r.isFunction(a.promise)?a.promise().progress(b.notify).done(b.resolve).fail(b.reject):b[d[0]+"With"](this,e?[a]:arguments)})}),a=null}).promise()},then:function(b,d,e){var f=0;function g(b,c,d,e){return function(){var h=this,i=arguments,j=function(){var a,j;if(!(b<f)){if(a=d.apply(h,i),a===c.promise())throw new TypeError("Thenable self-resolution");j=a&&("object"==typeof a||"function"==typeof a)&&a.then,r.isFunction(j)?e?j.call(a,g(f,c,M,e),g(f,c,N,e)):(f++,j.call(a,g(f,c,M,e),g(f,c,N,e),g(f,c,M,c.notifyWith))):(d!==M&&(h=void 0,i=[a]),(e||c.resolveWith)(h,i))}},k=e?j:function(){try{j()}catch(a){r.Deferred.exceptionHook&&r.Deferred.exceptionHook(a,k.stackTrace),b+1>=f&&(d!==N&&(h=void 0,i=[a]),c.rejectWith(h,i))}};b?k():(r.Deferred.getStackHook&&(k.stackTrace=r.Deferred.getStackHook()),a.setTimeout(k))}}return r.Deferred(function(a){c[0][3].add(g(0,a,r.isFunction(e)?e:M,a.notifyWith)),c[1][3].add(g(0,a,r.isFunction(b)?b:M)),c[2][3].add(g(0,a,r.isFunction(d)?d:N))}).promise()},promise:function(a){return null!=a?r.extend(a,e):e}},f={};return r.each(c,function(a,b){var g=b[2],h=b[5];e[b[1]]=g.add,h&&g.add(function(){d=h},c[3-a][2].disable,c[0][2].lock),g.add(b[3].fire),f[b[0]]=function(){return f[b[0]+"With"](this===f?void 0:this,arguments),this},f[b[0]+"With"]=g.fireWith}),e.promise(f),b&&b.call(f,f),f},when:function(a){var b=arguments.length,c=b,d=Array(c),e=f.call(arguments),g=r.Deferred(),h=function(a){return function(c){d[a]=this,e[a]=arguments.length>1?f.call(arguments):c,--b||g.resolveWith(d,e)}};if(b<=1&&(O(a,g.done(h(c)).resolve,g.reject),"pending"===g.state()||r.isFunction(e[c]&&e[c].then)))return g.then();while(c--)O(e[c],h(c),g.reject);return g.promise()}});var P=/^(Eval|Internal|Range|Reference|Syntax|Type|URI)Error$/;r.Deferred.exceptionHook=function(b,c){a.console&&a.console.warn&&b&&P.test(b.name)&&a.console.warn("jQuery.Deferred exception: "+b.message,b.stack,c)},r.readyException=function(b){a.setTimeout(function(){throw b})};var Q=r.Deferred();r.fn.ready=function(a){return Q.then(a)["catch"](function(a){r.readyException(a)}),this},r.extend({isReady:!1,readyWait:1,holdReady:function(a){a?r.readyWait++:r.ready(!0)},ready:function(a){(a===!0?--r.readyWait:r.isReady)||(r.isReady=!0,a!==!0&&--r.readyWait>0||Q.resolveWith(d,[r]))}}),r.ready.then=Q.then;function R(){d.removeEventListener("DOMContentLoaded",R),
 a.removeEventListener("load",R),r.ready()}"complete"===d.readyState||"loading"!==d.readyState&&!d.documentElement.doScroll?a.setTimeout(r.ready):(d.addEventListener("DOMContentLoaded",R),a.addEventListener("load",R));var S=function(a,b,c,d,e,f,g){var h=0,i=a.length,j=null==c;if("object"===r.type(c)){e=!0;for(h in c)S(a,b,h,c[h],!0,f,g)}else if(void 0!==d&&(e=!0,r.isFunction(d)||(g=!0),j&&(g?(b.call(a,d),b=null):(j=b,b=function(a,b,c){return j.call(r(a),c)})),b))for(;h<i;h++)b(a[h],c,g?d:d.call(a[h],h,b(a[h],c)));return e?a:j?b.call(a):i?b(a[0],c):f},T=function(a){return 1===a.nodeType||9===a.nodeType||!+a.nodeType};function U(){this.expando=r.expando+U.uid++}U.uid=1,U.prototype={cache:function(a){var b=a[this.expando];return b||(b={},T(a)&&(a.nodeType?a[this.expando]=b:Object.defineProperty(a,this.expando,{value:b,configurable:!0}))),b},set:function(a,b,c){var d,e=this.cache(a);if("string"==typeof b)e[r.camelCase(b)]=c;else for(d in b)e[r.camelCase(d)]=b[d];return e},get:function(a,b){return void 0===b?this.cache(a):a[this.expando]&&a[this.expando][r.camelCase(b)]},access:function(a,b,c){return void 0===b||b&&"string"==typeof b&&void 0===c?this.get(a,b):(this.set(a,b,c),void 0!==c?c:b)},remove:function(a,b){var c,d=a[this.expando];if(void 0!==d){if(void 0!==b){r.isArray(b)?b=b.map(r.camelCase):(b=r.camelCase(b),b=b in d?[b]:b.match(K)||[]),c=b.length;while(c--)delete d[b[c]]}(void 0===b||r.isEmptyObject(d))&&(a.nodeType?a[this.expando]=void 0:delete a[this.expando])}},hasData:function(a){var b=a[this.expando];return void 0!==b&&!r.isEmptyObject(b)}};var V=new U,W=new U,X=/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,Y=/[A-Z]/g;function Z(a){return"true"===a||"false"!==a&&("null"===a?null:a===+a+""?+a:X.test(a)?JSON.parse(a):a)}function $(a,b,c){var d;if(void 0===c&&1===a.nodeType)if(d="data-"+b.replace(Y,"-$&").toLowerCase(),c=a.getAttribute(d),"string"==typeof c){try{c=Z(c)}catch(e){}W.set(a,b,c)}else c=void 0;return c}r.extend({hasData:function(a){return W.hasData(a)||V.hasData(a)},data:function(a,b,c){return W.access(a,b,c)},removeData:function(a,b){W.remove(a,b)},_data:function(a,b,c){return V.access(a,b,c)},_removeData:function(a,b){V.remove(a,b)}}),r.fn.extend({data:function(a,b){var c,d,e,f=this[0],g=f&&f.attributes;if(void 0===a){if(this.length&&(e=W.get(f),1===f.nodeType&&!V.get(f,"hasDataAttrs"))){c=g.length;while(c--)g[c]&&(d=g[c].name,0===d.indexOf("data-")&&(d=r.camelCase(d.slice(5)),$(f,d,e[d])));V.set(f,"hasDataAttrs",!0)}return e}return"object"==typeof a?this.each(function(){W.set(this,a)}):S(this,function(b){var c;if(f&&void 0===b){if(c=W.get(f,a),void 0!==c)return c;if(c=$(f,a),void 0!==c)return c}else this.each(function(){W.set(this,a,b)})},null,b,arguments.length>1,null,!0)},removeData:function(a){return this.each(function(){W.remove(this,a)})}}),r.extend({queue:function(a,b,c){var d;if(a)return b=(b||"fx")+"queue",d=V.get(a,b),c&&(!d||r.isArray(c)?d=V.access(a,b,r.makeArray(c)):d.push(c)),d||[]},dequeue:function(a,b){b=b||"fx";var c=r.queue(a,b),d=c.length,e=c.shift(),f=r._queueHooks(a,b),g=function(){r.dequeue(a,b)};"inprogress"===e&&(e=c.shift(),d--),e&&("fx"===b&&c.unshift("inprogress"),delete f.stop,e.call(a,g,f)),!d&&f&&f.empty.fire()},_queueHooks:function(a,b){var c=b+"queueHooks";return V.get(a,c)||V.access(a,c,{empty:r.Callbacks("once memory").add(function(){V.remove(a,[b+"queue",c])})})}}),r.fn.extend({queue:function(a,b){var c=2;return"string"!=typeof a&&(b=a,a="fx",c--),arguments.length<c?r.queue(this[0],a):void 0===b?this:this.each(function(){var c=r.queue(this,a,b);r._queueHooks(this,a),"fx"===a&&"inprogress"!==c[0]&&r.dequeue(this,a)})},dequeue:function(a){return this.each(function(){r.dequeue(this,a)})},clearQueue:function(a){return this.queue(a||"fx",[])},promise:function(a,b){var c,d=1,e=r.Deferred(),f=this,g=this.length,h=function(){--d||e.resolveWith(f,[f])};"string"!=typeof a&&(b=a,a=void 0),a=a||"fx";while(g--)c=V.get(f[g],a+"queueHooks"),c&&c.empty&&(d++,c.empty.add(h));return h(),e.promise(b)}});var _=/[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source,aa=new RegExp("^(?:([+-])=|)("+_+")([a-z%]*)$","i"),ba=["Top","Right","Bottom","Left"],ca=function(a,b){return a=b||a,"none"===a.style.display||""===a.style.display&&r.contains(a.ownerDocument,a)&&"none"===r.css(a,"display")},da=function(a,b,c,d){var e,f,g={};for(f in b)g[f]=a.style[f],a.style[f]=b[f];e=c.apply(a,d||[]);for(f in b)a.style[f]=g[f];return e};function ea(a,b,c,d){var e,f=1,g=20,h=d?function(){return d.cur()}:function(){return r.css(a,b,"")},i=h(),j=c&&c[3]||(r.cssNumber[b]?"":"px"),k=(r.cssNumber[b]||"px"!==j&&+i)&&aa.exec(r.css(a,b));if(k&&k[3]!==j){j=j||k[3],c=c||[],k=+i||1;do f=f||".5",k/=f,r.style(a,b,k+j);while(f!==(f=h()/i)&&1!==f&&--g)}return c&&(k=+k||+i||0,e=c[1]?k+(c[1]+1)*c[2]:+c[2],d&&(d.unit=j,d.start=k,d.end=e)),e}var fa={};function ga(a){var b,c=a.ownerDocument,d=a.nodeName,e=fa[d];return e?e:(b=c.body.appendChild(c.createElement(d)),e=r.css(b,"display"),b.parentNode.removeChild(b),"none"===e&&(e="block"),fa[d]=e,e)}function ha(a,b){for(var c,d,e=[],f=0,g=a.length;f<g;f++)d=a[f],d.style&&(c=d.style.display,b?("none"===c&&(e[f]=V.get(d,"display")||null,e[f]||(d.style.display="")),""===d.style.display&&ca(d)&&(e[f]=ga(d))):"none"!==c&&(e[f]="none",V.set(d,"display",c)));for(f=0;f<g;f++)null!=e[f]&&(a[f].style.display=e[f]);return a}r.fn.extend({show:function(){return ha(this,!0)},hide:function(){return ha(this)},toggle:function(a){return"boolean"==typeof a?a?this.show():this.hide():this.each(function(){ca(this)?r(this).show():r(this).hide()})}});var ia=/^(?:checkbox|radio)$/i,ja=/<([a-z][^\/\0>\x20\t\r\n\f]+)/i,ka=/^$|\/(?:java|ecma)script/i,la={option:[1,"<select multiple='multiple'>","</select>"],thead:[1,"<table>","</table>"],col:[2,"<table><colgroup>","</colgroup></table>"],tr:[2,"<table><tbody>","</tbody></table>"],td:[3,"<table><tbody><tr>","</tr></tbody></table>"],_default:[0,"",""]};la.optgroup=la.option,la.tbody=la.tfoot=la.colgroup=la.caption=la.thead,la.th=la.td;function ma(a,b){var c;return c="undefined"!=typeof a.getElementsByTagName?a.getElementsByTagName(b||"*"):"undefined"!=typeof a.querySelectorAll?a.querySelectorAll(b||"*"):[],void 0===b||b&&r.nodeName(a,b)?r.merge([a],c):c}function na(a,b){for(var c=0,d=a.length;c<d;c++)V.set(a[c],"globalEval",!b||V.get(b[c],"globalEval"))}var oa=/<|&#?\w+;/;function pa(a,b,c,d,e){for(var f,g,h,i,j,k,l=b.createDocumentFragment(),m=[],n=0,o=a.length;n<o;n++)if(f=a[n],f||0===f)if("object"===r.type(f))r.merge(m,f.nodeType?[f]:f);else if(oa.test(f)){g=g||l.appendChild(b.createElement("div")),h=(ja.exec(f)||["",""])[1].toLowerCase(),i=la[h]||la._default,g.innerHTML=i[1]+r.htmlPrefilter(f)+i[2],k=i[0];while(k--)g=g.lastChild;r.merge(m,g.childNodes),g=l.firstChild,g.textContent=""}else m.push(b.createTextNode(f));l.textContent="",n=0;while(f=m[n++])if(d&&r.inArray(f,d)>-1)e&&e.push(f);else if(j=r.contains(f.ownerDocument,f),g=ma(l.appendChild(f),"script"),j&&na(g),c){k=0;while(f=g[k++])ka.test(f.type||"")&&c.push(f)}return l}!function(){var a=d.createDocumentFragment(),b=a.appendChild(d.createElement("div")),c=d.createElement("input");c.setAttribute("type","radio"),c.setAttribute("checked","checked"),c.setAttribute("name","t"),b.appendChild(c),o.checkClone=b.cloneNode(!0).cloneNode(!0).lastChild.checked,b.innerHTML="<textarea>x</textarea>",o.noCloneChecked=!!b.cloneNode(!0).lastChild.defaultValue}();var qa=d.documentElement,ra=/^key/,sa=/^(?:mouse|pointer|contextmenu|drag|drop)|click/,ta=/^([^.]*)(?:\.(.+)|)/;function ua(){return!0}function va(){return!1}function wa(){try{return d.activeElement}catch(a){}}function xa(a,b,c,d,e,f){var g,h;if("object"==typeof b){"string"!=typeof c&&(d=d||c,c=void 0);for(h in b)xa(a,h,c,d,b[h],f);return a}if(null==d&&null==e?(e=c,d=c=void 0):null==e&&("string"==typeof c?(e=d,d=void 0):(e=d,d=c,c=void 0)),e===!1)e=va;else if(!e)return a;return 1===f&&(g=e,e=function(a){return r().off(a),g.apply(this,arguments)},e.guid=g.guid||(g.guid=r.guid++)),a.each(function(){r.event.add(this,b,e,d,c)})}r.event={global:{},add:function(a,b,c,d,e){var f,g,h,i,j,k,l,m,n,o,p,q=V.get(a);if(q){c.handler&&(f=c,c=f.handler,e=f.selector),e&&r.find.matchesSelector(qa,e),c.guid||(c.guid=r.guid++),(i=q.events)||(i=q.events={}),(g=q.handle)||(g=q.handle=function(b){return"undefined"!=typeof r&&r.event.triggered!==b.type?r.event.dispatch.apply(a,arguments):void 0}),b=(b||"").match(K)||[""],j=b.length;while(j--)h=ta.exec(b[j])||[],n=p=h[1],o=(h[2]||"").split(".").sort(),n&&(l=r.event.special[n]||{},n=(e?l.delegateType:l.bindType)||n,l=r.event.special[n]||{},k=r.extend({type:n,origType:p,data:d,handler:c,guid:c.guid,selector:e,needsContext:e&&r.expr.match.needsContext.test(e),namespace:o.join(".")},f),(m=i[n])||(m=i[n]=[],m.delegateCount=0,l.setup&&l.setup.call(a,d,o,g)!==!1||a.addEventListener&&a.addEventListener(n,g)),l.add&&(l.add.call(a,k),k.handler.guid||(k.handler.guid=c.guid)),e?m.splice(m.delegateCount++,0,k):m.push(k),r.event.global[n]=!0)}},remove:function(a,b,c,d,e){var f,g,h,i,j,k,l,m,n,o,p,q=V.hasData(a)&&V.get(a);if(q&&(i=q.events)){b=(b||"").match(K)||[""],j=b.length;while(j--)if(h=ta.exec(b[j])||[],n=p=h[1],o=(h[2]||"").split(".").sort(),n){l=r.event.special[n]||{},n=(d?l.delegateType:l.bindType)||n,m=i[n]||[],h=h[2]&&new RegExp("(^|\\.)"+o.join("\\.(?:.*\\.|)")+"(\\.|$)"),g=f=m.length;while(f--)k=m[f],!e&&p!==k.origType||c&&c.guid!==k.guid||h&&!h.test(k.namespace)||d&&d!==k.selector&&("**"!==d||!k.selector)||(m.splice(f,1),k.selector&&m.delegateCount--,l.remove&&l.remove.call(a,k));g&&!m.length&&(l.teardown&&l.teardown.call(a,o,q.handle)!==!1||r.removeEvent(a,n,q.handle),delete i[n])}else for(n in i)r.event.remove(a,n+b[j],c,d,!0);r.isEmptyObject(i)&&V.remove(a,"handle events")}},dispatch:function(a){var b=r.event.fix(a),c,d,e,f,g,h,i=new Array(arguments.length),j=(V.get(this,"events")||{})[b.type]||[],k=r.event.special[b.type]||{};for(i[0]=b,c=1;c<arguments.length;c++)i[c]=arguments[c];if(b.delegateTarget=this,!k.preDispatch||k.preDispatch.call(this,b)!==!1){h=r.event.handlers.call(this,b,j),c=0;while((f=h[c++])&&!b.isPropagationStopped()){b.currentTarget=f.elem,d=0;while((g=f.handlers[d++])&&!b.isImmediatePropagationStopped())b.rnamespace&&!b.rnamespace.test(g.namespace)||(b.handleObj=g,b.data=g.data,e=((r.event.special[g.origType]||{}).handle||g.handler).apply(f.elem,i),void 0!==e&&(b.result=e)===!1&&(b.preventDefault(),b.stopPropagation()))}return k.postDispatch&&k.postDispatch.call(this,b),b.result}},handlers:function(a,b){var c,d,e,f,g,h=[],i=b.delegateCount,j=a.target;if(i&&j.nodeType&&!("click"===a.type&&a.button>=1))for(;j!==this;j=j.parentNode||this)if(1===j.nodeType&&("click"!==a.type||j.disabled!==!0)){for(f=[],g={},c=0;c<i;c++)d=b[c],e=d.selector+" ",void 0===g[e]&&(g[e]=d.needsContext?r(e,this).index(j)>-1:r.find(e,this,null,[j]).length),g[e]&&f.push(d);f.length&&h.push({elem:j,handlers:f})}return j=this,i<b.length&&h.push({elem:j,handlers:b.slice(i)}),h},addProp:function(a,b){Object.defineProperty(r.Event.prototype,a,{enumerable:!0,configurable:!0,get:r.isFunction(b)?function(){if(this.originalEvent)return b(this.originalEvent)}:function(){if(this.originalEvent)return this.originalEvent[a]},set:function(b){Object.defineProperty(this,a,{enumerable:!0,configurable:!0,writable:!0,value:b})}})},fix:function(a){return a[r.expando]?a:new r.Event(a)},special:{load:{noBubble:!0},focus:{trigger:function(){if(this!==wa()&&this.focus)return this.focus(),!1},delegateType:"focusin"},blur:{trigger:function(){if(this===wa()&&this.blur)return this.blur(),!1},delegateType:"focusout"},click:{trigger:function(){if("checkbox"===this.type&&this.click&&r.nodeName(this,"input"))return this.click(),!1},_default:function(a){return r.nodeName(a.target,"a")}},beforeunload:{postDispatch:function(a){void 0!==a.result&&a.originalEvent&&(a.originalEvent.returnValue=a.result)}}}},r.removeEvent=function(a,b,c){a.removeEventListener&&a.removeEventListener(b,c)},r.Event=function(a,b){return this instanceof r.Event?(a&&a.type?(this.originalEvent=a,this.type=a.type,this.isDefaultPrevented=a.defaultPrevented||void 0===a.defaultPrevented&&a.returnValue===!1?ua:va,this.target=a.target&&3===a.target.nodeType?a.target.parentNode:a.target,this.currentTarget=a.currentTarget,this.relatedTarget=a.relatedTarget):this.type=a,b&&r.extend(this,b),this.timeStamp=a&&a.timeStamp||r.now(),void(this[r.expando]=!0)):new r.Event(a,b)},r.Event.prototype={constructor:r.Event,isDefaultPrevented:va,isPropagationStopped:va,isImmediatePropagationStopped:va,isSimulated:!1,preventDefault:function(){var a=this.originalEvent;this.isDefaultPrevented=ua,a&&!this.isSimulated&&a.preventDefault()},stopPropagation:function(){var a=this.originalEvent;this.isPropagationStopped=ua,a&&!this.isSimulated&&a.stopPropagation()},stopImmediatePropagation:function(){var a=this.originalEvent;this.isImmediatePropagationStopped=ua,a&&!this.isSimulated&&a.stopImmediatePropagation(),this.stopPropagation()}},r.each({altKey:!0,bubbles:!0,cancelable:!0,changedTouches:!0,ctrlKey:!0,detail:!0,eventPhase:!0,metaKey:!0,pageX:!0,pageY:!0,shiftKey:!0,view:!0,"char":!0,charCode:!0,key:!0,keyCode:!0,button:!0,buttons:!0,clientX:!0,clientY:!0,offsetX:!0,offsetY:!0,pointerId:!0,pointerType:!0,screenX:!0,screenY:!0,targetTouches:!0,toElement:!0,touches:!0,which:function(a){var b=a.button;return null==a.which&&ra.test(a.type)?null!=a.charCode?a.charCode:a.keyCode:!a.which&&void 0!==b&&sa.test(a.type)?1&b?1:2&b?3:4&b?2:0:a.which}},r.event.addProp),r.each({mouseenter:"mouseover",mouseleave:"mouseout",pointerenter:"pointerover",pointerleave:"pointerout"},function(a,b){r.event.special[a]={delegateType:b,bindType:b,handle:function(a){var c,d=this,e=a.relatedTarget,f=a.handleObj;return e&&(e===d||r.contains(d,e))||(a.type=f.origType,c=f.handler.apply(this,arguments),a.type=b),c}}}),r.fn.extend({on:function(a,b,c,d){return xa(this,a,b,c,d)},one:function(a,b,c,d){return xa(this,a,b,c,d,1)},off:function(a,b,c){var d,e;if(a&&a.preventDefault&&a.handleObj)return d=a.handleObj,r(a.delegateTarget).off(d.namespace?d.origType+"."+d.namespace:d.origType,d.selector,d.handler),this;if("object"==typeof a){for(e in a)this.off(e,b,a[e]);return this}return b!==!1&&"function"!=typeof b||(c=b,b=void 0),c===!1&&(c=va),this.each(function(){r.event.remove(this,a,c,b)})}});var ya=/<(?!area|br|col|embed|hr|img|input|link|meta|param)(([a-z][^\/\0>\x20\t\r\n\f]*)[^>]*)\/>/gi,za=/<script|<style|<link/i,Aa=/checked\s*(?:[^=]|=\s*.checked.)/i,Ba=/^true\/(.*)/,Ca=/^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g;function Da(a,b){return r.nodeName(a,"table")&&r.nodeName(11!==b.nodeType?b:b.firstChild,"tr")?a.getElementsByTagName("tbody")[0]||a:a}function Ea(a){return a.type=(null!==a.getAttribute("type"))+"/"+a.type,a}function Fa(a){var b=Ba.exec(a.type);return b?a.type=b[1]:a.removeAttribute("type"),a}function Ga(a,b){var c,d,e,f,g,h,i,j;if(1===b.nodeType){if(V.hasData(a)&&(f=V.access(a),g=V.set(b,f),j=f.events)){delete g.handle,g.events={};for(e in j)for(c=0,d=j[e].length;c<d;c++)r.event.add(b,e,j[e][c])}W.hasData(a)&&(h=W.access(a),i=r.extend({},h),W.set(b,i))}}function Ha(a,b){var c=b.nodeName.toLowerCase();"input"===c&&ia.test(a.type)?b.checked=a.checked:"input"!==c&&"textarea"!==c||(b.defaultValue=a.defaultValue)}function Ia(a,b,c,d){b=g.apply([],b);var e,f,h,i,j,k,l=0,m=a.length,n=m-1,q=b[0],s=r.isFunction(q);if(s||m>1&&"string"==typeof q&&!o.checkClone&&Aa.test(q))return a.each(function(e){var f=a.eq(e);s&&(b[0]=q.call(this,e,f.html())),Ia(f,b,c,d)});if(m&&(e=pa(b,a[0].ownerDocument,!1,a,d),f=e.firstChild,1===e.childNodes.length&&(e=f),f||d)){for(h=r.map(ma(e,"script"),Ea),i=h.length;l<m;l++)j=e,l!==n&&(j=r.clone(j,!0,!0),i&&r.merge(h,ma(j,"script"))),c.call(a[l],j,l);if(i)for(k=h[h.length-1].ownerDocument,r.map(h,Fa),l=0;l<i;l++)j=h[l],ka.test(j.type||"")&&!V.access(j,"globalEval")&&r.contains(k,j)&&(j.src?r._evalUrl&&r._evalUrl(j.src):p(j.textContent.replace(Ca,""),k))}return a}function Ja(a,b,c){for(var d,e=b?r.filter(b,a):a,f=0;null!=(d=e[f]);f++)c||1!==d.nodeType||r.cleanData(ma(d)),d.parentNode&&(c&&r.contains(d.ownerDocument,d)&&na(ma(d,"script")),d.parentNode.removeChild(d));return a}r.extend({htmlPrefilter:function(a){return a.replace(ya,"<$1></$2>")},clone:function(a,b,c){var d,e,f,g,h=a.cloneNode(!0),i=r.contains(a.ownerDocument,a);if(!(o.noCloneChecked||1!==a.nodeType&&11!==a.nodeType||r.isXMLDoc(a)))for(g=ma(h),f=ma(a),d=0,e=f.length;d<e;d++)Ha(f[d],g[d]);if(b)if(c)for(f=f||ma(a),g=g||ma(h),d=0,e=f.length;d<e;d++)Ga(f[d],g[d]);else Ga(a,h);return g=ma(h,"script"),g.length>0&&na(g,!i&&ma(a,"script")),h},cleanData:function(a){for(var b,c,d,e=r.event.special,f=0;void 0!==(c=a[f]);f++)if(T(c)){if(b=c[V.expando]){if(b.events)for(d in b.events)e[d]?r.event.remove(c,d):r.removeEvent(c,d,b.handle);c[V.expando]=void 0}c[W.expando]&&(c[W.expando]=void 0)}}}),r.fn.extend({detach:function(a){return Ja(this,a,!0)},remove:function(a){return Ja(this,a)},text:function(a){return S(this,function(a){return void 0===a?r.text(this):this.empty().each(function(){1!==this.nodeType&&11!==this.nodeType&&9!==this.nodeType||(this.textContent=a)})},null,a,arguments.length)},append:function(){return Ia(this,arguments,function(a){if(1===this.nodeType||11===this.nodeType||9===this.nodeType){var b=Da(this,a);b.appendChild(a)}})},prepend:function(){return Ia(this,arguments,function(a){if(1===this.nodeType||11===this.nodeType||9===this.nodeType){var b=Da(this,a);b.insertBefore(a,b.firstChild)}})},before:function(){return Ia(this,arguments,function(a){this.parentNode&&this.parentNode.insertBefore(a,this)})},after:function(){return Ia(this,arguments,function(a){this.parentNode&&this.parentNode.insertBefore(a,this.nextSibling)})},empty:function(){for(var a,b=0;null!=(a=this[b]);b++)1===a.nodeType&&(r.cleanData(ma(a,!1)),a.textContent="");return this},clone:function(a,b){return a=null!=a&&a,b=null==b?a:b,this.map(function(){return r.clone(this,a,b)})},html:function(a){return S(this,function(a){var b=this[0]||{},c=0,d=this.length;if(void 0===a&&1===b.nodeType)return b.innerHTML;if("string"==typeof a&&!za.test(a)&&!la[(ja.exec(a)||["",""])[1].toLowerCase()]){a=r.htmlPrefilter(a);try{for(;c<d;c++)b=this[c]||{},1===b.nodeType&&(r.cleanData(ma(b,!1)),b.innerHTML=a);b=0}catch(e){}}b&&this.empty().append(a)},null,a,arguments.length)},replaceWith:function(){var a=[];return Ia(this,arguments,function(b){var c=this.parentNode;r.inArray(this,a)<0&&(r.cleanData(ma(this)),c&&c.replaceChild(b,this))},a)}}),r.each({appendTo:"append",prependTo:"prepend",insertBefore:"before",insertAfter:"after",replaceAll:"replaceWith"},function(a,b){r.fn[a]=function(a){for(var c,d=[],e=r(a),f=e.length-1,g=0;g<=f;g++)c=g===f?this:this.clone(!0),r(e[g])[b](c),h.apply(d,c.get());return this.pushStack(d)}});var Ka=/^margin/,La=new RegExp("^("+_+")(?!px)[a-z%]+$","i"),Ma=function(b){var c=b.ownerDocument.defaultView;return c&&c.opener||(c=a),c.getComputedStyle(b)};!function(){function b(){if(i){i.style.cssText="box-sizing:border-box;position:relative;display:block;margin:auto;border:1px;padding:1px;top:1%;width:50%",i.innerHTML="",qa.appendChild(h);var b=a.getComputedStyle(i);c="1%"!==b.top,g="2px"===b.marginLeft,e="4px"===b.width,i.style.marginRight="50%",f="4px"===b.marginRight,qa.removeChild(h),i=null}}var c,e,f,g,h=d.createElement("div"),i=d.createElement("div");i.style&&(i.style.backgroundClip="content-box",i.cloneNode(!0).style.backgroundClip="",o.clearCloneStyle="content-box"===i.style.backgroundClip,h.style.cssText="border:0;width:8px;height:0;top:0;left:-9999px;padding:0;margin-top:1px;position:absolute",h.appendChild(i),r.extend(o,{pixelPosition:function(){return b(),c},boxSizingReliable:function(){return b(),e},pixelMarginRight:function(){return b(),f},reliableMarginLeft:function(){return b(),g}}))}();function Na(a,b,c){var d,e,f,g,h=a.style;return c=c||Ma(a),c&&(g=c.getPropertyValue(b)||c[b],""!==g||r.contains(a.ownerDocument,a)||(g=r.style(a,b)),!o.pixelMarginRight()&&La.test(g)&&Ka.test(b)&&(d=h.width,e=h.minWidth,f=h.maxWidth,h.minWidth=h.maxWidth=h.width=g,g=c.width,h.width=d,h.minWidth=e,h.maxWidth=f)),void 0!==g?g+"":g}function Oa(a,b){return{get:function(){return a()?void delete this.get:(this.get=b).apply(this,arguments)}}}var Pa=/^(none|table(?!-c[ea]).+)/,Qa={position:"absolute",visibility:"hidden",display:"block"},Ra={letterSpacing:"0",fontWeight:"400"},Sa=["Webkit","Moz","ms"],Ta=d.createElement("div").style;function Ua(a){if(a in Ta)return a;var b=a[0].toUpperCase()+a.slice(1),c=Sa.length;while(c--)if(a=Sa[c]+b,a in Ta)return a}function Va(a,b,c){var d=aa.exec(b);return d?Math.max(0,d[2]-(c||0))+(d[3]||"px"):b}function Wa(a,b,c,d,e){var f,g=0;for(f=c===(d?"border":"content")?4:"width"===b?1:0;f<4;f+=2)"margin"===c&&(g+=r.css(a,c+ba[f],!0,e)),d?("content"===c&&(g-=r.css(a,"padding"+ba[f],!0,e)),"margin"!==c&&(g-=r.css(a,"border"+ba[f]+"Width",!0,e))):(g+=r.css(a,"padding"+ba[f],!0,e),"padding"!==c&&(g+=r.css(a,"border"+ba[f]+"Width",!0,e)));return g}function Xa(a,b,c){var d,e=!0,f=Ma(a),g="border-box"===r.css(a,"boxSizing",!1,f);if(a.getClientRects().length&&(d=a.getBoundingClientRect()[b]),d<=0||null==d){if(d=Na(a,b,f),(d<0||null==d)&&(d=a.style[b]),La.test(d))return d;e=g&&(o.boxSizingReliable()||d===a.style[b]),d=parseFloat(d)||0}return d+Wa(a,b,c||(g?"border":"content"),e,f)+"px"}r.extend({cssHooks:{opacity:{get:function(a,b){if(b){var c=Na(a,"opacity");return""===c?"1":c}}}},cssNumber:{animationIterationCount:!0,columnCount:!0,fillOpacity:!0,flexGrow:!0,flexShrink:!0,fontWeight:!0,lineHeight:!0,opacity:!0,order:!0,orphans:!0,widows:!0,zIndex:!0,zoom:!0},cssProps:{"float":"cssFloat"},style:function(a,b,c,d){if(a&&3!==a.nodeType&&8!==a.nodeType&&a.style){var e,f,g,h=r.camelCase(b),i=a.style;return b=r.cssProps[h]||(r.cssProps[h]=Ua(h)||h),g=r.cssHooks[b]||r.cssHooks[h],void 0===c?g&&"get"in g&&void 0!==(e=g.get(a,!1,d))?e:i[b]:(f=typeof c,"string"===f&&(e=aa.exec(c))&&e[1]&&(c=ea(a,b,e),f="number"),null!=c&&c===c&&("number"===f&&(c+=e&&e[3]||(r.cssNumber[h]?"":"px")),o.clearCloneStyle||""!==c||0!==b.indexOf("background")||(i[b]="inherit"),g&&"set"in g&&void 0===(c=g.set(a,c,d))||(i[b]=c)),void 0)}},css:function(a,b,c,d){var e,f,g,h=r.camelCase(b);return b=r.cssProps[h]||(r.cssProps[h]=Ua(h)||h),g=r.cssHooks[b]||r.cssHooks[h],g&&"get"in g&&(e=g.get(a,!0,c)),void 0===e&&(e=Na(a,b,d)),"normal"===e&&b in Ra&&(e=Ra[b]),""===c||c?(f=parseFloat(e),c===!0||isFinite(f)?f||0:e):e}}),r.each(["height","width"],function(a,b){r.cssHooks[b]={get:function(a,c,d){if(c)return!Pa.test(r.css(a,"display"))||a.getClientRects().length&&a.getBoundingClientRect().width?Xa(a,b,d):da(a,Qa,function(){return Xa(a,b,d)})},set:function(a,c,d){var e,f=d&&Ma(a),g=d&&Wa(a,b,d,"border-box"===r.css(a,"boxSizing",!1,f),f);return g&&(e=aa.exec(c))&&"px"!==(e[3]||"px")&&(a.style[b]=c,c=r.css(a,b)),Va(a,c,g)}}}),r.cssHooks.marginLeft=Oa(o.reliableMarginLeft,function(a,b){if(b)return(parseFloat(Na(a,"marginLeft"))||a.getBoundingClientRect().left-da(a,{marginLeft:0},function(){return a.getBoundingClientRect().left}))+"px"}),r.each({margin:"",padding:"",border:"Width"},function(a,b){r.cssHooks[a+b]={expand:function(c){for(var d=0,e={},f="string"==typeof c?c.split(" "):[c];d<4;d++)e[a+ba[d]+b]=f[d]||f[d-2]||f[0];return e}},Ka.test(a)||(r.cssHooks[a+b].set=Va)}),r.fn.extend({css:function(a,b){return S(this,function(a,b,c){var d,e,f={},g=0;if(r.isArray(b)){for(d=Ma(a),e=b.length;g<e;g++)f[b[g]]=r.css(a,b[g],!1,d);return f}return void 0!==c?r.style(a,b,c):r.css(a,b)},a,b,arguments.length>1)}});function Ya(a,b,c,d,e){return new Ya.prototype.init(a,b,c,d,e)}r.Tween=Ya,Ya.prototype={constructor:Ya,init:function(a,b,c,d,e,f){this.elem=a,this.prop=c,this.easing=e||r.easing._default,this.options=b,this.start=this.now=this.cur(),this.end=d,this.unit=f||(r.cssNumber[c]?"":"px")},cur:function(){var a=Ya.propHooks[this.prop];return a&&a.get?a.get(this):Ya.propHooks._default.get(this)},run:function(a){var b,c=Ya.propHooks[this.prop];return this.options.duration?this.pos=b=r.easing[this.easing](a,this.options.duration*a,0,1,this.options.duration):this.pos=b=a,this.now=(this.end-this.start)*b+this.start,this.options.step&&this.options.step.call(this.elem,this.now,this),c&&c.set?c.set(this):Ya.propHooks._default.set(this),this}},Ya.prototype.init.prototype=Ya.prototype,Ya.propHooks={_default:{get:function(a){var b;return 1!==a.elem.nodeType||null!=a.elem[a.prop]&&null==a.elem.style[a.prop]?a.elem[a.prop]:(b=r.css(a.elem,a.prop,""),b&&"auto"!==b?b:0)},set:function(a){r.fx.step[a.prop]?r.fx.step[a.prop](a):1!==a.elem.nodeType||null==a.elem.style[r.cssProps[a.prop]]&&!r.cssHooks[a.prop]?a.elem[a.prop]=a.now:r.style(a.elem,a.prop,a.now+a.unit)}}},Ya.propHooks.scrollTop=Ya.propHooks.scrollLeft={set:function(a){a.elem.nodeType&&a.elem.parentNode&&(a.elem[a.prop]=a.now)}},r.easing={linear:function(a){return a},swing:function(a){return.5-Math.cos(a*Math.PI)/2},_default:"swing"},r.fx=Ya.prototype.init,r.fx.step={};var Za,$a,_a=/^(?:toggle|show|hide)$/,ab=/queueHooks$/;function bb(){$a&&(a.requestAnimationFrame(bb),r.fx.tick())}function cb(){return a.setTimeout(function(){Za=void 0}),Za=r.now()}function db(a,b){var c,d=0,e={height:a};for(b=b?1:0;d<4;d+=2-b)c=ba[d],e["margin"+c]=e["padding"+c]=a;return b&&(e.opacity=e.width=a),e}function eb(a,b,c){for(var d,e=(hb.tweeners[b]||[]).concat(hb.tweeners["*"]),f=0,g=e.length;f<g;f++)if(d=e[f].call(c,b,a))return d}function fb(a,b,c){var d,e,f,g,h,i,j,k,l="width"in b||"height"in b,m=this,n={},o=a.style,p=a.nodeType&&ca(a),q=V.get(a,"fxshow");c.queue||(g=r._queueHooks(a,"fx"),null==g.unqueued&&(g.unqueued=0,h=g.empty.fire,g.empty.fire=function(){g.unqueued||h()}),g.unqueued++,m.always(function(){m.always(function(){g.unqueued--,r.queue(a,"fx").length||g.empty.fire()})}));for(d in b)if(e=b[d],_a.test(e)){if(delete b[d],f=f||"toggle"===e,e===(p?"hide":"show")){if("show"!==e||!q||void 0===q[d])continue;p=!0}n[d]=q&&q[d]||r.style(a,d)}if(i=!r.isEmptyObject(b),i||!r.isEmptyObject(n)){l&&1===a.nodeType&&(c.overflow=[o.overflow,o.overflowX,o.overflowY],j=q&&q.display,null==j&&(j=V.get(a,"display")),k=r.css(a,"display"),"none"===k&&(j?k=j:(ha([a],!0),j=a.style.display||j,k=r.css(a,"display"),ha([a]))),("inline"===k||"inline-block"===k&&null!=j)&&"none"===r.css(a,"float")&&(i||(m.done(function(){o.display=j}),null==j&&(k=o.display,j="none"===k?"":k)),o.display="inline-block")),c.overflow&&(o.overflow="hidden",m.always(function(){o.overflow=c.overflow[0],o.overflowX=c.overflow[1],o.overflowY=c.overflow[2]})),i=!1;for(d in n)i||(q?"hidden"in q&&(p=q.hidden):q=V.access(a,"fxshow",{display:j}),f&&(q.hidden=!p),p&&ha([a],!0),m.done(function(){p||ha([a]),V.remove(a,"fxshow");for(d in n)r.style(a,d,n[d])})),i=eb(p?q[d]:0,d,m),d in q||(q[d]=i.start,p&&(i.end=i.start,i.start=0))}}function gb(a,b){var c,d,e,f,g;for(c in a)if(d=r.camelCase(c),e=b[d],f=a[c],r.isArray(f)&&(e=f[1],f=a[c]=f[0]),c!==d&&(a[d]=f,delete a[c]),g=r.cssHooks[d],g&&"expand"in g){f=g.expand(f),delete a[d];for(c in f)c in a||(a[c]=f[c],b[c]=e)}else b[d]=e}function hb(a,b,c){var d,e,f=0,g=hb.prefilters.length,h=r.Deferred().always(function(){delete i.elem}),i=function(){if(e)return!1;for(var b=Za||cb(),c=Math.max(0,j.startTime+j.duration-b),d=c/j.duration||0,f=1-d,g=0,i=j.tweens.length;g<i;g++)j.tweens[g].run(f);return h.notifyWith(a,[j,f,c]),f<1&&i?c:(h.resolveWith(a,[j]),!1)},j=h.promise({elem:a,props:r.extend({},b),opts:r.extend(!0,{specialEasing:{},easing:r.easing._default},c),originalProperties:b,originalOptions:c,startTime:Za||cb(),duration:c.duration,tweens:[],createTween:function(b,c){var d=r.Tween(a,j.opts,b,c,j.opts.specialEasing[b]||j.opts.easing);return j.tweens.push(d),d},stop:function(b){var c=0,d=b?j.tweens.length:0;if(e)return this;for(e=!0;c<d;c++)j.tweens[c].run(1);return b?(h.notifyWith(a,[j,1,0]),h.resolveWith(a,[j,b])):h.rejectWith(a,[j,b]),this}}),k=j.props;for(gb(k,j.opts.specialEasing);f<g;f++)if(d=hb.prefilters[f].call(j,a,k,j.opts))return r.isFunction(d.stop)&&(r._queueHooks(j.elem,j.opts.queue).stop=r.proxy(d.stop,d)),d;return r.map(k,eb,j),r.isFunction(j.opts.start)&&j.opts.start.call(a,j),r.fx.timer(r.extend(i,{elem:a,anim:j,queue:j.opts.queue})),j.progress(j.opts.progress).done(j.opts.done,j.opts.complete).fail(j.opts.fail).always(j.opts.always)}r.Animation=r.extend(hb,{tweeners:{"*":[function(a,b){var c=this.createTween(a,b);return ea(c.elem,a,aa.exec(b),c),c}]},tweener:function(a,b){r.isFunction(a)?(b=a,a=["*"]):a=a.match(K);for(var c,d=0,e=a.length;d<e;d++)c=a[d],hb.tweeners[c]=hb.tweeners[c]||[],hb.tweeners[c].unshift(b)},prefilters:[fb],prefilter:function(a,b){b?hb.prefilters.unshift(a):hb.prefilters.push(a)}}),r.speed=function(a,b,c){var e=a&&"object"==typeof a?r.extend({},a):{complete:c||!c&&b||r.isFunction(a)&&a,duration:a,easing:c&&b||b&&!r.isFunction(b)&&b};return r.fx.off||d.hidden?e.duration=0:"number"!=typeof e.duration&&(e.duration in r.fx.speeds?e.duration=r.fx.speeds[e.duration]:e.duration=r.fx.speeds._default),null!=e.queue&&e.queue!==!0||(e.queue="fx"),e.old=e.complete,e.complete=function(){r.isFunction(e.old)&&e.old.call(this),e.queue&&r.dequeue(this,e.queue)},e},r.fn.extend({fadeTo:function(a,b,c,d){return this.filter(ca).css("opacity",0).show().end().animate({opacity:b},a,c,d)},animate:function(a,b,c,d){var e=r.isEmptyObject(a),f=r.speed(b,c,d),g=function(){var b=hb(this,r.extend({},a),f);(e||V.get(this,"finish"))&&b.stop(!0)};return g.finish=g,e||f.queue===!1?this.each(g):this.queue(f.queue,g)},stop:function(a,b,c){var d=function(a){var b=a.stop;delete a.stop,b(c)};return"string"!=typeof a&&(c=b,b=a,a=void 0),b&&a!==!1&&this.queue(a||"fx",[]),this.each(function(){var b=!0,e=null!=a&&a+"queueHooks",f=r.timers,g=V.get(this);if(e)g[e]&&g[e].stop&&d(g[e]);else for(e in g)g[e]&&g[e].stop&&ab.test(e)&&d(g[e]);for(e=f.length;e--;)f[e].elem!==this||null!=a&&f[e].queue!==a||(f[e].anim.stop(c),b=!1,f.splice(e,1));!b&&c||r.dequeue(this,a)})},finish:function(a){return a!==!1&&(a=a||"fx"),this.each(function(){var b,c=V.get(this),d=c[a+"queue"],e=c[a+"queueHooks"],f=r.timers,g=d?d.length:0;for(c.finish=!0,r.queue(this,a,[]),e&&e.stop&&e.stop.call(this,!0),b=f.length;b--;)f[b].elem===this&&f[b].queue===a&&(f[b].anim.stop(!0),f.splice(b,1));for(b=0;b<g;b++)d[b]&&d[b].finish&&d[b].finish.call(this);delete c.finish})}}),r.each(["toggle","show","hide"],function(a,b){var c=r.fn[b];r.fn[b]=function(a,d,e){return null==a||"boolean"==typeof a?c.apply(this,arguments):this.animate(db(b,!0),a,d,e)}}),r.each({slideDown:db("show"),slideUp:db("hide"),slideToggle:db("toggle"),fadeIn:{opacity:"show"},fadeOut:{opacity:"hide"},fadeToggle:{opacity:"toggle"}},function(a,b){r.fn[a]=function(a,c,d){return this.animate(b,a,c,d)}}),r.timers=[],r.fx.tick=function(){var a,b=0,c=r.timers;for(Za=r.now();b<c.length;b++)a=c[b],a()||c[b]!==a||c.splice(b--,1);c.length||r.fx.stop(),Za=void 0},r.fx.timer=function(a){r.timers.push(a),a()?r.fx.start():r.timers.pop()},r.fx.interval=13,r.fx.start=function(){$a||($a=a.requestAnimationFrame?a.requestAnimationFrame(bb):a.setInterval(r.fx.tick,r.fx.interval))},r.fx.stop=function(){a.cancelAnimationFrame?a.cancelAnimationFrame($a):a.clearInterval($a),$a=null},r.fx.speeds={slow:600,fast:200,_default:400},r.fn.delay=function(b,c){return b=r.fx?r.fx.speeds[b]||b:b,c=c||"fx",this.queue(c,function(c,d){var e=a.setTimeout(c,b);d.stop=function(){a.clearTimeout(e)}})},function(){var a=d.createElement("input"),b=d.createElement("select"),c=b.appendChild(d.createElement("option"));a.type="checkbox",o.checkOn=""!==a.value,o.optSelected=c.selected,a=d.createElement("input"),a.value="t",a.type="radio",o.radioValue="t"===a.value}();var ib,jb=r.expr.attrHandle;r.fn.extend({attr:function(a,b){return S(this,r.attr,a,b,arguments.length>1)},removeAttr:function(a){return this.each(function(){r.removeAttr(this,a)})}}),r.extend({attr:function(a,b,c){var d,e,f=a.nodeType;if(3!==f&&8!==f&&2!==f)return"undefined"==typeof a.getAttribute?r.prop(a,b,c):(1===f&&r.isXMLDoc(a)||(e=r.attrHooks[b.toLowerCase()]||(r.expr.match.bool.test(b)?ib:void 0)),
-void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:(a.setAttribute(b,c+""),c):e&&"get"in e&&null!==(d=e.get(a,b))?d:(d=r.find.attr(a,b),null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"===b&&r.nodeName(a,"input")){var c=a.value;return a.setAttribute("type",b),c&&(a.value=c),b}}}},removeAttr:function(a,b){var c,d=0,e=b&&b.match(K);if(e&&1===a.nodeType)while(c=e[d++])a.removeAttribute(c)}}),ib={set:function(a,b,c){return b===!1?r.removeAttr(a,c):a.setAttribute(c,c),c}},r.each(r.expr.match.bool.source.match(/\w+/g),function(a,b){var c=jb[b]||r.find.attr;jb[b]=function(a,b,d){var e,f,g=b.toLowerCase();return d||(f=jb[g],jb[g]=e,e=null!=c(a,b,d)?g:null,jb[g]=f),e}});var kb=/^(?:input|select|textarea|button)$/i,lb=/^(?:a|area)$/i;r.fn.extend({prop:function(a,b){return S(this,r.prop,a,b,arguments.length>1)},removeProp:function(a){return this.each(function(){delete this[r.propFix[a]||a]})}}),r.extend({prop:function(a,b,c){var d,e,f=a.nodeType;if(3!==f&&8!==f&&2!==f)return 1===f&&r.isXMLDoc(a)||(b=r.propFix[b]||b,e=r.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&&"get"in e&&null!==(d=e.get(a,b))?d:a[b]},propHooks:{tabIndex:{get:function(a){var b=r.find.attr(a,"tabindex");return b?parseInt(b,10):kb.test(a.nodeName)||lb.test(a.nodeName)&&a.href?0:-1}}},propFix:{"for":"htmlFor","class":"className"}}),o.optSelected||(r.propHooks.selected={get:function(a){var b=a.parentNode;return b&&b.parentNode&&b.parentNode.selectedIndex,null},set:function(a){var b=a.parentNode;b&&(b.selectedIndex,b.parentNode&&b.parentNode.selectedIndex)}}),r.each(["tabIndex","readOnly","maxLength","cellSpacing","cellPadding","rowSpan","colSpan","useMap","frameBorder","contentEditable"],function(){r.propFix[this.toLowerCase()]=this});function mb(a){var b=a.match(K)||[];return b.join(" ")}function nb(a){return a.getAttribute&&a.getAttribute("class")||""}r.fn.extend({addClass:function(a){var b,c,d,e,f,g,h,i=0;if(r.isFunction(a))return this.each(function(b){r(this).addClass(a.call(this,b,nb(this)))});if("string"==typeof a&&a){b=a.match(K)||[];while(c=this[i++])if(e=nb(c),d=1===c.nodeType&&" "+mb(e)+" "){g=0;while(f=b[g++])d.indexOf(" "+f+" ")<0&&(d+=f+" ");h=mb(d),e!==h&&c.setAttribute("class",h)}}return this},removeClass:function(a){var b,c,d,e,f,g,h,i=0;if(r.isFunction(a))return this.each(function(b){r(this).removeClass(a.call(this,b,nb(this)))});if(!arguments.length)return this.attr("class","");if("string"==typeof a&&a){b=a.match(K)||[];while(c=this[i++])if(e=nb(c),d=1===c.nodeType&&" "+mb(e)+" "){g=0;while(f=b[g++])while(d.indexOf(" "+f+" ")>-1)d=d.replace(" "+f+" "," ");h=mb(d),e!==h&&c.setAttribute("class",h)}}return this},toggleClass:function(a,b){var c=typeof a;return"boolean"==typeof b&&"string"===c?b?this.addClass(a):this.removeClass(a):r.isFunction(a)?this.each(function(c){r(this).toggleClass(a.call(this,c,nb(this),b),b)}):this.each(function(){var b,d,e,f;if("string"===c){d=0,e=r(this),f=a.match(K)||[];while(b=f[d++])e.hasClass(b)?e.removeClass(b):e.addClass(b)}else void 0!==a&&"boolean"!==c||(b=nb(this),b&&V.set(this,"__className__",b),this.setAttribute&&this.setAttribute("class",b||a===!1?"":V.get(this,"__className__")||""))})},hasClass:function(a){var b,c,d=0;b=" "+a+" ";while(c=this[d++])if(1===c.nodeType&&(" "+mb(nb(c))+" ").indexOf(b)>-1)return!0;return!1}});var ob=/\r/g;r.fn.extend({val:function(a){var b,c,d,e=this[0];{if(arguments.length)return d=r.isFunction(a),this.each(function(c){var e;1===this.nodeType&&(e=d?a.call(this,c,r(this).val()):a,null==e?e="":"number"==typeof e?e+="":r.isArray(e)&&(e=r.map(e,function(a){return null==a?"":a+""})),b=r.valHooks[this.type]||r.valHooks[this.nodeName.toLowerCase()],b&&"set"in b&&void 0!==b.set(this,e,"value")||(this.value=e))});if(e)return b=r.valHooks[e.type]||r.valHooks[e.nodeName.toLowerCase()],b&&"get"in b&&void 0!==(c=b.get(e,"value"))?c:(c=e.value,"string"==typeof c?c.replace(ob,""):null==c?"":c)}}}),r.extend({valHooks:{option:{get:function(a){var b=r.find.attr(a,"value");return null!=b?b:mb(r.text(a))}},select:{get:function(a){var b,c,d,e=a.options,f=a.selectedIndex,g="select-one"===a.type,h=g?null:[],i=g?f+1:e.length;for(d=f<0?i:g?f:0;d<i;d++)if(c=e[d],(c.selected||d===f)&&!c.disabled&&(!c.parentNode.disabled||!r.nodeName(c.parentNode,"optgroup"))){if(b=r(c).val(),g)return b;h.push(b)}return h},set:function(a,b){var c,d,e=a.options,f=r.makeArray(b),g=e.length;while(g--)d=e[g],(d.selected=r.inArray(r.valHooks.option.get(d),f)>-1)&&(c=!0);return c||(a.selectedIndex=-1),f}}}}),r.each(["radio","checkbox"],function(){r.valHooks[this]={set:function(a,b){if(r.isArray(b))return a.checked=r.inArray(r(a).val(),b)>-1}},o.checkOn||(r.valHooks[this].get=function(a){return null===a.getAttribute("value")?"on":a.value})});var pb=/^(?:focusinfocus|focusoutblur)$/;r.extend(r.event,{trigger:function(b,c,e,f){var g,h,i,j,k,m,n,o=[e||d],p=l.call(b,"type")?b.type:b,q=l.call(b,"namespace")?b.namespace.split("."):[];if(h=i=e=e||d,3!==e.nodeType&&8!==e.nodeType&&!pb.test(p+r.event.triggered)&&(p.indexOf(".")>-1&&(q=p.split("."),p=q.shift(),q.sort()),k=p.indexOf(":")<0&&"on"+p,b=b[r.expando]?b:new r.Event(p,"object"==typeof b&&b),b.isTrigger=f?2:3,b.namespace=q.join("."),b.rnamespace=b.namespace?new RegExp("(^|\\.)"+q.join("\\.(?:.*\\.|)")+"(\\.|$)"):null,b.result=void 0,b.target||(b.target=e),c=null==c?[b]:r.makeArray(c,[b]),n=r.event.special[p]||{},f||!n.trigger||n.trigger.apply(e,c)!==!1)){if(!f&&!n.noBubble&&!r.isWindow(e)){for(j=n.delegateType||p,pb.test(j+p)||(h=h.parentNode);h;h=h.parentNode)o.push(h),i=h;i===(e.ownerDocument||d)&&o.push(i.defaultView||i.parentWindow||a)}g=0;while((h=o[g++])&&!b.isPropagationStopped())b.type=g>1?j:n.bindType||p,m=(V.get(h,"events")||{})[b.type]&&V.get(h,"handle"),m&&m.apply(h,c),m=k&&h[k],m&&m.apply&&T(h)&&(b.result=m.apply(h,c),b.result===!1&&b.preventDefault());return b.type=p,f||b.isDefaultPrevented()||n._default&&n._default.apply(o.pop(),c)!==!1||!T(e)||k&&r.isFunction(e[p])&&!r.isWindow(e)&&(i=e[k],i&&(e[k]=null),r.event.triggered=p,e[p](),r.event.triggered=void 0,i&&(e[k]=i)),b.result}},simulate:function(a,b,c){var d=r.extend(new r.Event,c,{type:a,isSimulated:!0});r.event.trigger(d,null,b)}}),r.fn.extend({trigger:function(a,b){return this.each(function(){r.event.trigger(a,b,this)})},triggerHandler:function(a,b){var c=this[0];if(c)return r.event.trigger(a,b,c,!0)}}),r.each("blur focus focusin focusout resize scroll click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup contextmenu".split(" "),function(a,b){r.fn[b]=function(a,c){return arguments.length>0?this.on(b,null,a,c):this.trigger(b)}}),r.fn.extend({hover:function(a,b){return this.mouseenter(a).mouseleave(b||a)}}),o.focusin="onfocusin"in a,o.focusin||r.each({focus:"focusin",blur:"focusout"},function(a,b){var c=function(a){r.event.simulate(b,a.target,r.event.fix(a))};r.event.special[b]={setup:function(){var d=this.ownerDocument||this,e=V.access(d,b);e||d.addEventListener(a,c,!0),V.access(d,b,(e||0)+1)},teardown:function(){var d=this.ownerDocument||this,e=V.access(d,b)-1;e?V.access(d,b,e):(d.removeEventListener(a,c,!0),V.remove(d,b))}}});var qb=a.location,rb=r.now(),sb=/\?/;r.parseXML=function(b){var c;if(!b||"string"!=typeof b)return null;try{c=(new a.DOMParser).parseFromString(b,"text/xml")}catch(d){c=void 0}return c&&!c.getElementsByTagName("parsererror").length||r.error("Invalid XML: "+b),c};var tb=/\[\]$/,ub=/\r?\n/g,vb=/^(?:submit|button|image|reset|file)$/i,wb=/^(?:input|select|textarea|keygen)/i;function xb(a,b,c,d){var e;if(r.isArray(b))r.each(b,function(b,e){c||tb.test(a)?d(a,e):xb(a+"["+("object"==typeof e&&null!=e?b:"")+"]",e,c,d)});else if(c||"object"!==r.type(b))d(a,b);else for(e in b)xb(a+"["+e+"]",b[e],c,d)}r.param=function(a,b){var c,d=[],e=function(a,b){var c=r.isFunction(b)?b():b;d[d.length]=encodeURIComponent(a)+"="+encodeURIComponent(null==c?"":c)};if(r.isArray(a)||a.jquery&&!r.isPlainObject(a))r.each(a,function(){e(this.name,this.value)});else for(c in a)xb(c,a[c],b,e);return d.join("&")},r.fn.extend({serialize:function(){return r.param(this.serializeArray())},serializeArray:function(){return this.map(function(){var a=r.prop(this,"elements");return a?r.makeArray(a):this}).filter(function(){var a=this.type;return this.name&&!r(this).is(":disabled")&&wb.test(this.nodeName)&&!vb.test(a)&&(this.checked||!ia.test(a))}).map(function(a,b){var c=r(this).val();return null==c?null:r.isArray(c)?r.map(c,function(a){return{name:b.name,value:a.replace(ub,"\r\n")}}):{name:b.name,value:c.replace(ub,"\r\n")}}).get()}});var yb=/%20/g,zb=/#.*$/,Ab=/([?&])_=[^&]*/,Bb=/^(.*?):[ \t]*([^\r\n]*)$/gm,Cb=/^(?:about|app|app-storage|.+-extension|file|res|widget):$/,Db=/^(?:GET|HEAD)$/,Eb=/^\/\//,Fb={},Gb={},Hb="*/".concat("*"),Ib=d.createElement("a");Ib.href=qb.href;function Jb(a){return function(b,c){"string"!=typeof b&&(c=b,b="*");var d,e=0,f=b.toLowerCase().match(K)||[];if(r.isFunction(c))while(d=f[e++])"+"===d[0]?(d=d.slice(1)||"*",(a[d]=a[d]||[]).unshift(c)):(a[d]=a[d]||[]).push(c)}}function Kb(a,b,c,d){var e={},f=a===Gb;function g(h){var i;return e[h]=!0,r.each(a[h]||[],function(a,h){var j=h(b,c,d);return"string"!=typeof j||f||e[j]?f?!(i=j):void 0:(b.dataTypes.unshift(j),g(j),!1)}),i}return g(b.dataTypes[0])||!e["*"]&&g("*")}function Lb(a,b){var c,d,e=r.ajaxSettings.flatOptions||{};for(c in b)void 0!==b[c]&&((e[c]?a:d||(d={}))[c]=b[c]);return d&&r.extend(!0,a,d),a}function Mb(a,b,c){var d,e,f,g,h=a.contents,i=a.dataTypes;while("*"===i[0])i.shift(),void 0===d&&(d=a.mimeType||b.getResponseHeader("Content-Type"));if(d)for(e in h)if(h[e]&&h[e].test(d)){i.unshift(e);break}if(i[0]in c)f=i[0];else{for(e in c){if(!i[0]||a.converters[e+" "+i[0]]){f=e;break}g||(g=e)}f=f||g}if(f)return f!==i[0]&&i.unshift(f),c[f]}function Nb(a,b,c,d){var e,f,g,h,i,j={},k=a.dataTypes.slice();if(k[1])for(g in a.converters)j[g.toLowerCase()]=a.converters[g];f=k.shift();while(f)if(a.responseFields[f]&&(c[a.responseFields[f]]=b),!i&&d&&a.dataFilter&&(b=a.dataFilter(b,a.dataType)),i=f,f=k.shift())if("*"===f)f=i;else if("*"!==i&&i!==f){if(g=j[i+" "+f]||j["* "+f],!g)for(e in j)if(h=e.split(" "),h[1]===f&&(g=j[i+" "+h[0]]||j["* "+h[0]])){g===!0?g=j[e]:j[e]!==!0&&(f=h[0],k.unshift(h[1]));break}if(g!==!0)if(g&&a["throws"])b=g(b);else try{b=g(b)}catch(l){return{state:"parsererror",error:g?l:"No conversion from "+i+" to "+f}}}return{state:"success",data:b}}r.extend({active:0,lastModified:{},etag:{},ajaxSettings:{url:qb.href,type:"GET",isLocal:Cb.test(qb.protocol),global:!0,processData:!0,async:!0,contentType:"application/x-www-form-urlencoded; charset=UTF-8",accepts:{"*":Hb,text:"text/plain",html:"text/html",xml:"application/xml, text/xml",json:"application/json, text/javascript"},contents:{xml:/\bxml\b/,html:/\bhtml/,json:/\bjson\b/},responseFields:{xml:"responseXML",text:"responseText",json:"responseJSON"},converters:{"* text":String,"text html":!0,"text json":JSON.parse,"text xml":r.parseXML},flatOptions:{url:!0,context:!0}},ajaxSetup:function(a,b){return b?Lb(Lb(a,r.ajaxSettings),b):Lb(r.ajaxSettings,a)},ajaxPrefilter:Jb(Fb),ajaxTransport:Jb(Gb),ajax:function(b,c){"object"==typeof b&&(c=b,b=void 0),c=c||{};var e,f,g,h,i,j,k,l,m,n,o=r.ajaxSetup({},c),p=o.context||o,q=o.context&&(p.nodeType||p.jquery)?r(p):r.event,s=r.Deferred(),t=r.Callbacks("once memory"),u=o.statusCode||{},v={},w={},x="canceled",y={readyState:0,getResponseHeader:function(a){var b;if(k){if(!h){h={};while(b=Bb.exec(g))h[b[1].toLowerCase()]=b[2]}b=h[a.toLowerCase()]}return null==b?null:b},getAllResponseHeaders:function(){return k?g:null},setRequestHeader:function(a,b){return null==k&&(a=w[a.toLowerCase()]=w[a.toLowerCase()]||a,v[a]=b),this},overrideMimeType:function(a){return null==k&&(o.mimeType=a),this},statusCode:function(a){var b;if(a)if(k)y.always(a[y.status]);else for(b in a)u[b]=[u[b],a[b]];return this},abort:function(a){var b=a||x;return e&&e.abort(b),A(0,b),this}};if(s.promise(y),o.url=((b||o.url||qb.href)+"").replace(Eb,qb.protocol+"//"),o.type=c.method||c.type||o.method||o.type,o.dataTypes=(o.dataType||"*").toLowerCase().match(K)||[""],null==o.crossDomain){j=d.createElement("a");try{j.href=o.url,j.href=j.href,o.crossDomain=Ib.protocol+"//"+Ib.host!=j.protocol+"//"+j.host}catch(z){o.crossDomain=!0}}if(o.data&&o.processData&&"string"!=typeof o.data&&(o.data=r.param(o.data,o.traditional)),Kb(Fb,o,c,y),k)return y;l=r.event&&o.global,l&&0===r.active++&&r.event.trigger("ajaxStart"),o.type=o.type.toUpperCase(),o.hasContent=!Db.test(o.type),f=o.url.replace(zb,""),o.hasContent?o.data&&o.processData&&0===(o.contentType||"").indexOf("application/x-www-form-urlencoded")&&(o.data=o.data.replace(yb,"+")):(n=o.url.slice(f.length),o.data&&(f+=(sb.test(f)?"&":"?")+o.data,delete o.data),o.cache===!1&&(f=f.replace(Ab,"$1"),n=(sb.test(f)?"&":"?")+"_="+rb++ +n),o.url=f+n),o.ifModified&&(r.lastModified[f]&&y.setRequestHeader("If-Modified-Since",r.lastModified[f]),r.etag[f]&&y.setRequestHeader("If-None-Match",r.etag[f])),(o.data&&o.hasContent&&o.contentType!==!1||c.contentType)&&y.setRequestHeader("Content-Type",o.contentType),y.setRequestHeader("Accept",o.dataTypes[0]&&o.accepts[o.dataTypes[0]]?o.accepts[o.dataTypes[0]]+("*"!==o.dataTypes[0]?", "+Hb+"; q=0.01":""):o.accepts["*"]);for(m in o.headers)y.setRequestHeader(m,o.headers[m]);if(o.beforeSend&&(o.beforeSend.call(p,y,o)===!1||k))return y.abort();if(x="abort",t.add(o.complete),y.done(o.success),y.fail(o.error),e=Kb(Gb,o,c,y)){if(y.readyState=1,l&&q.trigger("ajaxSend",[y,o]),k)return y;o.async&&o.timeout>0&&(i=a.setTimeout(function(){y.abort("timeout")},o.timeout));try{k=!1,e.send(v,A)}catch(z){if(k)throw z;A(-1,z)}}else A(-1,"No Transport");function A(b,c,d,h){var j,m,n,v,w,x=c;k||(k=!0,i&&a.clearTimeout(i),e=void 0,g=h||"",y.readyState=b>0?4:0,j=b>=200&&b<300||304===b,d&&(v=Mb(o,y,d)),v=Nb(o,v,y,j),j?(o.ifModified&&(w=y.getResponseHeader("Last-Modified"),w&&(r.lastModified[f]=w),w=y.getResponseHeader("etag"),w&&(r.etag[f]=w)),204===b||"HEAD"===o.type?x="nocontent":304===b?x="notmodified":(x=v.state,m=v.data,n=v.error,j=!n)):(n=x,!b&&x||(x="error",b<0&&(b=0))),y.status=b,y.statusText=(c||x)+"",j?s.resolveWith(p,[m,x,y]):s.rejectWith(p,[y,x,n]),y.statusCode(u),u=void 0,l&&q.trigger(j?"ajaxSuccess":"ajaxError",[y,o,j?m:n]),t.fireWith(p,[y,x]),l&&(q.trigger("ajaxComplete",[y,o]),--r.active||r.event.trigger("ajaxStop")))}return y},getJSON:function(a,b,c){return r.get(a,b,c,"json")},getScript:function(a,b){return r.get(a,void 0,b,"script")}}),r.each(["get","post"],function(a,b){r[b]=function(a,c,d,e){return r.isFunction(c)&&(e=e||d,d=c,c=void 0),r.ajax(r.extend({url:a,type:b,dataType:e,data:c,success:d},r.isPlainObject(a)&&a))}}),r._evalUrl=function(a){return r.ajax({url:a,type:"GET",dataType:"script",cache:!0,async:!1,global:!1,"throws":!0})},r.fn.extend({wrapAll:function(a){var b;return this[0]&&(r.isFunction(a)&&(a=a.call(this[0])),b=r(a,this[0].ownerDocument).eq(0).clone(!0),this[0].parentNode&&b.insertBefore(this[0]),b.map(function(){var a=this;while(a.firstElementChild)a=a.firstElementChild;return a}).append(this)),this},wrapInner:function(a){return r.isFunction(a)?this.each(function(b){r(this).wrapInner(a.call(this,b))}):this.each(function(){var b=r(this),c=b.contents();c.length?c.wrapAll(a):b.append(a)})},wrap:function(a){var b=r.isFunction(a);return this.each(function(c){r(this).wrapAll(b?a.call(this,c):a)})},unwrap:function(a){return this.parent(a).not("body").each(function(){r(this).replaceWith(this.childNodes)}),this}}),r.expr.pseudos.hidden=function(a){return!r.expr.pseudos.visible(a)},r.expr.pseudos.visible=function(a){return!!(a.offsetWidth||a.offsetHeight||a.getClientRects().length)},r.ajaxSettings.xhr=function(){try{return new a.XMLHttpRequest}catch(b){}};var Ob={0:200,1223:204},Pb=r.ajaxSettings.xhr();o.cors=!!Pb&&"withCredentials"in Pb,o.ajax=Pb=!!Pb,r.ajaxTransport(function(b){var c,d;if(o.cors||Pb&&!b.crossDomain)return{send:function(e,f){var g,h=b.xhr();if(h.open(b.type,b.url,b.async,b.username,b.password),b.xhrFields)for(g in b.xhrFields)h[g]=b.xhrFields[g];b.mimeType&&h.overrideMimeType&&h.overrideMimeType(b.mimeType),b.crossDomain||e["X-Requested-With"]||(e["X-Requested-With"]="XMLHttpRequest");for(g in e)h.setRequestHeader(g,e[g]);c=function(a){return function(){c&&(c=d=h.onload=h.onerror=h.onabort=h.onreadystatechange=null,"abort"===a?h.abort():"error"===a?"number"!=typeof h.status?f(0,"error"):f(h.status,h.statusText):f(Ob[h.status]||h.status,h.statusText,"text"!==(h.responseType||"text")||"string"!=typeof h.responseText?{binary:h.response}:{text:h.responseText},h.getAllResponseHeaders()))}},h.onload=c(),d=h.onerror=c("error"),void 0!==h.onabort?h.onabort=d:h.onreadystatechange=function(){4===h.readyState&&a.setTimeout(function(){c&&d()})},c=c("abort");try{h.send(b.hasContent&&b.data||null)}catch(i){if(c)throw i}},abort:function(){c&&c()}}}),r.ajaxPrefilter(function(a){a.crossDomain&&(a.contents.script=!1)}),r.ajaxSetup({accepts:{script:"text/javascript, application/javascript, application/ecmascript, application/x-ecmascript"},contents:{script:/\b(?:java|ecma)script\b/},converters:{"text script":function(a){return r.globalEval(a),a}}}),r.ajaxPrefilter("script",function(a){void 0===a.cache&&(a.cache=!1),a.crossDomain&&(a.type="GET")}),r.ajaxTransport("script",function(a){if(a.crossDomain){var b,c;return{send:function(e,f){b=r("<script>").prop({charset:a.scriptCharset,src:a.url}).on("load error",c=function(a){b.remove(),c=null,a&&f("error"===a.type?404:200,a.type)}),d.head.appendChild(b[0])},abort:function(){c&&c()}}}});var Qb=[],Rb=/(=)\?(?=&|$)|\?\?/;r.ajaxSetup({jsonp:"callback",jsonpCallback:function(){var a=Qb.pop()||r.expando+"_"+rb++;return this[a]=!0,a}}),r.ajaxPrefilter("json jsonp",function(b,c,d){var e,f,g,h=b.jsonp!==!1&&(Rb.test(b.url)?"url":"string"==typeof b.data&&0===(b.contentType||"").indexOf("application/x-www-form-urlencoded")&&Rb.test(b.data)&&"data");if(h||"jsonp"===b.dataTypes[0])return e=b.jsonpCallback=r.isFunction(b.jsonpCallback)?b.jsonpCallback():b.jsonpCallback,h?b[h]=b[h].replace(Rb,"$1"+e):b.jsonp!==!1&&(b.url+=(sb.test(b.url)?"&":"?")+b.jsonp+"="+e),b.converters["script json"]=function(){return g||r.error(e+" was not called"),g[0]},b.dataTypes[0]="json",f=a[e],a[e]=function(){g=arguments},d.always(function(){void 0===f?r(a).removeProp(e):a[e]=f,b[e]&&(b.jsonpCallback=c.jsonpCallback,Qb.push(e)),g&&r.isFunction(f)&&f(g[0]),g=f=void 0}),"script"}),o.createHTMLDocument=function(){var a=d.implementation.createHTMLDocument("").body;return a.innerHTML="<form></form><form></form>",2===a.childNodes.length}(),r.parseHTML=function(a,b,c){if("string"!=typeof a)return[];"boolean"==typeof b&&(c=b,b=!1);var e,f,g;return b||(o.createHTMLDocument?(b=d.implementation.createHTMLDocument(""),e=b.createElement("base"),e.href=d.location.href,b.head.appendChild(e)):b=d),f=B.exec(a),g=!c&&[],f?[b.createElement(f[1])]:(f=pa([a],b,g),g&&g.length&&r(g).remove(),r.merge([],f.childNodes))},r.fn.load=function(a,b,c){var d,e,f,g=this,h=a.indexOf(" ");return h>-1&&(d=mb(a.slice(h)),a=a.slice(0,h)),r.isFunction(b)?(c=b,b=void 0):b&&"object"==typeof b&&(e="POST"),g.length>0&&r.ajax({url:a,type:e||"GET",dataType:"html",data:b}).done(function(a){f=arguments,g.html(d?r("<div>").append(r.parseHTML(a)).find(d):a)}).always(c&&function(a,b){g.each(function(){c.apply(this,f||[a.responseText,b,a])})}),this},r.each(["ajaxStart","ajaxStop","ajaxComplete","ajaxError","ajaxSuccess","ajaxSend"],function(a,b){r.fn[b]=function(a){return this.on(b,a)}}),r.expr.pseudos.animated=function(a){return r.grep(r.timers,function(b){return a===b.elem}).length};function Sb(a){return r.isWindow(a)?a:9===a.nodeType&&a.defaultView}r.offset={setOffset:function(a,b,c){var d,e,f,g,h,i,j,k=r.css(a,"position"),l=r(a),m={};"static"===k&&(a.style.position="relative"),h=l.offset(),f=r.css(a,"top"),i=r.css(a,"left"),j=("absolute"===k||"fixed"===k)&&(f+i).indexOf("auto")>-1,j?(d=l.position(),g=d.top,e=d.left):(g=parseFloat(f)||0,e=parseFloat(i)||0),r.isFunction(b)&&(b=b.call(a,c,r.extend({},h))),null!=b.top&&(m.top=b.top-h.top+g),null!=b.left&&(m.left=b.left-h.left+e),"using"in b?b.using.call(a,m):l.css(m)}},r.fn.extend({offset:function(a){if(arguments.length)return void 0===a?this:this.each(function(b){r.offset.setOffset(this,a,b)});var b,c,d,e,f=this[0];if(f)return f.getClientRects().length?(d=f.getBoundingClientRect(),d.width||d.height?(e=f.ownerDocument,c=Sb(e),b=e.documentElement,{top:d.top+c.pageYOffset-b.clientTop,left:d.left+c.pageXOffset-b.clientLeft}):d):{top:0,left:0}},position:function(){if(this[0]){var a,b,c=this[0],d={top:0,left:0};return"fixed"===r.css(c,"position")?b=c.getBoundingClientRect():(a=this.offsetParent(),b=this.offset(),r.nodeName(a[0],"html")||(d=a.offset()),d={top:d.top+r.css(a[0],"borderTopWidth",!0),left:d.left+r.css(a[0],"borderLeftWidth",!0)}),{top:b.top-d.top-r.css(c,"marginTop",!0),left:b.left-d.left-r.css(c,"marginLeft",!0)}}},offsetParent:function(){return this.map(function(){var a=this.offsetParent;while(a&&"static"===r.css(a,"position"))a=a.offsetParent;return a||qa})}}),r.each({scrollLeft:"pageXOffset",scrollTop:"pageYOffset"},function(a,b){var c="pageYOffset"===b;r.fn[a]=function(d){return S(this,function(a,d,e){var f=Sb(a);return void 0===e?f?f[b]:a[d]:void(f?f.scrollTo(c?f.pageXOffset:e,c?e:f.pageYOffset):a[d]=e)},a,d,arguments.length)}}),r.each(["top","left"],function(a,b){r.cssHooks[b]=Oa(o.pixelPosition,function(a,c){if(c)return c=Na(a,b),La.test(c)?r(a).position()[b]+"px":c})}),r.each({Height:"height",Width:"width"},function(a,b){r.each({padding:"inner"+a,content:b,"":"outer"+a},function(c,d){r.fn[d]=function(e,f){var g=arguments.length&&(c||"boolean"!=typeof e),h=c||(e===!0||f===!0?"margin":"border");return S(this,function(b,c,e){var f;return r.isWindow(b)?0===d.indexOf("outer")?b["inner"+a]:b.document.documentElement["client"+a]:9===b.nodeType?(f=b.documentElement,Math.max(b.body["scroll"+a],f["scroll"+a],b.body["offset"+a],f["offset"+a],f["client"+a])):void 0===e?r.css(b,c,h):r.style(b,c,e,h)},b,g?e:void 0,g)}})}),r.fn.extend({bind:function(a,b,c){return this.on(a,null,b,c)},unbind:function(a,b){return this.off(a,null,b)},delegate:function(a,b,c,d){return this.on(b,a,c,d)},undelegate:function(a,b,c){return 1===arguments.length?this.off(a,"**"):this.off(b,a||"**",c)}}),r.parseJSON=JSON.parse,"function"=="function"&&__webpack_require__(989)&&!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function(){return r}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));var Tb=a.jQuery,Ub=a.$;return r.noConflict=function(b){return a.$===r&&(a.$=Ub),b&&a.jQuery===r&&(a.jQuery=Tb),r},b||(a.jQuery=a.$=r),r});
+void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:(a.setAttribute(b,c+""),c):e&&"get"in e&&null!==(d=e.get(a,b))?d:(d=r.find.attr(a,b),null==d?void 0:d))},attrHooks:{type:{set:function(a,b){if(!o.radioValue&&"radio"===b&&r.nodeName(a,"input")){var c=a.value;return a.setAttribute("type",b),c&&(a.value=c),b}}}},removeAttr:function(a,b){var c,d=0,e=b&&b.match(K);if(e&&1===a.nodeType)while(c=e[d++])a.removeAttribute(c)}}),ib={set:function(a,b,c){return b===!1?r.removeAttr(a,c):a.setAttribute(c,c),c}},r.each(r.expr.match.bool.source.match(/\w+/g),function(a,b){var c=jb[b]||r.find.attr;jb[b]=function(a,b,d){var e,f,g=b.toLowerCase();return d||(f=jb[g],jb[g]=e,e=null!=c(a,b,d)?g:null,jb[g]=f),e}});var kb=/^(?:input|select|textarea|button)$/i,lb=/^(?:a|area)$/i;r.fn.extend({prop:function(a,b){return S(this,r.prop,a,b,arguments.length>1)},removeProp:function(a){return this.each(function(){delete this[r.propFix[a]||a]})}}),r.extend({prop:function(a,b,c){var d,e,f=a.nodeType;if(3!==f&&8!==f&&2!==f)return 1===f&&r.isXMLDoc(a)||(b=r.propFix[b]||b,e=r.propHooks[b]),void 0!==c?e&&"set"in e&&void 0!==(d=e.set(a,c,b))?d:a[b]=c:e&&"get"in e&&null!==(d=e.get(a,b))?d:a[b]},propHooks:{tabIndex:{get:function(a){var b=r.find.attr(a,"tabindex");return b?parseInt(b,10):kb.test(a.nodeName)||lb.test(a.nodeName)&&a.href?0:-1}}},propFix:{"for":"htmlFor","class":"className"}}),o.optSelected||(r.propHooks.selected={get:function(a){var b=a.parentNode;return b&&b.parentNode&&b.parentNode.selectedIndex,null},set:function(a){var b=a.parentNode;b&&(b.selectedIndex,b.parentNode&&b.parentNode.selectedIndex)}}),r.each(["tabIndex","readOnly","maxLength","cellSpacing","cellPadding","rowSpan","colSpan","useMap","frameBorder","contentEditable"],function(){r.propFix[this.toLowerCase()]=this});function mb(a){var b=a.match(K)||[];return b.join(" ")}function nb(a){return a.getAttribute&&a.getAttribute("class")||""}r.fn.extend({addClass:function(a){var b,c,d,e,f,g,h,i=0;if(r.isFunction(a))return this.each(function(b){r(this).addClass(a.call(this,b,nb(this)))});if("string"==typeof a&&a){b=a.match(K)||[];while(c=this[i++])if(e=nb(c),d=1===c.nodeType&&" "+mb(e)+" "){g=0;while(f=b[g++])d.indexOf(" "+f+" ")<0&&(d+=f+" ");h=mb(d),e!==h&&c.setAttribute("class",h)}}return this},removeClass:function(a){var b,c,d,e,f,g,h,i=0;if(r.isFunction(a))return this.each(function(b){r(this).removeClass(a.call(this,b,nb(this)))});if(!arguments.length)return this.attr("class","");if("string"==typeof a&&a){b=a.match(K)||[];while(c=this[i++])if(e=nb(c),d=1===c.nodeType&&" "+mb(e)+" "){g=0;while(f=b[g++])while(d.indexOf(" "+f+" ")>-1)d=d.replace(" "+f+" "," ");h=mb(d),e!==h&&c.setAttribute("class",h)}}return this},toggleClass:function(a,b){var c=typeof a;return"boolean"==typeof b&&"string"===c?b?this.addClass(a):this.removeClass(a):r.isFunction(a)?this.each(function(c){r(this).toggleClass(a.call(this,c,nb(this),b),b)}):this.each(function(){var b,d,e,f;if("string"===c){d=0,e=r(this),f=a.match(K)||[];while(b=f[d++])e.hasClass(b)?e.removeClass(b):e.addClass(b)}else void 0!==a&&"boolean"!==c||(b=nb(this),b&&V.set(this,"__className__",b),this.setAttribute&&this.setAttribute("class",b||a===!1?"":V.get(this,"__className__")||""))})},hasClass:function(a){var b,c,d=0;b=" "+a+" ";while(c=this[d++])if(1===c.nodeType&&(" "+mb(nb(c))+" ").indexOf(b)>-1)return!0;return!1}});var ob=/\r/g;r.fn.extend({val:function(a){var b,c,d,e=this[0];{if(arguments.length)return d=r.isFunction(a),this.each(function(c){var e;1===this.nodeType&&(e=d?a.call(this,c,r(this).val()):a,null==e?e="":"number"==typeof e?e+="":r.isArray(e)&&(e=r.map(e,function(a){return null==a?"":a+""})),b=r.valHooks[this.type]||r.valHooks[this.nodeName.toLowerCase()],b&&"set"in b&&void 0!==b.set(this,e,"value")||(this.value=e))});if(e)return b=r.valHooks[e.type]||r.valHooks[e.nodeName.toLowerCase()],b&&"get"in b&&void 0!==(c=b.get(e,"value"))?c:(c=e.value,"string"==typeof c?c.replace(ob,""):null==c?"":c)}}}),r.extend({valHooks:{option:{get:function(a){var b=r.find.attr(a,"value");return null!=b?b:mb(r.text(a))}},select:{get:function(a){var b,c,d,e=a.options,f=a.selectedIndex,g="select-one"===a.type,h=g?null:[],i=g?f+1:e.length;for(d=f<0?i:g?f:0;d<i;d++)if(c=e[d],(c.selected||d===f)&&!c.disabled&&(!c.parentNode.disabled||!r.nodeName(c.parentNode,"optgroup"))){if(b=r(c).val(),g)return b;h.push(b)}return h},set:function(a,b){var c,d,e=a.options,f=r.makeArray(b),g=e.length;while(g--)d=e[g],(d.selected=r.inArray(r.valHooks.option.get(d),f)>-1)&&(c=!0);return c||(a.selectedIndex=-1),f}}}}),r.each(["radio","checkbox"],function(){r.valHooks[this]={set:function(a,b){if(r.isArray(b))return a.checked=r.inArray(r(a).val(),b)>-1}},o.checkOn||(r.valHooks[this].get=function(a){return null===a.getAttribute("value")?"on":a.value})});var pb=/^(?:focusinfocus|focusoutblur)$/;r.extend(r.event,{trigger:function(b,c,e,f){var g,h,i,j,k,m,n,o=[e||d],p=l.call(b,"type")?b.type:b,q=l.call(b,"namespace")?b.namespace.split("."):[];if(h=i=e=e||d,3!==e.nodeType&&8!==e.nodeType&&!pb.test(p+r.event.triggered)&&(p.indexOf(".")>-1&&(q=p.split("."),p=q.shift(),q.sort()),k=p.indexOf(":")<0&&"on"+p,b=b[r.expando]?b:new r.Event(p,"object"==typeof b&&b),b.isTrigger=f?2:3,b.namespace=q.join("."),b.rnamespace=b.namespace?new RegExp("(^|\\.)"+q.join("\\.(?:.*\\.|)")+"(\\.|$)"):null,b.result=void 0,b.target||(b.target=e),c=null==c?[b]:r.makeArray(c,[b]),n=r.event.special[p]||{},f||!n.trigger||n.trigger.apply(e,c)!==!1)){if(!f&&!n.noBubble&&!r.isWindow(e)){for(j=n.delegateType||p,pb.test(j+p)||(h=h.parentNode);h;h=h.parentNode)o.push(h),i=h;i===(e.ownerDocument||d)&&o.push(i.defaultView||i.parentWindow||a)}g=0;while((h=o[g++])&&!b.isPropagationStopped())b.type=g>1?j:n.bindType||p,m=(V.get(h,"events")||{})[b.type]&&V.get(h,"handle"),m&&m.apply(h,c),m=k&&h[k],m&&m.apply&&T(h)&&(b.result=m.apply(h,c),b.result===!1&&b.preventDefault());return b.type=p,f||b.isDefaultPrevented()||n._default&&n._default.apply(o.pop(),c)!==!1||!T(e)||k&&r.isFunction(e[p])&&!r.isWindow(e)&&(i=e[k],i&&(e[k]=null),r.event.triggered=p,e[p](),r.event.triggered=void 0,i&&(e[k]=i)),b.result}},simulate:function(a,b,c){var d=r.extend(new r.Event,c,{type:a,isSimulated:!0});r.event.trigger(d,null,b)}}),r.fn.extend({trigger:function(a,b){return this.each(function(){r.event.trigger(a,b,this)})},triggerHandler:function(a,b){var c=this[0];if(c)return r.event.trigger(a,b,c,!0)}}),r.each("blur focus focusin focusout resize scroll click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup contextmenu".split(" "),function(a,b){r.fn[b]=function(a,c){return arguments.length>0?this.on(b,null,a,c):this.trigger(b)}}),r.fn.extend({hover:function(a,b){return this.mouseenter(a).mouseleave(b||a)}}),o.focusin="onfocusin"in a,o.focusin||r.each({focus:"focusin",blur:"focusout"},function(a,b){var c=function(a){r.event.simulate(b,a.target,r.event.fix(a))};r.event.special[b]={setup:function(){var d=this.ownerDocument||this,e=V.access(d,b);e||d.addEventListener(a,c,!0),V.access(d,b,(e||0)+1)},teardown:function(){var d=this.ownerDocument||this,e=V.access(d,b)-1;e?V.access(d,b,e):(d.removeEventListener(a,c,!0),V.remove(d,b))}}});var qb=a.location,rb=r.now(),sb=/\?/;r.parseXML=function(b){var c;if(!b||"string"!=typeof b)return null;try{c=(new a.DOMParser).parseFromString(b,"text/xml")}catch(d){c=void 0}return c&&!c.getElementsByTagName("parsererror").length||r.error("Invalid XML: "+b),c};var tb=/\[\]$/,ub=/\r?\n/g,vb=/^(?:submit|button|image|reset|file)$/i,wb=/^(?:input|select|textarea|keygen)/i;function xb(a,b,c,d){var e;if(r.isArray(b))r.each(b,function(b,e){c||tb.test(a)?d(a,e):xb(a+"["+("object"==typeof e&&null!=e?b:"")+"]",e,c,d)});else if(c||"object"!==r.type(b))d(a,b);else for(e in b)xb(a+"["+e+"]",b[e],c,d)}r.param=function(a,b){var c,d=[],e=function(a,b){var c=r.isFunction(b)?b():b;d[d.length]=encodeURIComponent(a)+"="+encodeURIComponent(null==c?"":c)};if(r.isArray(a)||a.jquery&&!r.isPlainObject(a))r.each(a,function(){e(this.name,this.value)});else for(c in a)xb(c,a[c],b,e);return d.join("&")},r.fn.extend({serialize:function(){return r.param(this.serializeArray())},serializeArray:function(){return this.map(function(){var a=r.prop(this,"elements");return a?r.makeArray(a):this}).filter(function(){var a=this.type;return this.name&&!r(this).is(":disabled")&&wb.test(this.nodeName)&&!vb.test(a)&&(this.checked||!ia.test(a))}).map(function(a,b){var c=r(this).val();return null==c?null:r.isArray(c)?r.map(c,function(a){return{name:b.name,value:a.replace(ub,"\r\n")}}):{name:b.name,value:c.replace(ub,"\r\n")}}).get()}});var yb=/%20/g,zb=/#.*$/,Ab=/([?&])_=[^&]*/,Bb=/^(.*?):[ \t]*([^\r\n]*)$/gm,Cb=/^(?:about|app|app-storage|.+-extension|file|res|widget):$/,Db=/^(?:GET|HEAD)$/,Eb=/^\/\//,Fb={},Gb={},Hb="*/".concat("*"),Ib=d.createElement("a");Ib.href=qb.href;function Jb(a){return function(b,c){"string"!=typeof b&&(c=b,b="*");var d,e=0,f=b.toLowerCase().match(K)||[];if(r.isFunction(c))while(d=f[e++])"+"===d[0]?(d=d.slice(1)||"*",(a[d]=a[d]||[]).unshift(c)):(a[d]=a[d]||[]).push(c)}}function Kb(a,b,c,d){var e={},f=a===Gb;function g(h){var i;return e[h]=!0,r.each(a[h]||[],function(a,h){var j=h(b,c,d);return"string"!=typeof j||f||e[j]?f?!(i=j):void 0:(b.dataTypes.unshift(j),g(j),!1)}),i}return g(b.dataTypes[0])||!e["*"]&&g("*")}function Lb(a,b){var c,d,e=r.ajaxSettings.flatOptions||{};for(c in b)void 0!==b[c]&&((e[c]?a:d||(d={}))[c]=b[c]);return d&&r.extend(!0,a,d),a}function Mb(a,b,c){var d,e,f,g,h=a.contents,i=a.dataTypes;while("*"===i[0])i.shift(),void 0===d&&(d=a.mimeType||b.getResponseHeader("Content-Type"));if(d)for(e in h)if(h[e]&&h[e].test(d)){i.unshift(e);break}if(i[0]in c)f=i[0];else{for(e in c){if(!i[0]||a.converters[e+" "+i[0]]){f=e;break}g||(g=e)}f=f||g}if(f)return f!==i[0]&&i.unshift(f),c[f]}function Nb(a,b,c,d){var e,f,g,h,i,j={},k=a.dataTypes.slice();if(k[1])for(g in a.converters)j[g.toLowerCase()]=a.converters[g];f=k.shift();while(f)if(a.responseFields[f]&&(c[a.responseFields[f]]=b),!i&&d&&a.dataFilter&&(b=a.dataFilter(b,a.dataType)),i=f,f=k.shift())if("*"===f)f=i;else if("*"!==i&&i!==f){if(g=j[i+" "+f]||j["* "+f],!g)for(e in j)if(h=e.split(" "),h[1]===f&&(g=j[i+" "+h[0]]||j["* "+h[0]])){g===!0?g=j[e]:j[e]!==!0&&(f=h[0],k.unshift(h[1]));break}if(g!==!0)if(g&&a["throws"])b=g(b);else try{b=g(b)}catch(l){return{state:"parsererror",error:g?l:"No conversion from "+i+" to "+f}}}return{state:"success",data:b}}r.extend({active:0,lastModified:{},etag:{},ajaxSettings:{url:qb.href,type:"GET",isLocal:Cb.test(qb.protocol),global:!0,processData:!0,async:!0,contentType:"application/x-www-form-urlencoded; charset=UTF-8",accepts:{"*":Hb,text:"text/plain",html:"text/html",xml:"application/xml, text/xml",json:"application/json, text/javascript"},contents:{xml:/\bxml\b/,html:/\bhtml/,json:/\bjson\b/},responseFields:{xml:"responseXML",text:"responseText",json:"responseJSON"},converters:{"* text":String,"text html":!0,"text json":JSON.parse,"text xml":r.parseXML},flatOptions:{url:!0,context:!0}},ajaxSetup:function(a,b){return b?Lb(Lb(a,r.ajaxSettings),b):Lb(r.ajaxSettings,a)},ajaxPrefilter:Jb(Fb),ajaxTransport:Jb(Gb),ajax:function(b,c){"object"==typeof b&&(c=b,b=void 0),c=c||{};var e,f,g,h,i,j,k,l,m,n,o=r.ajaxSetup({},c),p=o.context||o,q=o.context&&(p.nodeType||p.jquery)?r(p):r.event,s=r.Deferred(),t=r.Callbacks("once memory"),u=o.statusCode||{},v={},w={},x="canceled",y={readyState:0,getResponseHeader:function(a){var b;if(k){if(!h){h={};while(b=Bb.exec(g))h[b[1].toLowerCase()]=b[2]}b=h[a.toLowerCase()]}return null==b?null:b},getAllResponseHeaders:function(){return k?g:null},setRequestHeader:function(a,b){return null==k&&(a=w[a.toLowerCase()]=w[a.toLowerCase()]||a,v[a]=b),this},overrideMimeType:function(a){return null==k&&(o.mimeType=a),this},statusCode:function(a){var b;if(a)if(k)y.always(a[y.status]);else for(b in a)u[b]=[u[b],a[b]];return this},abort:function(a){var b=a||x;return e&&e.abort(b),A(0,b),this}};if(s.promise(y),o.url=((b||o.url||qb.href)+"").replace(Eb,qb.protocol+"//"),o.type=c.method||c.type||o.method||o.type,o.dataTypes=(o.dataType||"*").toLowerCase().match(K)||[""],null==o.crossDomain){j=d.createElement("a");try{j.href=o.url,j.href=j.href,o.crossDomain=Ib.protocol+"//"+Ib.host!=j.protocol+"//"+j.host}catch(z){o.crossDomain=!0}}if(o.data&&o.processData&&"string"!=typeof o.data&&(o.data=r.param(o.data,o.traditional)),Kb(Fb,o,c,y),k)return y;l=r.event&&o.global,l&&0===r.active++&&r.event.trigger("ajaxStart"),o.type=o.type.toUpperCase(),o.hasContent=!Db.test(o.type),f=o.url.replace(zb,""),o.hasContent?o.data&&o.processData&&0===(o.contentType||"").indexOf("application/x-www-form-urlencoded")&&(o.data=o.data.replace(yb,"+")):(n=o.url.slice(f.length),o.data&&(f+=(sb.test(f)?"&":"?")+o.data,delete o.data),o.cache===!1&&(f=f.replace(Ab,"$1"),n=(sb.test(f)?"&":"?")+"_="+rb++ +n),o.url=f+n),o.ifModified&&(r.lastModified[f]&&y.setRequestHeader("If-Modified-Since",r.lastModified[f]),r.etag[f]&&y.setRequestHeader("If-None-Match",r.etag[f])),(o.data&&o.hasContent&&o.contentType!==!1||c.contentType)&&y.setRequestHeader("Content-Type",o.contentType),y.setRequestHeader("Accept",o.dataTypes[0]&&o.accepts[o.dataTypes[0]]?o.accepts[o.dataTypes[0]]+("*"!==o.dataTypes[0]?", "+Hb+"; q=0.01":""):o.accepts["*"]);for(m in o.headers)y.setRequestHeader(m,o.headers[m]);if(o.beforeSend&&(o.beforeSend.call(p,y,o)===!1||k))return y.abort();if(x="abort",t.add(o.complete),y.done(o.success),y.fail(o.error),e=Kb(Gb,o,c,y)){if(y.readyState=1,l&&q.trigger("ajaxSend",[y,o]),k)return y;o.async&&o.timeout>0&&(i=a.setTimeout(function(){y.abort("timeout")},o.timeout));try{k=!1,e.send(v,A)}catch(z){if(k)throw z;A(-1,z)}}else A(-1,"No Transport");function A(b,c,d,h){var j,m,n,v,w,x=c;k||(k=!0,i&&a.clearTimeout(i),e=void 0,g=h||"",y.readyState=b>0?4:0,j=b>=200&&b<300||304===b,d&&(v=Mb(o,y,d)),v=Nb(o,v,y,j),j?(o.ifModified&&(w=y.getResponseHeader("Last-Modified"),w&&(r.lastModified[f]=w),w=y.getResponseHeader("etag"),w&&(r.etag[f]=w)),204===b||"HEAD"===o.type?x="nocontent":304===b?x="notmodified":(x=v.state,m=v.data,n=v.error,j=!n)):(n=x,!b&&x||(x="error",b<0&&(b=0))),y.status=b,y.statusText=(c||x)+"",j?s.resolveWith(p,[m,x,y]):s.rejectWith(p,[y,x,n]),y.statusCode(u),u=void 0,l&&q.trigger(j?"ajaxSuccess":"ajaxError",[y,o,j?m:n]),t.fireWith(p,[y,x]),l&&(q.trigger("ajaxComplete",[y,o]),--r.active||r.event.trigger("ajaxStop")))}return y},getJSON:function(a,b,c){return r.get(a,b,c,"json")},getScript:function(a,b){return r.get(a,void 0,b,"script")}}),r.each(["get","post"],function(a,b){r[b]=function(a,c,d,e){return r.isFunction(c)&&(e=e||d,d=c,c=void 0),r.ajax(r.extend({url:a,type:b,dataType:e,data:c,success:d},r.isPlainObject(a)&&a))}}),r._evalUrl=function(a){return r.ajax({url:a,type:"GET",dataType:"script",cache:!0,async:!1,global:!1,"throws":!0})},r.fn.extend({wrapAll:function(a){var b;return this[0]&&(r.isFunction(a)&&(a=a.call(this[0])),b=r(a,this[0].ownerDocument).eq(0).clone(!0),this[0].parentNode&&b.insertBefore(this[0]),b.map(function(){var a=this;while(a.firstElementChild)a=a.firstElementChild;return a}).append(this)),this},wrapInner:function(a){return r.isFunction(a)?this.each(function(b){r(this).wrapInner(a.call(this,b))}):this.each(function(){var b=r(this),c=b.contents();c.length?c.wrapAll(a):b.append(a)})},wrap:function(a){var b=r.isFunction(a);return this.each(function(c){r(this).wrapAll(b?a.call(this,c):a)})},unwrap:function(a){return this.parent(a).not("body").each(function(){r(this).replaceWith(this.childNodes)}),this}}),r.expr.pseudos.hidden=function(a){return!r.expr.pseudos.visible(a)},r.expr.pseudos.visible=function(a){return!!(a.offsetWidth||a.offsetHeight||a.getClientRects().length)},r.ajaxSettings.xhr=function(){try{return new a.XMLHttpRequest}catch(b){}};var Ob={0:200,1223:204},Pb=r.ajaxSettings.xhr();o.cors=!!Pb&&"withCredentials"in Pb,o.ajax=Pb=!!Pb,r.ajaxTransport(function(b){var c,d;if(o.cors||Pb&&!b.crossDomain)return{send:function(e,f){var g,h=b.xhr();if(h.open(b.type,b.url,b.async,b.username,b.password),b.xhrFields)for(g in b.xhrFields)h[g]=b.xhrFields[g];b.mimeType&&h.overrideMimeType&&h.overrideMimeType(b.mimeType),b.crossDomain||e["X-Requested-With"]||(e["X-Requested-With"]="XMLHttpRequest");for(g in e)h.setRequestHeader(g,e[g]);c=function(a){return function(){c&&(c=d=h.onload=h.onerror=h.onabort=h.onreadystatechange=null,"abort"===a?h.abort():"error"===a?"number"!=typeof h.status?f(0,"error"):f(h.status,h.statusText):f(Ob[h.status]||h.status,h.statusText,"text"!==(h.responseType||"text")||"string"!=typeof h.responseText?{binary:h.response}:{text:h.responseText},h.getAllResponseHeaders()))}},h.onload=c(),d=h.onerror=c("error"),void 0!==h.onabort?h.onabort=d:h.onreadystatechange=function(){4===h.readyState&&a.setTimeout(function(){c&&d()})},c=c("abort");try{h.send(b.hasContent&&b.data||null)}catch(i){if(c)throw i}},abort:function(){c&&c()}}}),r.ajaxPrefilter(function(a){a.crossDomain&&(a.contents.script=!1)}),r.ajaxSetup({accepts:{script:"text/javascript, application/javascript, application/ecmascript, application/x-ecmascript"},contents:{script:/\b(?:java|ecma)script\b/},converters:{"text script":function(a){return r.globalEval(a),a}}}),r.ajaxPrefilter("script",function(a){void 0===a.cache&&(a.cache=!1),a.crossDomain&&(a.type="GET")}),r.ajaxTransport("script",function(a){if(a.crossDomain){var b,c;return{send:function(e,f){b=r("<script>").prop({charset:a.scriptCharset,src:a.url}).on("load error",c=function(a){b.remove(),c=null,a&&f("error"===a.type?404:200,a.type)}),d.head.appendChild(b[0])},abort:function(){c&&c()}}}});var Qb=[],Rb=/(=)\?(?=&|$)|\?\?/;r.ajaxSetup({jsonp:"callback",jsonpCallback:function(){var a=Qb.pop()||r.expando+"_"+rb++;return this[a]=!0,a}}),r.ajaxPrefilter("json jsonp",function(b,c,d){var e,f,g,h=b.jsonp!==!1&&(Rb.test(b.url)?"url":"string"==typeof b.data&&0===(b.contentType||"").indexOf("application/x-www-form-urlencoded")&&Rb.test(b.data)&&"data");if(h||"jsonp"===b.dataTypes[0])return e=b.jsonpCallback=r.isFunction(b.jsonpCallback)?b.jsonpCallback():b.jsonpCallback,h?b[h]=b[h].replace(Rb,"$1"+e):b.jsonp!==!1&&(b.url+=(sb.test(b.url)?"&":"?")+b.jsonp+"="+e),b.converters["script json"]=function(){return g||r.error(e+" was not called"),g[0]},b.dataTypes[0]="json",f=a[e],a[e]=function(){g=arguments},d.always(function(){void 0===f?r(a).removeProp(e):a[e]=f,b[e]&&(b.jsonpCallback=c.jsonpCallback,Qb.push(e)),g&&r.isFunction(f)&&f(g[0]),g=f=void 0}),"script"}),o.createHTMLDocument=function(){var a=d.implementation.createHTMLDocument("").body;return a.innerHTML="<form></form><form></form>",2===a.childNodes.length}(),r.parseHTML=function(a,b,c){if("string"!=typeof a)return[];"boolean"==typeof b&&(c=b,b=!1);var e,f,g;return b||(o.createHTMLDocument?(b=d.implementation.createHTMLDocument(""),e=b.createElement("base"),e.href=d.location.href,b.head.appendChild(e)):b=d),f=B.exec(a),g=!c&&[],f?[b.createElement(f[1])]:(f=pa([a],b,g),g&&g.length&&r(g).remove(),r.merge([],f.childNodes))},r.fn.load=function(a,b,c){var d,e,f,g=this,h=a.indexOf(" ");return h>-1&&(d=mb(a.slice(h)),a=a.slice(0,h)),r.isFunction(b)?(c=b,b=void 0):b&&"object"==typeof b&&(e="POST"),g.length>0&&r.ajax({url:a,type:e||"GET",dataType:"html",data:b}).done(function(a){f=arguments,g.html(d?r("<div>").append(r.parseHTML(a)).find(d):a)}).always(c&&function(a,b){g.each(function(){c.apply(this,f||[a.responseText,b,a])})}),this},r.each(["ajaxStart","ajaxStop","ajaxComplete","ajaxError","ajaxSuccess","ajaxSend"],function(a,b){r.fn[b]=function(a){return this.on(b,a)}}),r.expr.pseudos.animated=function(a){return r.grep(r.timers,function(b){return a===b.elem}).length};function Sb(a){return r.isWindow(a)?a:9===a.nodeType&&a.defaultView}r.offset={setOffset:function(a,b,c){var d,e,f,g,h,i,j,k=r.css(a,"position"),l=r(a),m={};"static"===k&&(a.style.position="relative"),h=l.offset(),f=r.css(a,"top"),i=r.css(a,"left"),j=("absolute"===k||"fixed"===k)&&(f+i).indexOf("auto")>-1,j?(d=l.position(),g=d.top,e=d.left):(g=parseFloat(f)||0,e=parseFloat(i)||0),r.isFunction(b)&&(b=b.call(a,c,r.extend({},h))),null!=b.top&&(m.top=b.top-h.top+g),null!=b.left&&(m.left=b.left-h.left+e),"using"in b?b.using.call(a,m):l.css(m)}},r.fn.extend({offset:function(a){if(arguments.length)return void 0===a?this:this.each(function(b){r.offset.setOffset(this,a,b)});var b,c,d,e,f=this[0];if(f)return f.getClientRects().length?(d=f.getBoundingClientRect(),d.width||d.height?(e=f.ownerDocument,c=Sb(e),b=e.documentElement,{top:d.top+c.pageYOffset-b.clientTop,left:d.left+c.pageXOffset-b.clientLeft}):d):{top:0,left:0}},position:function(){if(this[0]){var a,b,c=this[0],d={top:0,left:0};return"fixed"===r.css(c,"position")?b=c.getBoundingClientRect():(a=this.offsetParent(),b=this.offset(),r.nodeName(a[0],"html")||(d=a.offset()),d={top:d.top+r.css(a[0],"borderTopWidth",!0),left:d.left+r.css(a[0],"borderLeftWidth",!0)}),{top:b.top-d.top-r.css(c,"marginTop",!0),left:b.left-d.left-r.css(c,"marginLeft",!0)}}},offsetParent:function(){return this.map(function(){var a=this.offsetParent;while(a&&"static"===r.css(a,"position"))a=a.offsetParent;return a||qa})}}),r.each({scrollLeft:"pageXOffset",scrollTop:"pageYOffset"},function(a,b){var c="pageYOffset"===b;r.fn[a]=function(d){return S(this,function(a,d,e){var f=Sb(a);return void 0===e?f?f[b]:a[d]:void(f?f.scrollTo(c?f.pageXOffset:e,c?e:f.pageYOffset):a[d]=e)},a,d,arguments.length)}}),r.each(["top","left"],function(a,b){r.cssHooks[b]=Oa(o.pixelPosition,function(a,c){if(c)return c=Na(a,b),La.test(c)?r(a).position()[b]+"px":c})}),r.each({Height:"height",Width:"width"},function(a,b){r.each({padding:"inner"+a,content:b,"":"outer"+a},function(c,d){r.fn[d]=function(e,f){var g=arguments.length&&(c||"boolean"!=typeof e),h=c||(e===!0||f===!0?"margin":"border");return S(this,function(b,c,e){var f;return r.isWindow(b)?0===d.indexOf("outer")?b["inner"+a]:b.document.documentElement["client"+a]:9===b.nodeType?(f=b.documentElement,Math.max(b.body["scroll"+a],f["scroll"+a],b.body["offset"+a],f["offset"+a],f["client"+a])):void 0===e?r.css(b,c,h):r.style(b,c,e,h)},b,g?e:void 0,g)}})}),r.fn.extend({bind:function(a,b,c){return this.on(a,null,b,c)},unbind:function(a,b){return this.off(a,null,b)},delegate:function(a,b,c,d){return this.on(b,a,c,d)},undelegate:function(a,b,c){return 1===arguments.length?this.off(a,"**"):this.off(b,a||"**",c)}}),r.parseJSON=JSON.parse,"function"=="function"&&__webpack_require__(990)&&!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function(){return r}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));var Tb=a.jQuery,Ub=a.$;return r.noConflict=function(b){return a.$===r&&(a.$=Ub),b&&a.jQuery===r&&(a.jQuery=Tb),r},b||(a.jQuery=a.$=r),r});
 
 
 /***/ }
 
-},[1026]);
+},[1027]);
 //# sourceMappingURL=main.bundle.map
