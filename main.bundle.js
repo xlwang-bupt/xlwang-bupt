@@ -58,27 +58,26 @@ var AppComponent = (function () {
         this.picName = '图像展示区域';
         this.title = 'AngularJS is using!';
         this.tableHead = [];
-        this.tableData = [];
         this.tableDataShowing = [];
         this.dataName = '数据门类';
         this.dataValue = '';
         this.dataTablePageNumber = 1;
-        this.dataTablePageNumberAll = 1;
         this.dateFilter = '2016-01-01';
+        this.beginIndex = 0;
+        this.perPage = 10;
+        this.host = 'http://172.25.203.3:3434/';
     }
-    AppComponent.prototype.tableDataShowingChange = function () {
-        this.tableDataShowing = this.tableData[this.dataTablePageNumber - 1];
-    };
     AppComponent.prototype.prePage = function () {
         if (1 < this.dataTablePageNumber) {
             this.dataTablePageNumber--;
-            this.tableDataShowingChange();
+            this.getData();
         }
     };
     AppComponent.prototype.nextPage = function () {
-        if (this.dataTablePageNumberAll > this.dataTablePageNumber) {
+        var self = this;
+        if (self.tableDataShowing.length = self.perPage) {
             this.dataTablePageNumber++;
-            this.tableDataShowingChange();
+            this.getData();
         }
     };
     AppComponent.prototype.changeDataName = function (name) {
@@ -110,7 +109,7 @@ var AppComponent = (function () {
         if (self.foodNameFilter) {
             _.set(request, 'food_name', self.foodNameFilter);
         }
-        $.post('http://59.110.25.2:3434/', request, function (docs, status) {
+        $.post(self.host, request, function (docs, status) {
             var sourceData = docs;
             var data = [];
             _(docs).forEach(function (doc) {
@@ -950,22 +949,16 @@ var AppComponent = (function () {
                 order: '*'
             };
         }
-        $.post('http://59.110.25.2:3434/', request, function (data, status) {
+        ;
+        _.set(request, 'beginIndex', (self.dataTablePageNumber - 1) * self.perPage);
+        _.set(request, 'perPage', self.perPage);
+        $.post(self.host, request, function (data, status) {
             result = data;
+            self.tableDataShowing = [];
             self.tableHead = _.keys(result[0]);
-            var temp = [];
             _(result).forEach(function (rowData) {
-                temp.push(_.values(rowData));
+                self.tableDataShowing.push(_.values(rowData));
             });
-            self.tableData = _.chunk(temp, 10);
-            self.dataTablePageNumber = 1;
-            if (temp.length / 10 > _.floor(temp.length / 10)) {
-                self.dataTablePageNumberAll = _.floor(temp.length / 10) + 1;
-            }
-            else {
-                self.dataTablePageNumberAll = _.floor(temp.length / 10);
-            }
-            self.tableDataShowingChange();
         });
     };
     AppComponent.prototype.ngOnInit = function () {
@@ -5440,7 +5433,7 @@ module.exports = {
 /***/ 969:
 /***/ function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n  <div class=\"page-header\">\n    <h1>\n      中科助腾数据展示项目\n    </h1>\n  </div>\n  <div class=\"row\">\n    <div class=\"guide col-md-2\">\n      <h2>目录</h2>\n      <ul class=\"nav nav-pills nav-stacked\" role=\"tablist\">\n        <li role=\"presentation\" class=\"active\">\n          <a  (click)=\"showTable()\" role=\"tab\" data-toggle=\"tab\">\n            数据表格\n          </a>\n        </li>\n        <li role=\"presentation\">\n          <a  (click)=\"getMainPage()\" role=\"tab\" data-toggle=\"tab\">\n            主页\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"showpart col-md-10\">\n      <div class=\"row\">\n        <div class=\"col-md-12\" *ngIf=\"isTable&&!isMainPage\">\n          <h2>数据表格</h2>\n          <div class=\"table-responsive\">\n            <table id=\"datatable\" class=\"table-hover table-bordered\">\n              <thead>\n              <tr>\n                <th *ngFor=\"let tableHeadCell of tableHead\">\n                  {{tableHeadCell}}\n                </th>\n              </tr>\n              </thead>\n              <tbody>\n              <tr *ngFor=\"let rowData of tableDataShowing\">\n                <td *ngFor=\"let dataCell of rowData\">{{dataCell}}</td>\n              </tr>\n              </tbody>\n              <tfoot>\n              <tr>\n                <td><a (click)=\"prePage()\">上一页</a></td>\n                <td><a (click)=\"nextPage()\">下一页</a></td>\n                <td>当前页数：{{dataTablePageNumber}}/{{dataTablePageNumberAll}}</td>\n              </tr>\n              </tfoot>\n            </table>\n          </div>\n        </div>\n        <div *ngIf=\"isTable\" class=\"col-md-12\">\n          <div class=\"col-md-2\">\n            <button class=\"btn btn-default\" (click)=\"getData()\">数据刷新</button>\n          </div>\n          <div class=\"col-md-6\">\n            <div class=\"input-group\">\n      <span class=\"input-group-btn\">\n        <button class=\"btn btn-default\" type=\"button\">匹配值</button>\n      </span>\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dataValue\">\n            </div><!-- /input-group -->\n          </div><!-- /.col-lg-6 -->\n          <div class=\"col-md-4\">\n            <div class=\"dropdown\">\n              <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\">\n                {{dataName}}\n                <span class=\"caret\"></span>\n              </button>\n              <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">\n                <li *ngFor=\"let name of tableHead\" role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" (click)=\"this.changeDataName(name)\">{{name}}</a></li>\n              </ul>\n            </div>\n          </div>\n        </div><!-- /.row -->\n        <div class=\"col-md-12\">\n          <div class=\"row\" [hidden]=\"isTable\">\n            <div class=\"col-md-3\">\n              <label>时间筛选：</label><input type=\"date\" [(ngModel)]=\"dateFilter\" class=\"form-control\">\n            </div>\n            <div class=\"col-md-4\">\n              <label>食物筛选：</label><input type=\"text\" [(ngModel)]=\"foodNameFilter\" class=\"form-control\">\n            </div>\n            <div class=\"col-md-2\">\n              <button class=\"btn btn-default\" (click)=\"paintChinaMap('主页', 'main-left-map')\">搜索</button>\n            </div>\n          </div>\n          <div [hidden]=\"isTable\" class=\"row\" id=\"canvas-container\">\n            <div class=\"col-md-12\">\n              <h2>{{picName}}</h2>\n            </div>\n            <div class=\"col-md-12 col-lg-12\" id=\"main-left-map\" style=\"width:500px; height:700px;\">la</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container-fluid\">\n  <div class=\"page-header\">\n    <h1>\n      中科助腾数据展示项目\n    </h1>\n  </div>\n  <div class=\"row\">\n    <div class=\"guide col-md-2\">\n      <h2>目录</h2>\n      <ul class=\"nav nav-pills nav-stacked\" role=\"tablist\">\n        <li role=\"presentation\" class=\"active\">\n          <a  (click)=\"showTable()\" role=\"tab\" data-toggle=\"tab\">\n            数据表格\n          </a>\n        </li>\n        <li role=\"presentation\">\n          <a  (click)=\"getMainPage()\" role=\"tab\" data-toggle=\"tab\">\n            主页\n          </a>\n        </li>\n      </ul>\n    </div>\n    <div class=\"showpart col-md-10\">\n      <div class=\"row\">\n        <div class=\"col-md-12\" *ngIf=\"isTable&&!isMainPage\">\n          <h2>数据表格</h2>\n          <div class=\"table-responsive\">\n            <table id=\"datatable\" class=\"table-hover table-bordered\">\n              <thead>\n              <tr>\n                <th *ngFor=\"let tableHeadCell of tableHead\">\n                  {{tableHeadCell}}\n                </th>\n              </tr>\n              </thead>\n              <tbody>\n              <tr *ngFor=\"let rowData of tableDataShowing\">\n                <td *ngFor=\"let dataCell of rowData\">{{dataCell}}</td>\n              </tr>\n              </tbody>\n              <tfoot>\n              <tr>\n                <td><a (click)=\"prePage()\" class=\"pointer\">上一页</a></td>\n                <td><a (click)=\"nextPage()\" class=\"pointer\">下一页</a></td>\n                <td>当前页数：{{dataTablePageNumber}}</td>\n              </tr>\n              </tfoot>\n            </table>\n          </div>\n        </div>\n        <div *ngIf=\"isTable\" class=\"col-md-12\">\n          <div class=\"col-md-2\">\n            <button class=\"btn btn-default\" (click)=\"getData()\">数据刷新</button>\n          </div>\n          <div class=\"col-md-6\">\n            <div class=\"input-group\">\n      <span class=\"input-group-btn\">\n        <button class=\"btn btn-default\" type=\"button\">匹配值</button>\n      </span>\n              <input type=\"text\" class=\"form-control\" [(ngModel)]=\"dataValue\">\n            </div><!-- /input-group -->\n          </div><!-- /.col-lg-6 -->\n          <div class=\"col-md-4\">\n            <div class=\"dropdown\">\n              <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\">\n                {{dataName}}\n                <span class=\"caret\"></span>\n              </button>\n              <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">\n                <li *ngFor=\"let name of tableHead\" role=\"presentation\"><a role=\"menuitem\" tabindex=\"-1\" (click)=\"this.changeDataName(name)\">{{name}}</a></li>\n              </ul>\n            </div>\n          </div>\n        </div><!-- /.row -->\n        <div class=\"col-md-12\">\n          <div class=\"row\" [hidden]=\"isTable\">\n            <div class=\"col-md-3\">\n              <label>时间筛选：</label><input type=\"date\" [(ngModel)]=\"dateFilter\" class=\"form-control\">\n            </div>\n            <div class=\"col-md-4\">\n              <label>食物筛选：</label><input type=\"text\" [(ngModel)]=\"foodNameFilter\" class=\"form-control\">\n            </div>\n            <div class=\"col-md-2\">\n              <button class=\"btn btn-default\" (click)=\"paintChinaMap('主页', 'main-left-map')\">搜索</button>\n            </div>\n          </div>\n          <div [hidden]=\"isTable\" class=\"row\" id=\"canvas-container\">\n            <div class=\"col-md-12\">\n              <h2>{{picName}}</h2>\n            </div>\n            <div class=\"col-md-12 col-lg-12\" id=\"main-left-map\" style=\"width:500px; height:700px;\">la</div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n"
 
 /***/ },
 
