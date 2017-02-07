@@ -65,7 +65,7 @@ var AppComponent = (function () {
         this.dateFilter = '2016-01-01';
         this.beginIndex = 0;
         this.perPage = 10;
-        this.host = 'http://172.25.203.3:3434/';
+        this.host = 'http://59.110.25.2:3434/';
     }
     AppComponent.prototype.prePage = function () {
         if (1 < this.dataTablePageNumber) {
